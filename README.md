@@ -1,6 +1,7 @@
 # Commando's van de MeshCore-bot
 
-Alle commando's van de **Vip|HA|🤖** MeshCore-bot. De bot antwoordt in de taal waarin je schrijft: Nederlands, Engels, Duits of Frans.
+Alle commando's van de **Vip|HA|🤖** MeshCore-bot. 
+De bot antwoordt in de taal waarin je schrijft: Nederlands, Engels, Duits of Frans.
 
 **Zo gebruik je ze:** typ het commando in `#bot` of `#test`, of stuur het als DM naar de bot. In Publiek (kanaal 0) reageert de bot niet op commando's. Meer uitleg over één commando: `help <commando>`, bijvoorbeeld `help dx`.
 
