@@ -1,10 +1,10 @@
-# MeshCore bot commands
+# Commando's van de MeshCore-bot
 
-All commands of the **Vip|HA|🤖** MeshCore bot. The descriptions are in Dutch, like the bot's replies; the bot answers in the language you write in (Dutch, English, German or French).
+Alle commando's van de **Vip|HA|🤖** MeshCore-bot. De bot antwoordt in de taal waarin je schrijft: Nederlands, Engels, Duits of Frans.
 
-**How to use:** type the command in `#bot` or `#test`, or send it as a direct message (DM) to the bot. In the public channel (channel 0) the bot does not run commands. More help on one command: `help <command>`, for example `help dx`.
+**Zo gebruik je ze:** typ het commando in `#bot` of `#test`, of stuur het als DM naar de bot. In Publiek (kanaal 0) reageert de bot niet op commando's. Meer uitleg over één commando: `help <commando>`, bijvoorbeeld `help dx`.
 
-Legend: **DM** = only by direct message · **#f1** = in the #f1 channel or by DM · 🌐 = needs internet
+Tekens: **DM** = alleen via een DM · **#f1** = in het kanaal #f1 of via DM · 🌐 = heeft internet nodig
 
 ## Inhoud
 
