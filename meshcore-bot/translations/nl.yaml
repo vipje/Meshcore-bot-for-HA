@@ -1,0 +1,125 @@
+configuration:
+  connection:
+    name: Verbinding
+    description: Hoe de bot met je MeshCore-radio praat. Normaal via de MeshCore Proxy-add-on (tcp, localhost, poort 5010).
+    fields:
+      type:
+        name: Verbindingstype
+        description: "tcp = via de MeshCore Proxy-add-on (aanbevolen, zo kunnen meerdere add-ons de radio delen). serial = de bot opent zelf de USB-radio. ble = Bluetooth."
+      tcp_host:
+        name: TCP-host
+        description: Host waarop de proxy draait. Laat op localhost staan voor de MeshCore Proxy-add-on.
+      tcp_port:
+        name: TCP-poort
+        description: Poort van de proxy (standaard 5010).
+      serial_port:
+        name: Seriële poort
+        description: Alleen voor verbindingstype serial, bijvoorbeeld /dev/ttyACM0 of een /dev/serial/by-id/...-pad.
+      ble_device_name:
+        name: Bluetooth-apparaatnaam
+        description: Alleen voor verbindingstype ble.
+  bot:
+    name: Bot
+    description: Identiteit en algemeen gedrag van de bot.
+    fields:
+      name:
+        name: Botnaam
+        description: "Naam die de bot op het mesh gebruikt. Zet zelf GEEN robot-emoji achter de naam: |🤖 wordt altijd automatisch achter de naam gezet zodat iedereen ziet dat het een bot is. Vul MeshCore in en de bot heet MeshCore|🤖. Een emoji die je zelf toevoegt wordt eerst weggehaald, dus je krijgt nooit 🤖|🤖. Ook de naam die mensen noemen als @[naam]."
+      channels:
+        name: Kanalen om op te luisteren
+        description: Kanaalnamen waarop de bot antwoordt, één per regel, precies zoals ze op je radio heten (bijvoorbeeld test of #bot).
+      respond_to_dms:
+        name: Directe berichten beantwoorden
+        description: Ook directe berichten beantwoorden (en berichten uit een room server waarop de bot is ingelogd).
+      admin_pubkeys:
+        name: Admin-publieke sleutels
+        description: "Publieke sleutels van 64 tekens die admin-commando's mogen gebruiken (reload, advert, announce, ...). Alleen geldig voor echte directe berichten. Iedereen die mag schrijven in een hier opgenomen room server wordt admin, voeg dus alleen een room-sleutel toe als jij de enige bent met toegang."
+      tx_delay_seconds:
+        name: Pauze tussen berichtdelen
+        description: Seconden tussen de delen van een lang antwoord uit meerdere berichten. Hoger geeft het mesh meer ruimte, maar lange antwoorden duren langer.
+      rate_limit_seconds:
+        name: Minimale tijd tussen antwoorden
+        description: De bot antwoordt in totaal hooguit één keer per zoveel seconden (een tweede commando binnen die tijd krijgt geen antwoord). Upstream gebruikt 10, deze add-on 4. Lager betekent meer airtime op de mesh.
+      language:
+        name: Taal van de antwoorden
+        description: De taal van de eigen antwoorden van de bot (weer, dobbelstenen, help enzovoort). Nederlands dekt ongeveer 70% van de ingebouwde teksten, de rest blijft Engels. De extra commando's van deze add-on zijn sowieso Nederlands.
+      log_level:
+        name: Logniveau
+        description: Gebruik DEBUG als er iets stil wordt weggegooid en je wilt zien waarom.
+      timezone:
+        name: Tijdzone
+        description: Tijdzonenaam zoals Europe/Amsterdam, gebruikt voor geplande berichten zoals de wekelijkse aankondiging. Leeg = de systeemtijdzone.
+  weather:
+    name: Weer en eenheden
+    description: Gebruikt door wx, gwx, rain, aqi en andere weercommando's.
+    fields:
+      default_country:
+        name: Standaardland
+        description: Landcode van twee letters als iemand er geen opgeeft (NL, BE, DE, US, ...).
+      provider:
+        name: Weerprovider
+        description: openmeteo werkt wereldwijd. noaa is alleen voor de VS, maar heeft wel waarschuwingen.
+      temperature_unit:
+        name: Temperatuureenheid
+        description: celsius of fahrenheit.
+      wind_speed_unit:
+        name: Windsnelheideenheid
+        description: kmh of mph.
+      precipitation_unit:
+        name: Neerslageenheid
+        description: mm of inch.
+  webviewer:
+    name: Webviewer
+    description: Het dashboard van de bot (contacten, pakketten, radio, statistieken). Te openen met de knop Web-UI openen.
+    fields:
+      enabled:
+        name: Webviewer aanzetten
+        description: Toont het dashboard op de onderstaande poort op alle netwerkinterfaces.
+      port:
+        name: Poort
+        description: Poort van het dashboard. De knop Web-UI openen wijst altijd naar 8081.
+      lan_access:
+        name: Bereikbaar via het netwerk
+        description: "Laat aan om het dashboard ook op de webviewer-poort te openen vanaf elk apparaat op je netwerk. Zet uit zodra de zijbalk werkt: de poort is dan dicht voor het netwerk en het dashboard is alleen via Home Assistant (zijbalk) te bereiken. Het wachtwoord is dan niet meer nodig."
+      password:
+        name: Wachtwoord
+        description: Aanbevolen. Leeg betekent dat iedereen op je netwerk het dashboard kan openen.
+  contacts:
+    name: Contacten en kaart
+    description: Hoe de bot omgaat met de contactlijst van de radio, en hoe de kaartgegevens van het dashboard veilig blijven.
+    fields:
+      mode:
+        name: Contactbeheer
+        description: "device = de radio voegt zelf contacten toe en overschrijft de oudste die geen favoriet is (aanbevolen). bot = de bot voegt contacten toe. false = helemaal handmatig."
+      protect_starred:
+        name: Gesterde contacten nooit verwijderen
+        description: Contacten waar je in het dashboard van de bot een ster aan geeft, worden door de bot nooit van de radio verwijderd en krijgen de favoriet-markering op de radio, zodat ook de firmware ze houdt. Verwijderde contacten blijven hoe dan ook op de kaart van het dashboard staan.
+      keep_radio_favourites:
+        name: Favorieten uit de MeshCore-app behouden
+        description: Standaard haalt de bot ongeveer 3 minuten na elke start de favoriet-markering weg bij elk contact dat niet op zijn eigen beschermde lijst staat. Laat dit aan om de sterren die je in de app zet te houden.
+  commands:
+    name: Commando's
+    description: Commando's aan of uit zetten zonder een schakelaar per commando.
+    fields:
+      enable:
+        name: Extra commando's aanzetten
+        description: "Commando's die standaard uit staan: airplanes, worldcup. Eén naam per regel."
+      disable:
+        name: Commando's uitzetten
+        description: "Commandonamen om uit te zetten, bijvoorbeeld dadjoke, quiz, hangman. De bot meldt dan dat het commando is uitgezet. Niet elk commando ondersteunt dit; zie de documentatie."
+      feeds_enabled:
+        name: RSS/API-feeds aanzetten
+        description: Nodig zodat het commando feed subscribe ook echt iets ophaalt en verstuurt.
+      feed_max_item_age_minutes:
+        name: Feed-items negeren die ouder zijn dan (minuten)
+        description: Voorkomt dat een nieuwe feed een kanaal volgooit met zijn hele backlog.
+  advanced:
+    name: Geavanceerd
+    description: Voor alles wat geen eigen optie heeft.
+    fields:
+      keywords:
+        name: Keyword-antwoorden
+        description: 'Eén antwoord per regel als keyword = "antwoordtekst". Ondersteunt plaatsaanduidingen zoals {sender}, {connection_info} en {timestamp}.'
+      extra_config:
+        name: Extra config-regels
+        description: "Eén aanpassing per regel als Sectie.sleutel = waarde (bijvoorbeeld Sports_Command.enabled = true). Wordt als laatste toegepast en wint dus van alle andere opties. Zie config.ini.example in het meshcore-bot-project voor alle instellingen."

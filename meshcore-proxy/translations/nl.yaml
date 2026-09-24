@@ -1,0 +1,19 @@
+configuration:
+  serial_port:
+    name: Seriële poort
+    description: "Pad van de MeshCore-radio, bijvoorbeeld /dev/ttyACM0. Een /dev/serial/by-id/usb-...-pad is het stabielst, omdat het niet verandert als je andere USB-apparaten aansluit. De add-on-log toont de beschikbare paden als de poort niet wordt gevonden."
+  baudrate:
+    name: Baudrate
+    description: Seriële snelheid van de radio. De MeshCore companion-firmware gebruikt 115200.
+  listen_port:
+    name: Luisterpoort
+    description: TCP-poort waarmee clients verbinden (meshcore-ha, MeshCore Bot). Standaard 5010.
+  turn_quiet_seconds:
+    name: Beurt eindigt na stilte (seconden)
+    description: "Terwijl één client met de radio praat, krijgt die de antwoorden direct en houdt de proxy ze voor de anderen even vast. De beurt eindigt na zoveel seconden zonder radioverkeer."
+  turn_max_seconds:
+    name: Langste beurt (seconden)
+    description: Harde limiet voor hoe lang één client de beurt mag houden, ook als de radio blijft zenden.
+  log_level:
+    name: Logniveau
+    description: DEBUG toont elke beurt die wordt genomen en vrijgegeven.

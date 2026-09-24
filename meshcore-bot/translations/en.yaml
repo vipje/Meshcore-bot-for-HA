@@ -1,0 +1,125 @@
+configuration:
+  connection:
+    name: Connection
+    description: How the bot talks to your MeshCore radio. Normally through the MeshCore Proxy add-on (tcp, localhost, port 5010).
+    fields:
+      type:
+        name: Connection type
+        description: "tcp = via the MeshCore Proxy add-on (recommended, lets other add-ons share the radio). serial = the bot opens the USB radio itself. ble = Bluetooth."
+      tcp_host:
+        name: TCP host
+        description: Host running the proxy. Leave on localhost for the MeshCore Proxy add-on.
+      tcp_port:
+        name: TCP port
+        description: Port of the proxy (MeshCore Proxy default 5010).
+      serial_port:
+        name: Serial port
+        description: Only for connection type serial, for example /dev/ttyACM0 or a /dev/serial/by-id/... path.
+      ble_device_name:
+        name: Bluetooth device name
+        description: Only for connection type ble.
+  bot:
+    name: Bot
+    description: Identity and general behaviour of the bot.
+    fields:
+      name:
+        name: Bot name
+        description: "Name the bot uses on the mesh. Do NOT add a robot emoji yourself: |🤖 is always added automatically at the end so everyone can see it is a bot. Enter MeshCore and the bot is called MeshCore|🤖. An emoji you add yourself is removed first, so you never get 🤖|🤖. Also the name people mention as @[name]."
+      channels:
+        name: Channels to listen on
+        description: Channel names the bot answers on, one per entry, exactly as they are named on your radio (for example test or #bot).
+      respond_to_dms:
+        name: Answer direct messages
+        description: Also answer direct messages (and messages from a room server the bot is logged in to).
+      admin_pubkeys:
+        name: Admin public keys
+        description: "64-character public keys that may use admin commands (reload, advert, announce, ...). Only honoured for real direct messages. Anyone who can write in a room server listed here becomes admin, so only add a room key if you are the only one with access to it."
+      tx_delay_seconds:
+        name: Delay between message parts
+        description: Seconds between the parts of a long, multi-message reply. Higher gives the mesh more breathing room but makes long replies slower.
+      rate_limit_seconds:
+        name: Minimum time between replies
+        description: The bot answers at most once per this many seconds in total (a second command within that time gets no answer). Upstream uses 10, this add-on 4. Lower means more airtime on the mesh.
+      language:
+        name: Language of the replies
+        description: The language of the bot's own replies (weather, dice, help and so on). Dutch covers about 70% of the built-in texts, the rest stays English. The extra commands of this add-on are Dutch either way.
+      log_level:
+        name: Log level
+        description: Use DEBUG when something is dropped silently and you need to see why.
+      timezone:
+        name: Time zone
+        description: Time zone name such as Europe/Amsterdam, used for scheduled messages such as the weekly announcement. Empty = the system time zone.
+  weather:
+    name: Weather and units
+    description: Used by wx, gwx, rain, aqi and other weather commands.
+    fields:
+      default_country:
+        name: Default country
+        description: Two-letter country code used when someone does not give one (NL, BE, DE, US, ...).
+      provider:
+        name: Weather provider
+        description: openmeteo works worldwide. noaa is US-only but includes alerts.
+      temperature_unit:
+        name: Temperature unit
+        description: celsius or fahrenheit.
+      wind_speed_unit:
+        name: Wind speed unit
+        description: kmh or mph.
+      precipitation_unit:
+        name: Precipitation unit
+        description: mm or inch.
+  webviewer:
+    name: Web viewer
+    description: The bot's dashboard (contacts, packets, radio, stats). Opened with the Open Web UI button.
+    fields:
+      enabled:
+        name: Enable web viewer
+        description: Serves the dashboard on the port below on all network interfaces.
+      port:
+        name: Port
+        description: Port of the dashboard. The Open Web UI button always points at 8081.
+      lan_access:
+        name: Reachable from the network
+        description: "Leave on to also open the dashboard on the viewer port from any device on your network. Turn it off once the sidebar works: the viewer port is then closed to the network and the dashboard is only reachable through Home Assistant (sidebar). The password is then no longer needed."
+      password:
+        name: Password
+        description: Recommended. Empty means anyone on your network can open the dashboard.
+  contacts:
+    name: Contacts and map
+    description: How the bot treats the contact list of the radio, and how the dashboard map data is kept safe.
+    fields:
+      mode:
+        name: Contact management
+        description: "device = the radio adds contacts itself and overwrites the oldest one that is not a favourite (recommended). bot = the bot adds contacts. false = fully manual."
+      protect_starred:
+        name: Never remove starred contacts
+        description: Contacts you star in the bot's web dashboard are never removed from the radio by the bot, and get the favourite mark on the radio so its firmware keeps them too. Removed contacts stay on the dashboard map either way.
+      keep_radio_favourites:
+        name: Keep favourites set in the MeshCore app
+        description: By default the bot clears the favourite mark of every contact that is not on its own protected list, about 3 minutes after each start. Leave this on to keep the stars you set in the app.
+  commands:
+    name: Commands
+    description: Switch commands on or off without a toggle per command.
+    fields:
+      enable:
+        name: Extra commands to enable
+        description: "Commands that are off by default: airplanes, worldcup. One name per entry."
+      disable:
+        name: Commands to disable
+        description: "Command names to switch off, for example dadjoke, quiz, hangman. The bot then tells users the command is disabled. Not every command supports this; see the documentation."
+      feeds_enabled:
+        name: Enable RSS/API feeds
+        description: Needed for the feed subscribe command to fetch and post anything.
+      feed_max_item_age_minutes:
+        name: Ignore feed items older than (minutes)
+        description: Prevents a new feed from flooding a channel with its whole backlog.
+  advanced:
+    name: Advanced
+    description: For everything that has no option of its own.
+    fields:
+      keywords:
+        name: Keyword replies
+        description: 'One reply per entry as keyword = "reply text". Supports placeholders such as {sender}, {connection_info} and {timestamp}.'
+      extra_config:
+        name: Extra config lines
+        description: "One override per entry as Section.key = value (for example Sports_Command.enabled = true). Applied last, so it wins over every other option. See config.ini.example in the meshcore-bot project for all settings."

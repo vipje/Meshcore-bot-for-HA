@@ -1,0 +1,129 @@
+name: MeshCore Bot
+version: "1.0.0"
+slug: meshcore_bot
+description: MeshCore mesh bot (agessaman/meshcore-bot) with Home Assistant integration, room server login and Dutch/Belgian extra commands
+url: https://github.com/vipje/Meshcore-bot-for-HA
+stage: stable
+arch:
+  - aarch64
+  - amd64
+  - armv7
+  - armhf
+  - i386
+startup: application
+boot: auto
+init: false
+map:
+  - addon_config:rw
+  # /share/meshcore-bot: export and import of settings and database (data_transfer.py)
+  - share:rw
+# host_network is needed so the bot can reach meshcore-proxy (which also uses
+# host networking) on localhost. Under host networking Docker port mapping does
+# not exist, so the bot binds directly to the host ports set in the options.
+host_network: true
+# Lets the notification service tell Home Assistant when the radio is down (persistent
+# notification or a notify service), because the mesh cannot report its own outage.
+homeassistant_api: true
+# Lets data_transfer.py restore the add-on options after an import (POST /addons/self/options).
+hassio_api: true
+# Fixed port number instead of the [PORT:] macro, because that macro translates
+# a Docker port mapping that does not exist under host_network. If you change
+# webviewer.port, the "Open Web UI" button keeps pointing at 8081.
+webui: "http://[HOST]:[PORT:8081]/"
+# Dashboard in the Home Assistant sidebar (ingress). Under host networking the Supervisor cannot pick a
+# port, so this is the fixed viewer port; if you change webviewer.port, change it here too.
+# See local_shared/ingress_support.py for how the viewer copes with the ingress path prefix.
+ingress: true
+ingress_port: 8081
+panel_icon: mdi:radio-tower
+panel_title: MeshCore Bot
+options:
+  connection:
+    type: tcp
+    tcp_host: localhost
+    tcp_port: 5010
+    serial_port: ""
+    ble_device_name: ""
+  bot:
+    # The suffix |🤖 is always appended automatically; do not add it yourself.
+    name: MeshCoreBot
+    channels:
+      - test
+    respond_to_dms: true
+    admin_pubkeys: []
+    tx_delay_seconds: 3.0
+    rate_limit_seconds: 4
+    language: nl
+    log_level: INFO
+    timezone: ""
+  weather:
+    default_country: NL
+    provider: openmeteo
+    temperature_unit: celsius
+    wind_speed_unit: kmh
+    precipitation_unit: mm
+  webviewer:
+    enabled: true
+    port: 8081
+    lan_access: false
+    password: ""
+  contacts:
+    mode: device
+    protect_starred: true
+    keep_radio_favourites: true
+  commands:
+    enable: []
+    disable: []
+    feeds_enabled: true
+    feed_max_item_age_minutes: 30
+  advanced:
+    keywords:
+      - 'ping = "Pong!"'
+      - 'test = "ack @[{sender}]{phrase_part} | {connection_info} | Received at: {timestamp}"'
+    extra_config: []
+schema:
+  connection:
+    type: "list(serial|ble|tcp)"
+    tcp_host: "str?"
+    tcp_port: "port?"
+    serial_port: "str?"
+    ble_device_name: "str?"
+  bot:
+    name: "str"
+    channels:
+      - "str"
+    respond_to_dms: "bool"
+    admin_pubkeys:
+      - "match(^[0-9a-fA-F]{64}$)"
+    tx_delay_seconds: "float(0,30)"
+    rate_limit_seconds: "int(1,60)?"
+    language: "list(nl|en)?"
+    log_level: "list(DEBUG|INFO|WARNING|ERROR)"
+    timezone: "str?"
+  weather:
+    default_country: "str"
+    provider: "list(noaa|openmeteo)"
+    temperature_unit: "list(fahrenheit|celsius)"
+    wind_speed_unit: "list(mph|kmh)"
+    precipitation_unit: "list(mm|inch)"
+  webviewer:
+    enabled: "bool"
+    port: "int(1024,65535)"
+    lan_access: "bool?"
+    password: "password?"
+  contacts:
+    mode: "list(device|bot|false)"
+    protect_starred: "bool"
+    keep_radio_favourites: "bool"
+  commands:
+    enable:
+      - "str"
+    disable:
+      - "str"
+    feeds_enabled: "bool"
+    feed_max_item_age_minutes: "int(1,10080)"
+  advanced:
+    keywords:
+      - "str"
+    extra_config:
+      - "str"

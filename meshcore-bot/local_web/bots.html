@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+
+{% block title %}Bots - MeshCore Bot Data Viewer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-3">
+            <i class="fas fa-robot"></i> Bots
+        </h1>
+        <p class="text-muted">
+            Every name the bot has heard, with what it makes of it. A name counts as a bot when it has the robot emoji or the word
+            <em>bot</em> in it, or when you tick it here. A bot gets no greeting from the greeter, and the bot stays quiet in the public
+            channel when another bot has already answered. Tick or untick to overrule the automatic guess; a change works within
+            30 seconds, without a restart. The admin command <code>botlist</code> edits the same lists.
+        </p>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row g-3 align-items-end">
+            <div class="col-12 col-lg-auto">
+                <div class="btn-group" role="group" aria-label="Filter">
+                    <input type="radio" class="btn-check" name="bots-filter" id="f-bots" value="bots" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="f-bots">Bots <span class="badge bg-secondary" id="n-bots">0</span></label>
+                    <input type="radio" class="btn-check" name="bots-filter" id="f-people" value="people" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="f-people">Not bots <span class="badge bg-secondary" id="n-people">0</span></label>
+                    <input type="radio" class="btn-check" name="bots-filter" id="f-hand" value="hand" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="f-hand">Set by hand <span class="badge bg-secondary" id="n-hand">0</span></label>
+                    <input type="radio" class="btn-check" name="bots-filter" id="f-all" value="all" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="f-all">All <span class="badge bg-secondary" id="n-all">0</span></label>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg">
+                <label class="form-label mb-1" for="bots-search">Search</label>
+                <input type="search" class="form-control" id="bots-search" placeholder="Name" autocomplete="off">
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <label class="form-label mb-1" for="bots-add">Add a name as bot</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="bots-add" maxlength="40" placeholder="Name exactly as it appears" autocomplete="off">
+                    <button class="btn btn-primary" type="button" id="bots-add-btn"><i class="fas fa-plus"></i> Add</button>
+                </div>
+            </div>
+        </div>
+        <div id="bots-message" class="mt-3" role="status" aria-live="polite"></div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover table-sm align-middle mb-0" id="bots-table">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 4.5rem;" class="text-center">Bot</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Recognised as</th>
+                        <th scope="col">Set by</th>
+                        <th scope="col">Last heard</th>
+                        <th scope="col" class="text-end">Messages</th>
+                    </tr>
+                </thead>
+                <tbody id="bots-body">
+                    <tr><td colspan="6" class="text-center text-muted py-4">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+    'use strict';
+
+    // Names come from the mesh and are not trusted: everything below is built with textContent and
+    // DOM nodes, so a name is never interpreted as HTML.
+    let rows = [];
+    let busy = false;
+
+    const body = document.getElementById('bots-body');
+    const message = document.getElementById('bots-message');
+    const search = document.getElementById('bots-search');
+    const addInput = document.getElementById('bots-add');
+
+    function currentFilter() {
+        const checked = document.querySelector('input[name="bots-filter"]:checked');
+        return checked ? checked.value : 'bots';
+    }
+
+    function say(kind, text) {
+        message.replaceChildren();
+        if (!text) return;
+        const div = document.createElement('div');
+        div.className = 'alert alert-' + kind + ' py-2 mb-0';
+        div.textContent = text;
+        message.appendChild(div);
+        if (kind === 'success') setTimeout(function () { if (message.firstChild === div) message.replaceChildren(); }, 4000);
+    }
+
+    function ago(ts) {
+        if (!ts) return '-';
+        const s = Math.max(0, Math.floor(Date.now() / 1000) - ts);
+        if (s < 90) return 'just now';
+        if (s < 5400) return Math.round(s / 60) + ' min ago';
+        if (s < 129600) return Math.round(s / 3600) + ' h ago';
+        return Math.round(s / 86400) + ' days ago';
+    }
+
+    function api(path, options) {
+        const opts = Object.assign({ headers: {} }, options || {});
+        opts.headers['X-Requested-With'] = 'XMLHttpRequest';
+        if (opts.body) opts.headers['Content-Type'] = 'application/json';
+        return fetch(path, opts).then(function (resp) {
+            return resp.json().catch(function () { return {}; }).then(function (data) {
+                if (!resp.ok) throw new Error(data.error || ('HTTP ' + resp.status));
+                return data;
+            });
+        });
+    }
+
+    function matches(row, filter, query) {
+        if (filter === 'bots' && !row.is_bot) return false;
+        if (filter === 'people' && row.is_bot) return false;
+        if (filter === 'hand' && row.manual === null) return false;
+        return !query || row.name.toLowerCase().indexOf(query) !== -1;
+    }
+
+    function cell(text, className) {
+        const td = document.createElement('td');
+        if (className) td.className = className;
+        td.textContent = text;
+        return td;
+    }
+
+    function render() {
+        const filter = currentFilter();
+        const query = search.value.trim().toLowerCase();
+        document.getElementById('n-bots').textContent = rows.filter(function (r) { return r.is_bot; }).length;
+        document.getElementById('n-people').textContent = rows.filter(function (r) { return !r.is_bot; }).length;
+        document.getElementById('n-hand').textContent = rows.filter(function (r) { return r.manual !== null; }).length;
+        document.getElementById('n-all').textContent = rows.length;
+
+        body.replaceChildren();
+        const shown = rows.filter(function (r) { return matches(r, filter, query); });
+        if (!shown.length) {
+            const tr = document.createElement('tr');
+            const td = cell(rows.length ? 'Nothing matches this filter.' : 'No names heard yet.', 'text-center text-muted py-4');
+            td.colSpan = 6;
+            tr.appendChild(td);
+            body.appendChild(tr);
+            return;
+        }
+        shown.forEach(function (row) {
+            const tr = document.createElement('tr');
+
+            const tdBox = document.createElement('td');
+            tdBox.className = 'text-center';
+            const box = document.createElement('input');
+            box.type = 'checkbox';
+            box.className = 'form-check-input';
+            box.checked = row.is_bot;
+            box.setAttribute('aria-label', 'Treat ' + row.name + ' as a bot');
+            box.addEventListener('change', function () { save(row.name, box.checked, box); });
+            tdBox.appendChild(box);
+            tr.appendChild(tdBox);
+
+            const tdName = cell(row.name, 'fw-semibold');
+            tdName.style.wordBreak = 'break-word';
+            tr.appendChild(tdName);
+
+            tr.appendChild(cell(row.auto ? 'Bot: ' + row.auto_reason : 'Not a bot: ' + row.auto_reason, 'text-muted small'));
+
+            const tdBy = document.createElement('td');
+            if (row.manual === null) {
+                tdBy.textContent = 'Automatic';
+                tdBy.className = 'text-muted';
+            } else {
+                const badge = document.createElement('span');
+                badge.className = 'badge ' + (row.manual ? 'bg-success' : 'bg-warning text-dark');
+                badge.textContent = row.manual ? 'By hand: bot' : 'By hand: not a bot';
+                tdBy.appendChild(badge);
+                const reset = document.createElement('button');
+                reset.type = 'button';
+                reset.className = 'btn btn-link btn-sm py-0';
+                reset.textContent = 'back to automatic';
+                reset.addEventListener('click', function () { save(row.name, null, reset); });
+                tdBy.appendChild(reset);
+            }
+            tr.appendChild(tdBy);
+
+            const tdSeen = cell(ago(row.last_heard));
+            if (row.last_heard) tdSeen.title = new Date(row.last_heard * 1000).toLocaleString();
+            tr.appendChild(tdSeen);
+
+            tr.appendChild(cell(row.source === 'contact' ? 'advert only' : String(row.messages), 'text-end text-muted'));
+            body.appendChild(tr);
+        });
+    }
+
+    function save(name, isBot, control) {
+        if (busy) { if (control && control.type === 'checkbox') control.checked = !control.checked; return Promise.resolve(); }
+        busy = true;
+        if (control) control.disabled = true;
+        return api('/api/bots/set', { method: 'POST', body: JSON.stringify({ name: name, is_bot: isBot }) })
+            .then(function (updated) {
+                const key = name.toLowerCase();
+                const i = rows.findIndex(function (r) { return r.name.toLowerCase() === key; });
+                if (i >= 0) {
+                    updated.messages = rows[i].messages;
+                    updated.last_heard = rows[i].last_heard;
+                    updated.source = rows[i].source;
+                    rows[i] = updated;
+                } else {
+                    rows.unshift(updated);
+                }
+                say('success', updated.name + ' now counts as ' + (updated.is_bot ? 'a bot' : 'not a bot') +
+                    (updated.manual === null ? ' (automatic).' : ' (by hand).'));
+            })
+            .catch(function (err) { say('danger', 'Could not save: ' + err.message); })
+            .then(function () { busy = false; render(); });
+    }
+
+    function load() {
+        return api('/api/bots').then(function (data) {
+            rows = data.names || [];
+            render();
+        }).catch(function (err) {
+            body.replaceChildren();
+            say('danger', 'Could not load the names: ' + err.message);
+        });
+    }
+
+    document.querySelectorAll('input[name="bots-filter"]').forEach(function (el) { el.addEventListener('change', render); });
+    search.addEventListener('input', render);
+    document.getElementById('bots-add-btn').addEventListener('click', function () {
+        const name = addInput.value.trim();
+        if (!name) { say('warning', 'Type a name first.'); return; }
+        save(name, true, null).then(function () { addInput.value = ''; });
+    });
+    addInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); document.getElementById('bots-add-btn').click(); }
+    });
+
+    load();
+})();
+</script>
+{% endblock %}

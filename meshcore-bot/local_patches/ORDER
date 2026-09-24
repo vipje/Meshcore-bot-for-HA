@@ -1,0 +1,144 @@
+# Order in which local_patches/apply_all.py runs the build-time patches on the upstream source (one per line).
+# The order matters: some patches anchor on text an earlier one added (webviewer_games after webviewer_bots).
+# A patch fails the build when its anchor text is not found exactly once (upstream changed); see each file.
+
+# Upstream webviewer-problemen (in v1.1.0 is de back-upknop door upstream zelf gefixt) gepatcht op de geclonede broncode
+# (zie local_patches/patch_webviewer.py voor de exacte diffs + uitleg):
+# 1. "Backup Now"-knop gaf altijd 503 (webviewer draait los van de bot).
+# 2. Mesh-kaart in dark mode toonde "API KEY REQUIRED" (CARTO tiles vereisen
+#    nu een betaalde key) - teruggezet op de gratis OSM-tiles + CSS-filter.
+# Faalt de build hier, dan is de upstream-code rond deze plek veranderd en
+# moet het patchscript bijgewerkt worden voordat je verder upgradet.
+patch_webviewer.py
+
+# Derde patch: channel_manager.fetch_all_channels() geeft de startup-scan op
+# na 3 opeenvolgende lege kanaalsloten (uitgangspunt: kanalen staan altijd
+# aaneengesloten vanaf 0). Bij een echt gat van 3+ lege sloten voordat een
+# hoger-genummerd kanaal komt (bij ons: 5-6-7 leeg tussen #bot@4 en #test@8)
+# stopt de scan te vroeg en mist dat kanaal helemaal - feed subscribe kan het
+# dan niet vinden op naam, en binnenkomende berichten erop tonen alleen nog
+# een generieke "ChannelN" in plaats van de echte naam. Zie
+# local_patches/patch_channel_manager.py voor de exacte diff.
+patch_channel_manager.py
+
+# Derde-b patch: de startup-scan wacht maar 2 s per kanaal en telt een time-out
+# als "leeg". Is de radio op dat moment bezig (meshcore-ha laadt na een
+# HA-herstart tegelijk via de proxy), dan mist de bot zijn kanalen (20-09: alleen
+# #test geladen, #bot stil tot de volgende herstart). Time-out 6 s, de bot
+# onthoudt de kanalenlijst van de laatste gezonde run (bot_metadata), en een
+# achtergrondcontrole vergelijkt monitor_channels + die lijst met de kanaalcache
+# (na 30/60/120 s en daarna elk uur) en vraagt ontbrekende kanalen opnieuw op.
+# Zie local_patches/patch_channel_watchdog.py.
+patch_channel_watchdog.py
+
+# Vierde patch: FeedManager stuurt bij de allereerste check van een feed in
+# één keer de hele actuele inhoud (er is nog niets "gezien"), wat tegen de
+# verzend-rate-limiter aanbotst zodra een feed meer dan een paar items heeft.
+# Voegt [Feed_Manager] default_max_item_age_minutes toe: negeert items ouder
+# dan dat aantal minuten, voor elke feed. Zie
+# local_patches/patch_feed_manager.py voor de exacte diff.
+patch_feed_manager.py
+
+# Vijfde patch: noch 'help' (zonder argument) noch 'cmd' kan ooit alle
+# commando's tonen - beide bouwen één LoRa-bericht en kappen af met "(N
+# more)" zodra het budget op is, wat bij 40+ plugins ruim voor de "t" van
+# topu/topc gebeurt. Voegt paginering toe: 'help 1', 'help 2', ... lopen de
+# volledige commandolijst pagina voor pagina af, gefilterd via help_filter.py.
+# Zie local_patches/patch_command_manager.py voor de exacte diff.
+patch_command_manager.py
+
+# Zelfde help_filter.py-filter toegepast op de resterende commando-overzichten
+# in help_command.py: kale 'help' (incl. de statistiek- en foutafhandelings-
+# fallbacks) en 'help <commando>' (geen details tonen voor een admin-only/
+# DM-only/uitgeschakeld commando - gewoon "onbekend"). Zie
+# local_patches/patch_help_filter.py.
+patch_help_filter.py
+
+# send_dm had al een automatische opsplits-vangrail voor te lange berichten,
+# send_channel_message niet - vandaar dat een te lange poll-vraag stilletjes
+# halverwege een woord werd afgekapt. Geeft nu élk commando's kanaalbericht
+# diezelfde bescherming, in plaats van dat ieder commando dit zelf zou moeten
+# checken. Zie local_patches/patch_channel_message_length_guard.py.
+patch_channel_message_length_guard.py
+
+# Zesde patch: een uitgeschakeld commando (bv. [Airplanes_Command] enabled =
+# false) faalt stil op can_execute_now() in execute_commands() - geen enkele
+# reactie, niet te onderscheiden van een commando dat niet eens bestaat.
+# Voegt een tak toe aan de bestaande elif-keten die daar al WEL op reageert
+# voor DM-only/admin/cooldown, zodat de gebruiker een duidelijk "staat uit"
+# bericht krijgt i.p.v. stilte. Zie local_patches/patch_disabled_command_notice.py.
+patch_disabled_command_notice.py
+
+# Achtste patch: webhook_service.py kapt lange berichten af i.p.v. ze te
+# splitsen - met max_message_length nu op 140 (de meshcore-telefoon-app kan
+# zelf maar ~142 tekens sturen) zou een langere P2000-melding via HA anders
+# gewoon zijn staart kwijtraken. Splitst i.p.v. afkapt. Zie
+# local_patches/patch_webhook_chunking.py.
+patch_webhook_chunking.py
+
+# Negende patch: rain-commando's grens-temperatuurhint ("34°F" bij twijfel
+# tussen regen/sneeuw/ijzel) en aqi's grapteksten over andere planeten stonden
+# hardcoded in Fahrenheit, zonder enige config-koppeling (in tegenstelling tot
+# wx/gwx). Omgezet naar Celsius. Zie local_patches/patch_metric_units.py.
+patch_metric_units.py
+
+# Tiende patch: airplanes-commando gebruikte nautische mijlen (zoekradius) en
+# voet (hoogte) voor alle gebruikersinvoer/-weergave. De airplanes.live-API
+# zelf blijft nm/ft verwachten (dat is de API-conventie, niet aangepast) -
+# alleen wat je typt/instelt en wat je terugziet is nu km/m. Commando staat
+# standaard uit (airplanes_enabled: false), vandaar nu vast meeomgezet.
+# Zie local_patches/patch_airplanes_metric.py.
+patch_airplanes_metric.py
+
+# Contact protection: stars in the dashboard (and favourites set in the MeshCore
+# app) are never removed from the radio by the bot's contact-limit management;
+# see patch_contact_protection.py for the details.
+patch_contact_protection.py
+
+# Split long replies at a " | " separator so every message holds complete parts (for example
+# "Received at: 22:13:34" is not torn apart); see patch_split_at_separator.py.
+patch_split_at_separator.py
+
+# DM-sent hook: upstream only notifies listeners about channel messages the bot
+# sends. This adds bot.dm_sent_listeners for DMs (and thus room server replies),
+# which the Home Assistant bridge uses to show them in the MeshCore Chat panel.
+patch_dm_sent_listeners.py
+
+# Formula 1 in the #f1 channel: the F1 service (reads Home Assistant's f1_sensor, posts sparingly, runs the
+# prediction game), its data/text/planning module and game, and the `f1` command.
+patch_channel_hint.py
+
+# Reply in the sender's own language (auto-detected from what they typed), for every command. Settings card
+# only (see the file); patch_sender_language_detection.py does the actual work in command_manager.py.
+patch_sender_language_detection.py
+
+# Other bots: the greeter does not greet them, and the admin command `botlist` marks a name as a bot
+# (or as never a bot) on top of the automatic recognition (robot emoji, the word bot) in channel_hint.py.
+patch_greeter_skip_bots.py
+
+# The webhook's secret token is a password field on its card (upstream shows it in clear).
+patch_webhook_secret_password.py
+
+# The dashboard's "Bots" page: tick who is a bot. Same hand-made lists as the `botlist` command.
+# See local_patches/patch_webviewer_bots.py, local_shared/bots_admin.py and local_web/bots.html.
+patch_webviewer_bots.py
+
+# Games page (2.14.2): read-only standings of Mesh RPG, DX Jacht, karma, check-in streaks, voorspel and the F1 game,
+# bots left out; see local_shared/games_admin.py. Anchors on the Bots menu item, so it runs after the Bots patch.
+patch_webviewer_games.py
+
+# Channel radar page (which hashtag channels are in use around the bot); anchors on the Games menu item.
+patch_webviewer_radar.py
+
+# Home Assistant sidebar (ingress): one WSGI layer that makes the web viewer work under the
+# ingress path prefix; see local_shared/ingress_support.py. It only acts on requests that carry
+# the X-Ingress-Path header, so the normal address on the viewer port is unaffected.
+patch_webviewer_ingress.py
+
+# Contact capacity: after a cleanup round that could remove nothing (the radio overwrites the oldest itself),
+# skip further rounds for 6 hours instead of repeating it for every new contact. See the patch for details.
+patch_contact_capacity_quiet.py
+
+# The add-on's own keys in sections upstream checks ([Bot], [Feed_Manager], [Help_Command]) are documented in
+# config.ini.example, so the bot no longer warns "unknown key" about them at every start.
+patch_config_example_keys.py

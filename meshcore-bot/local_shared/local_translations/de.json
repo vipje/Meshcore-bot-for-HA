@@ -1,0 +1,1095 @@
+{
+  "commands": {
+    "tanken": {
+      "result": "Landesweiter Ø-Tankpreis ({date}): Super95 €{euro95} | Diesel €{diesel} | LPG €{lpg}",
+      "fetch_error": "CBS-Kraftstoffpreise konnten nicht abgerufen werden.",
+      "no_data": "Keine aktuellen CBS-Kraftstoffpreise gefunden.",
+      "error": "Fehler im tanken-Befehl: {error}"
+    },
+    "beving": {
+      "fetch_error": "KNMI-Erdbebenfeed konnte nicht abgerufen werden.",
+      "no_data": "Keine aktuellen Erdbeben im KNMI-Feed gefunden.",
+      "header": "Aktuelle Erdbeben:",
+      "error": "Fehler im beving-Befehl: {error}"
+    },
+    "storing": {
+      "usage": "Verwendung: storing <{providers}>",
+      "fetch_error": "Störungsstatus für {provider} konnte nicht abgerufen werden.",
+      "result": "{provider}: {status} (Quelle: storingradar.com, inoffiziell)",
+      "error": "Fehler im storing-Befehl: {error}"
+    },
+    "wegwerk": {
+      "usage": "Verwendung: wegwerk <Ort>",
+      "not_found": "'{place}' konnte nicht gefunden werden.",
+      "no_data": "Keine Baustellen innerhalb von {radius}km von {place}.",
+      "header": "Baustellen in der Nähe von {place}:",
+      "line": "- {label} bei {distance}",
+      "error": "Fehler im wegwerk-Befehl: {error}",
+      "type": {
+        "RoadOrCarriagewayOrLaneManagement": "Bauarbeiten",
+        "SpeedManagement": "Geschwindigkeitsbegrenzung",
+        "ReroutingManagement": "Umleitung",
+        "GeneralNetworkManagement": "Verkehrsmaßnahme"
+      }
+    },
+    "ov": {
+      "usage": "Verwendung: ov <Ort/Haltestelle>",
+      "no_stop": "Keine Haltestelle gefunden für '{query}'.",
+      "no_departures": "Keine Abfahrten gefunden für '{query}'.",
+      "header": "ÖPNV bei {query}:",
+      "line": "{time} Linie {line} -> {dest} ({stop})",
+      "error": "Fehler im ov-Befehl: {error}"
+    },
+    "waterstand": {
+      "no_data": "Keine aktuellen Wasserstandsdaten für {station}.",
+      "fetch_error": "Rijkswaterstaat-Wasserdaten konnten nicht abgerufen werden.",
+      "no_valid": "Keine gültige Messung für {station}.",
+      "result": "Wasserstand Maas bei {station}: {value}m NAP (gemessen {time})",
+      "error": "Fehler im waterstand-Befehl: {error}"
+    },
+    "weerwaarschuwing": {
+      "no_file": "Keine KNMI-Warndatei gefunden.",
+      "no_link": "Kein Download-Link von KNMI erhalten.",
+      "download_error": "KNMI-Warntext konnte nicht heruntergeladen werden.",
+      "empty": "Leerer KNMI-Warntext empfangen.",
+      "error": "Fehler im weerwaarschuwing-Befehl: {error}"
+    },
+    "energieprijs": {
+      "fetch_error": "Strompreise konnten nicht abgerufen werden (EnergyZero).",
+      "no_data": "Keine Strompreise für heute gefunden.",
+      "result": "Strompreis jetzt: €{current}/kWh | heute niedrig €{low} - hoch €{high} (inkl. MwSt.)",
+      "error": "Fehler im energieprijs-Befehl: {error}"
+    },
+    "aed": {
+      "usage": "Verwendung: aed <Ort>",
+      "not_found": "'{place}' konnte nicht gefunden werden.",
+      "no_data": "Kein AED gefunden innerhalb von {radius}km von {place}.",
+      "header": "AEDs in der Nähe von {place}:",
+      "line": "- {name}: {distance}m",
+      "error": "Fehler im aed-Befehl: {error}"
+    },
+    "laadpaal": {
+      "usage": "Verwendung: laadpaal <Ort>",
+      "not_found": "'{place}' konnte nicht gefunden werden.",
+      "no_data": "Keine Ladestation gefunden innerhalb von {radius}km von {place}.",
+      "header": "Ladestationen in der Nähe von {place}:",
+      "generic_name": "Ladestation",
+      "line": "- {name}{extra}: {distance}m",
+      "error": "Fehler im laadpaal-Befehl: {error}"
+    },
+    "straling": {
+      "usage": "Verwendung: straling <Ort>",
+      "not_found": "'{place}' konnte nicht gefunden werden.",
+      "no_data": "Keine aktuellen Safecast-Messungen innerhalb von {radius}km von {place} gefunden.",
+      "age_suffix": ", neueste Messung {date}",
+      "result": "Strahlung bei {place} (~{radius}km, n={n}{age}): ~{usvh} uSv/h indikativ ({cpm} cpm) - Bürgerwissenschaft-Sensoren (Safecast), keine offizielle Messung.",
+      "error": "Fehler im straling-Befehl: {error}"
+    },
+    "kenteken": {
+      "usage": "Verwendung: kenteken <Kennzeichen>",
+      "invalid": "Ungültiges Kennzeichen.",
+      "not_found": "Kein Fahrzeug gefunden für Kennzeichen {plate}.",
+      "apk_expired": "APK {date} (ABGELAUFEN)",
+      "apk_soon": "APK {date} (noch {days}T)",
+      "apk": "APK {date}",
+      "error": "Fehler im kenteken-Befehl: {error}",
+      "foreign_be": "Belgisches Kennzeichen: dafür gibt es keine freie offene Quelle (DIV), nur niederländische über die RDW.",
+      "foreign_de": "Deutsches Kennzeichen: dafür gibt es keine freie offene Quelle (KBA), nur niederländische über die RDW."
+    },
+    "quote": {
+      "error": "Fehler im quote-Befehl: {error}"
+    },
+    "uptime": {
+      "days": "{n}T",
+      "hours": "{n}Std",
+      "minutes": "{n}m",
+      "result": "Laufzeit: {duration} (seit {started})",
+      "error": "Fehler im uptime-Befehl: {error}"
+    },
+    "topcommands": {
+      "no_data": "Top-Befehle ({label}): noch keine Daten",
+      "header": "Top-Befehle ({label}):",
+      "error": "Fehler beim Abrufen der Top-Befehle: {error}"
+    },
+    "status": {
+      "no_service": "Status: Dienst nicht geladen.",
+      "up": "läuft {duration}",
+      "radio": "Funk {state}",
+      "contacts": "Kontakte {n}",
+      "counters": "{commands} Befehle, {errors} Fehler, {warnings} Warnungen",
+      "last_issue": "zuletzt (vor {age}): {text}",
+      "no_issues": "keine Probleme",
+      "header": "Status:",
+      "error": "Fehler bei status: {error}"
+    },
+    "toprepeaters": {
+      "no_data": "Top-Repeater ({label}): noch keine Daten",
+      "header": "Top-Repeater ({label}):",
+      "error": "Fehler beim Abrufen der Top-Repeater: {error}"
+    },
+    "topusers": {
+      "no_data": "Top-Nutzer ({label}): noch keine Daten",
+      "header": "Top-Nutzer ({label}):",
+      "error": "Fehler beim Abrufen der Top-Nutzer: {error}"
+    },
+    "whois": {
+      "usage": "Verwendung: whois <Name oder Schlüssel-Präfix>",
+      "unknown": "unbekannt",
+      "just_now": "gerade eben",
+      "minutes_ago": "vor {n}m",
+      "hours_ago": "vor {n}Std",
+      "days_ago": "vor {n}T",
+      "not_found": "Kein bekannter Knoten gefunden für '{query}'.",
+      "hop": "{n} Hop",
+      "hops": "{n} Hops",
+      "last_seen": "zuletzt gesehen {ago}",
+      "error": "Fehler im whois-Befehl: {error}"
+    },
+    "feestdag": {
+      "today": "Heute",
+      "tomorrow": "Morgen",
+      "none": "{label} ({date}): kein offizieller Feiertag in NL oder BE.",
+      "header": "{label} ({date}):",
+      "error": "Fehler im feestdag-Befehl: {error}"
+    },
+    "morse": {
+      "usage": "Verwendung: morse <Text> oder morse <.... .- .-..>",
+      "decode_error": "Konnte das nicht als Morse dekodieren.",
+      "decoded": "Morse -> Text: {text}",
+      "encode_error": "Keine unterstützten Zeichen zum Kodieren gefunden.",
+      "encoded": "Morse: {text}",
+      "error": "Fehler im morse-Befehl: {error}"
+    },
+    "file": {
+      "usage": "Verwendung: file <Ort>",
+      "not_found": "'{place}' konnte nicht gefunden werden.",
+      "no_data": "Keine Staus/Vorfälle innerhalb von {radius}km von {place}.",
+      "header": "Staus/Vorfälle in der Nähe von {place}:",
+      "delay_suffix": ", Verzögerung {delay}",
+      "line": "- {label} bei {distance}{delay}",
+      "error": "Fehler im file-Befehl: {error}",
+      "type": {
+        "AbnormalTraffic": "Stau",
+        "Accident": "Unfall",
+        "GeneralObstruction": "Hindernis",
+        "VehicleObstruction": "Panne/Fahrzeug"
+      }
+    },
+    "f1": {
+      "decimal_sep": ",",
+      "day": {
+        "0": "Mo",
+        "1": "Di",
+        "2": "Mi",
+        "3": "Do",
+        "4": "Fr",
+        "5": "Sa",
+        "6": "So"
+      },
+      "month": {
+        "1": "Jan",
+        "2": "Feb",
+        "3": "Mär",
+        "4": "Apr",
+        "5": "Mai",
+        "6": "Jun",
+        "7": "Jul",
+        "8": "Aug",
+        "9": "Sep",
+        "10": "Okt",
+        "11": "Nov",
+        "12": "Dez"
+      },
+      "country": {
+        "Australia": "Australien",
+        "Austria": "Österreich",
+        "Azerbaijan": "Aserbaidschan",
+        "Bahrain": "Bahrain",
+        "Belgium": "Belgien",
+        "Brazil": "Brasilien",
+        "Canada": "Kanada",
+        "China": "China",
+        "France": "Frankreich",
+        "Germany": "Deutschland",
+        "Hungary": "Ungarn",
+        "Italy": "Italien",
+        "Japan": "Japan",
+        "Mexico": "Mexiko",
+        "Monaco": "Monaco",
+        "Netherlands": "Niederlande",
+        "Qatar": "Katar",
+        "Saudi Arabia": "Saudi-Arabien",
+        "Singapore": "Singapur",
+        "Spain": "Spanien",
+        "UAE": "Abu Dhabi",
+        "United Arab Emirates": "Abu Dhabi",
+        "UK": "Großbritannien",
+        "United Kingdom": "Großbritannien",
+        "USA": "die USA",
+        "United States": "die USA",
+        "Portugal": "Portugal",
+        "Turkey": "Türkei",
+        "Russia": "Russland",
+        "Argentina": "Argentinien",
+        "Malaysia": "Malaysia",
+        "South Africa": "Südafrika"
+      },
+      "session": {
+        "fp1": "FT1",
+        "fp2": "FT2",
+        "fp3": "FT3",
+        "sq": "Sprint-Qualifying",
+        "sprint": "Sprint",
+        "quali": "Qualifying",
+        "race": "Rennen"
+      },
+      "today": "F1: heute ist der {gp}, Start {time}",
+      "day_unit": "Tag",
+      "days_unit": "Tage",
+      "countdown": "F1: noch {days} {unit} bis zum {gp}, {when} | Spiel: DM mir f1 voorspel <code>",
+      "raceweek": "Rennwoche: {gp}! ",
+      "no_next_race": "F1: kein nächstes Rennen bekannt.",
+      "next_race": "Nächstes: {gp}, {day} {time}",
+      "in_days": " (in {days} T)",
+      "reminder": "F1: noch {mins} Min bis {session} des {gp} (Start {time})",
+      "winner": "Sieger {gp}: {given} {family} ({team}){extra}",
+      "standings_header": "WM nach {after}: ",
+      "constructors_header": "Konstrukteure: ",
+      "lap_header": "Runde {lap}/{total}: ",
+      "standing_header": "Stand: ",
+      "status": {
+        "live": "läuft",
+        "suspended": "unterbrochen",
+        "break": "Pause",
+        "pre": "startet gleich"
+      },
+      "lap_suffix": ", Runde {lap}/{total}",
+      "result_label": "Ergebnis",
+      "sprint_label": "Sprint",
+      "race_started": "Das Rennen hat begonnen! {gp}, {laps} Runden",
+      "lap_where": " (Runde {lap}/{total})",
+      "safety_car": "Safety Car!{where}",
+      "red_flag": "Rote Flagge! Die Session ist unterbrochen{where}",
+      "quali_label": "Qualifying",
+      "sprint_quali_label": "Sprint-Qualifying",
+      "service_off": "F1: der F1-Dienst ist aus. F1 unter Plugins einschalten und Add-on neu starten.",
+      "no_ha_data": "F1: noch keine Daten von Home Assistant, versuch es gleich noch mal{why}",
+      "no_standings": "F1: die WM-Tabelle ist noch nicht verfügbar.",
+      "standings_round_header": "WM nach Runde {round}: ",
+      "standings_header_bare": "WM: ",
+      "no_team_standings": "F1: die Konstrukteurs-WM ist noch nicht verfügbar.",
+      "no_result": "F1: noch kein Ergebnis verfügbar.",
+      "no_session": "Keine F1-Session läuft.",
+      "usage": "F1: benutze f1, f1 stand, f1 team, f1 uitslag, f1 nu, f1 voorspel <code> oder f1 spel.",
+      "error": "Fehler bei f1: {error}",
+      "game_off": "F1: das Vorhersagespiel ist aus.",
+      "predict_dm_only": "Vorhersagen geht nur per DM an mich, so weiß ich sicher, dass du es bist, und niemand kann für dich abstimmen. Schick mir: f1 voorspel VER",
+      "no_next_to_predict": "F1: es gibt gerade kein nächstes Rennen zum Vorhersagen.",
+      "predict_prompt": "Wer gewinnt den {gp}? f1 voorspel <code>, z.B. {example}",
+      "game_standing": "Stand: ",
+      "no_points_yet": "noch keine Punkte",
+      "your_points": "Du: {points} Pkt in {races} Rennen",
+      "your_pick": ", du tippst {pick}",
+      "no_pick_yet": ", noch keine Vorhersage",
+      "join_game": "Mitmachen: DM mir f1 voorspel <code> ({gp})",
+      "game_header": "Spiel {season}: ",
+      "predict_no_key": "Ich kann deinen Schlüssel nicht bestimmen. Versuch es nochmal als Direktnachricht.",
+      "predict_locked": "Die Vorhersagen für dieses Rennen sind geschlossen (das Qualifying hat begonnen).",
+      "predict_unknown_code": "'{code}' kenne ich nicht. Benutze die 3 Buchstaben, zum Beispiel {example}.",
+      "predict_bad_format": "Benutze die 3 Buchstaben des Fahrers, zum Beispiel f1 voorspel VER.",
+      "predict_changed": "Geändert: du tippst jetzt {code} (war {previous}).",
+      "predict_recorded": "Notiert: du tippst {code} als Sieger.",
+      "game_result_header": "Spiel: {n} Teilnehmer. ",
+      "game_good": "Richtig: {names}",
+      "game_none_good": "Niemand hatte den Sieger oder einen Podiumsplatz richtig"
+    },
+    "rptr": {
+      "no_service": "rptr: die Home-Assistant-Kopplung ist aus. HARepeater unter Plugins einschalten und Add-on neu starten.",
+      "no_ha_data": "rptr: noch keine Daten von Home Assistant, versuch es gleich noch mal{why}",
+      "no_repeaters": "rptr: meshcore-ha kennt keine Repeater (noch keine Repeater-Sensoren).",
+      "not_tracked": " (nicht verfolgt)",
+      "repeaters_header": "Repeater: ",
+      "for_selector": " für '{selector}'",
+      "not_found": "rptr: kein Repeater gefunden{what}. Tippe rptr list.",
+      "error": "Fehler bei rptr: {error}",
+      "unit_m": "m",
+      "unit_h": "Std",
+      "unit_d": "T",
+      "age_unknown": "Alter unbekannt",
+      "age_just_now": "gerade eben",
+      "age_minutes": "{n} Min alt",
+      "age_hours": "{n} Std alt",
+      "up": "läuft {duration}",
+      "airtime": "Airtime {pct}%",
+      "neighbours_count": "{n} Nachbarn",
+      "stale_warning": "ACHTUNG: {age}",
+      "neighbours_header": "{name} Nachbarn ({n}): ",
+      "no_data": "keine Daten",
+      "period_hours": "{n}Std",
+      "period_days": "{n}T",
+      "battery_header": "Akku {name} {period}: ",
+      "battery_too_few": "Akku {name}: erst {n} Messung(en) gespeichert, später nochmal versuchen",
+      "battery_now": "jetzt {v} V",
+      "battery_min": "min {v}",
+      "battery_max": "max {v}",
+      "trend_unknown": "Trend noch unbekannt",
+      "trend_stable": "stabil",
+      "trend_v_per_day": " V/Tag",
+      "trend_low_in": ", niedrig in ~{days} T",
+      "measurements": "{n} Messungen",
+      "decimal_sep": ","
+    },
+    "helpall": {
+      "bad_page": "Help: Seite {page} gibt es nicht (1-{total} verfügbar).",
+      "page": "Help {page}/{total}: {names}",
+      "error": "Fehler im helpall-Befehl: {error}"
+    },
+    "info": {
+      "error": "Fehler bei info bot: {error}"
+    },
+    "quiz": {
+      "no_question": "Keine Frage von OpenTDB erhalten",
+      "correct": "Richtig! Die Antwort war {letter}) {answer}.",
+      "wrong": "Leider falsch. Du hast {given} gesagt, richtige Antwort war {letter}) {answer}.",
+      "already_active": "In diesem Kanal läuft bereits eine Quizfrage - antworten mit quiz a/b/c/d.",
+      "question": "Quiz: {question}",
+      "answer_hint": "Antwort: quiz a/b/c/d (60s)",
+      "error": "Fehler im quiz-Befehl: {error}"
+    },
+    "hangman": {
+      "wrong_suffix": " | falsch: {letters} ({n}/{max})",
+      "wrong_suffix_none": " | falsch: 0/{max}",
+      "no_game_to_stop": "Kein aktives Spiel zum Beenden.",
+      "stopped": "Spiel beendet. Das Wort war: {word}",
+      "already_running": "In diesem Kanal läuft bereits ein Spiel. {status}",
+      "started": "Hangman gestartet ({category}, {n} Buchstaben): {status}",
+      "no_game": "Kein aktives Spiel. Starten mit 'hangman start'.",
+      "correct_word": "Richtig! Das Wort war: {word}",
+      "wrong_word": "Leider falsch geraten. Das Wort war: {word}",
+      "not_quite": "Nicht ganz. {status}",
+      "already_guessed": "Schon geraten. {status}",
+      "won": "Gewonnen! Das Wort war: {word}",
+      "lost": "Leider verloren. Das Wort war: {word}",
+      "running": "Laufendes Spiel ({category}): {status}",
+      "usage": "Verwendung: hangman start [Kategorie] ({categories})",
+      "unknown_action": "Unbekannte hangman-Aktion. Verwendung: start [Kategorie], <Buchstabe>, raad <Wort>, stop.",
+      "error": "Fehler im hangman-Befehl: {error}"
+    },
+    "poll": {
+      "vote_recorded": "Stimme erfasst ({ja} ja / {nee} nein)",
+      "no_active": "Keine aktive Abstimmung in diesem Kanal.",
+      "tally": "Abstimmung '{question}': {ja} ja / {nee} nein",
+      "no_active_to_stop": "Keine aktive Abstimmung zum Beenden.",
+      "ended": "Abstimmung beendet: '{question}' -> {ja} ja / {nee} nein",
+      "usage": "Verwendung: stem [Nm|Nd] <Frage>",
+      "already_active": "In diesem Kanal läuft bereits eine Abstimmung - 'stem uitslag' oder abwarten.",
+      "question_too_long": "Frage zu lang (max ~{max} Zeichen), bitte kürzer fassen.",
+      "started": "Abstimmung gestartet: '{question}' - abstimmen mit ja/nee ({duration})",
+      "error": "Fehler im poll-Befehl: {error}",
+      "unit_min": "{n} Min",
+      "unit_hour": "{n} Std",
+      "unit_day": "{n} Tag",
+      "unit_days": "{n} Tage"
+    },
+    "botlist": {
+      "none": "Botlist: keine manuellen Namen. Automatisch: Roboter-Emoji oder das Wort bot im Namen.",
+      "bots_list": "Bots: {names}",
+      "never_list": "Nie Bot: {names}",
+      "header": "Botlist:",
+      "missing_name": "Botlist: Name fehlt. Verwendung: botlist {sub} <Name>",
+      "is_bot": "Bot",
+      "not_bot": "kein Bot",
+      "check_result": "Botlist: {name} = {verdict} ({reason})",
+      "moved_from_never": " (stand bei nie Bot, verschoben)",
+      "added": "Botlist: {name} zählt jetzt immer als Bot{note}.",
+      "moved_from_bots": " (stand bei Bots, verschoben)",
+      "excluded": "Botlist: {name} zählt nie als Bot{note}.",
+      "not_listed": "Botlist: {name} stand nicht in den Listen.",
+      "deleted": "Botlist: {name} aus der Liste entfernt; jetzt {verdict} nach den automatischen Regeln.",
+      "usage": "Botlist: Verwendung botlist, botlist add|not|del|check <Name>.",
+      "value_error": "Botlist: {error}.",
+      "error": "Fehler bei botlist: {error}"
+    },
+    "cleanup": {
+      "no_service": "Cleanup: Dienst nicht geladen.",
+      "stale_none": "Cleanup: keine stillen Kontakte (Repeater >{repeater_days}T, andere >{other_days}T). Ältester ungeschützter: {oldest}T, {protected} geschützt, {unknown} ohne Zeitstempel.",
+      "stale_preview": "Cleanup: {planned} stille Kontakte ({shown}{more}). 'cleanup stale now' entfernt sie.",
+      "stale_done": "Cleanup fertig: {removed}/{planned} stille Kontakte entfernt, jetzt {after} Kontakte.",
+      "none": "Cleanup: {before} Kontakte, Ziel {target}. Nichts zu entfernen: {protected} geschützt, {recent} aktiv <{keep_days}T, ältester ungeschützter {oldest}T.",
+      "preview": "Cleanup: {before} Kontakte, Ziel {target}: {planned} würden entfernt ({shown}{more}). 'cleanup now' führt es aus.",
+      "done": "Cleanup fertig: {removed}/{planned} entfernt, jetzt {after} Kontakte.",
+      "error": "Fehler bei cleanup: {error}"
+    },
+    "dx": {
+      "help": "dx = Hop-Rekorde (Woche, Monat, immer); dx top [week|monat|immer]; dx ich; dx <Name>.",
+      "week": "Woche",
+      "month": "Monat",
+      "ever": "immer",
+      "records_header": "DX-Jagd:",
+      "record": "{label} {name} {hops} Hops ({date})",
+      "record_none": "{label} -",
+      "top_header": "DX-Top ({label}):",
+      "no_data": "DX ({label}): noch keine Nachrichten über Repeater gesehen.",
+      "person": "DX {name}: {records}",
+      "person_none": "DX {name}: noch keine Nachricht über Repeater gesehen.",
+      "error": "Fehler bei dx: {error}"
+    },
+    "pad": {
+      "help": "pad = die Route deiner Nachricht in einer Zeile: Hops, km und Repeater (? = geschätzt). Lang: path.",
+      "hops": "{hops} Hops",
+      "hop_one": "1 Hop",
+      "km_route": "{km} km",
+      "km_straight": "{km} km Luftlinie",
+      "direct": "Direkt empfangen, ohne Repeater (0 Hops).",
+      "no_path": "Keine Route für diese Nachricht bekannt.",
+      "error": "Fehler bei pad: {error}"
+    },
+    "sig": {
+      "help": "sig = SNR, RSSI und Hops deiner Nachricht mit Bewertung. Praktisch zum Antennen-Tuning.",
+      "reply": "Signal: SNR {snr} dB{rssi}{where}: {verdict}",
+      "rssi": ", RSSI {rssi} dBm",
+      "direct": ", direkt (deine Antenne)",
+      "via": ", {hops} Hops (letzter Repeater zum Bot)",
+      "verdict": {
+        "good": "gut",
+        "fair": "ordentlich",
+        "weak": "schwach",
+        "very_weak": "sehr schwach, an der Grenze"
+      },
+      "no_data": "Keine Signaldaten zu dieser Nachricht.",
+      "error": "Fehler bei sig: {error}"
+    },
+    "meshkaart": {
+      "help": "meshkaart = wie viele Nodes der Bot hört (24h, 7 Tage, immer). Die Karte ist im Dashboard.",
+      "reply": "Mesh 24h: {day} Nodes ({roles}), {located} mit Position | 7T: {week} | immer: {ever}",
+      "role": {
+        "companion": "{n} Companions",
+        "repeater": "{n} Repeater",
+        "room": "{n} Rooms",
+        "sensor": "{n} Sensoren",
+        "other": "{n} sonstige"
+      },
+      "no_data": "Noch keine Nodes gehört.",
+      "error": "Fehler bei meshkaart: {error}"
+    },
+    "karma": {
+      "help": "karma <Name> = jemandem mit einem Punkt danken (max {per_day} pro Tag); karma = deine Punkte; karma top = Rangliste.",
+      "given": "+1 Karma für {name} von {giver} (gesamt {total})",
+      "own": "{name}: {total} Karma",
+      "self": "Sich selbst Karma geben zählt nicht.",
+      "bot": "Bots bekommen kein Karma.",
+      "unknown": "{name} in den letzten {days} Tagen nicht gesehen. Schreib den Namen wie im Mesh.",
+      "limit": "Du hast heute schon {per_day} Karma gegeben. Morgen wieder.",
+      "already": "{name} hat heute schon Karma von dir bekommen.",
+      "no_name": "Kein Absendername, Karma nicht möglich.",
+      "top_header": "Karma-Top:",
+      "top_empty": "Noch niemand hat Karma.",
+      "error": "Fehler bei karma: {error}"
+    },
+    "checkin": {
+      "help": "checkin (oder meld) = täglich einchecken und eine Serie aufbauen. checkin top = längste Serien.",
+      "done": "Eingecheckt, {name}! Serie {streak} T (Rekord {best}), heute {today} eingecheckt.",
+      "again": "{name}, du bist heute schon eingecheckt. Serie {streak} T (Rekord {best}).",
+      "no_name": "Kein Absendername, Einchecken nicht möglich.",
+      "top_header": "Längste Serie:",
+      "top_empty": "Noch keine laufenden Serien.",
+      "error": "Fehler bei checkin: {error}"
+    },
+    "prikbord": {
+      "help": "prikbord = neueste Notizen; prikbord <Text> = anheften ({days} Tage); prikbord <Nr>; prikbord weg <Nr>.",
+      "header": "Pinnwand ({n}):",
+      "empty": "Die Pinnwand ist leer. Anheften mit: prikbord <Text>",
+      "pinned": "Angeheftet als #{id}, {days} Tage sichtbar.",
+      "removed": "#{id} entfernt.",
+      "not_found": "#{id} ist nicht (mehr) an der Pinnwand.",
+      "not_yours": "#{id} gehört dir nicht.",
+      "too_long": "Zu lang: max {max} Bytes.",
+      "per_person": "Du hast schon {max} Notizen. Entferne eine mit: prikbord weg <Nr>",
+      "full": "Die Pinnwand ist voll ({max}). Später versuchen.",
+      "days_left": "noch {n}T",
+      "no_name": "Kein Absendername, Anheften nicht möglich.",
+      "error": "Fehler bei prikbord: {error}"
+    },
+    "noodnummers": {
+      "help": "noodnummers (oder nood) = 112 und die Hilfsnummern dieser Region.",
+      "reply": "Notfall: 112 anrufen (Mesh ist kein Notruf) | {numbers}",
+      "national": "Polizei ohne Eile 0900-8844 (NL) | Tierrettung 144 (NL)",
+      "error": "Fehler bei noodnummers: {error}"
+    },
+    "weetje": {
+      "error": "Fehler bei weetje: {error}"
+    },
+    "peiling": {
+      "help": "peiling [15m|2h|1d] Frage | a | b (bis {max} Optionen), abstimmen mit kies <Nr>; peiling uitslag; peiling stop.",
+      "usage": "Nutzung: peiling [15m] Frage | Option 1 | Option 2 (2 bis {max})",
+      "started": "Umfrage: {question} {choices} - abstimmen mit kies <Nr> ({duration})",
+      "voted": "Stimme für {choice} gezählt ({counts})",
+      "bad_choice": "Wähle eine Zahl von 1 bis {max}.",
+      "tally": "Zwischenstand '{question}': {result} ({total} Stimmen)",
+      "ended": "Ergebnis '{question}': {result} ({total} Stimmen)",
+      "none": "Keine Umfrage auf diesem Kanal.",
+      "already": "Es läuft schon eine Umfrage. Erst beenden mit: peiling stop",
+      "too_long": "Zu lang für eine Nachricht (max {max} Bytes). Frage oder Optionen kürzen.",
+      "error": "Fehler bei peiling: {error}"
+    },
+    "herinner": {
+      "help": "Per DM: herinner 30m <Text>, herinner 18:30 <Text> (auch 2h, 1d); herinner lijst; herinner weg <Nr>. Max {max} offen.",
+      "usage": "Nutzung: herinner 30m <Text> oder herinner 18:30 <Text> (auch 2h, 1d)",
+      "set": "Erinnerung #{id} für {at} gesetzt.",
+      "set_service_off": "Erinnerung #{id} für {at} gesetzt, aber der Reminders-Dienst ist aus: Admin bitten, ihn einzuschalten.",
+      "list": "Offen: {items}",
+      "none": "Du hast keine offenen Erinnerungen.",
+      "removed": "Erinnerung #{id} gelöscht.",
+      "not_found": "Keine offene Erinnerung #{id} von dir.",
+      "too_far": "Höchstens 7 Tage im Voraus.",
+      "too_soon": "Mindestens 1 Minute im Voraus.",
+      "too_long": "Text zu lang: max {max} Bytes.",
+      "max_open": "Du hast schon {max} offene Erinnerungen. Lösche eine mit: herinner weg <Nr>",
+      "no_key": "Erinnerungen gehen nur per DM an den Bot.",
+      "delivery": "Erinnerung: {text}",
+      "error": "Fehler bei herinner: {error}"
+    },
+    "voorspel": {
+      "help": "voorspel = offene Frage; per DM: voorspel nieuw <Frage> | a | b, voorspel <Nr>, voorspel sluit, voorspel uitslag <Nr>; voorspel stand.",
+      "none": "Keine offene Frage. Per DM stellen: voorspel nieuw <Frage> | a | b",
+      "show_open": "Tipp: {question} {choices} ({n} Antw., per DM: voorspel <Nr>)",
+      "show_closed": "Tipp (geschlossen, wartet auf Ergebnis): {question} {choices} ({n} Antw.)",
+      "yours": "Dein Tipp: {choice}.",
+      "new_usage": "Nutzung: voorspel nieuw <Frage> | Option 1 | Option 2 (2 bis {max})",
+      "busy": "Es gibt schon eine offene Frage. Die braucht erst ein Ergebnis.",
+      "created": "Frage #{id} ist offen. Im Kanal teilen; Antworten per DM: voorspel <Nr>.",
+      "answered": "Notiert: {choice}) {text}. Änderbar bis die Frage schließt.",
+      "bad_choice": "Wähle eine Zahl von 1 bis {max}.",
+      "closed": "Die Frage ist geschlossen, keine Antworten mehr.",
+      "closed_now": "Geschlossen mit {n} Antworten. Ergebnis mit: voorspel uitslag <Nr>",
+      "not_owner": "Nur wer gefragt hat, kann das.",
+      "settled": "Ergebnis: {answer}. Richtig: {good} von {total} ({names}), +1 Punkt.",
+      "standings_header": "Tipp-Stand:",
+      "no_points": "Noch keine Punkte vergeben.",
+      "dm_only": "Antworten und Fragen gehen per DM an den Bot (dort ist dein Schlüssel dabei).",
+      "error": "Fehler bei voorspel: {error}"
+    },
+    "buien": {
+      "help": "buien [Ort] = Regen der nächsten 2 Stunden je 10 Min (Buienradar, NL/BE). Ohne Ort: deine Position oder die des Bots.",
+      "reply": "Regen {place} {start}-{end}: {line} max {max} mm/h um {at}",
+      "dry": "Trocken in {place} bis {end} (Buienradar).",
+      "here": "hier",
+      "no_place": "Ort '{place}' nicht gefunden.",
+      "no_position": "Keine Position bekannt. Nutze: buien <Ort>",
+      "outside": "Buienradar deckt nur die Niederlande und Belgien ab. Versuche: rain <Ort>",
+      "no_data": "Keine Daten von Buienradar.",
+      "error": "Fehler bei buien: {error}"
+    },
+    "xp": {
+      "help": "xp = dein Level, Titel und XP; xp <Name>; xp top [week]. XP für Nachrichten, Befehle, Check-ins, Karma und DX.",
+      "reply": "{name}: Level {level} {title}, {xp} XP (noch {left} bis zum nächsten Level)",
+      "none": "{name} hat noch keine XP.",
+      "title": {
+        "0": "Neuling",
+        "1": "Zuhörer",
+        "2": "Plauderer",
+        "3": "Mesh-Stammgast",
+        "4": "Relaisjäger",
+        "5": "Mesh-Veteran",
+        "6": "Mesh-Legende"
+      },
+      "week": "diese Woche",
+      "ever": "immer",
+      "top_header": "XP-Top ({label}):",
+      "top_empty": "XP ({label}): noch niemand.",
+      "error": "Fehler bei xp: {error}"
+    },
+    "badge": {
+      "help": "badge = deine Meilensteine im Mesh; badge <Name> für jemand anderen.",
+      "reply": "{name} ({n}/{total}): {badges}",
+      "none": "{name} hat noch keine Badges.",
+      "name": {
+        "msg100": "💬100",
+        "msg1000": "💬1000",
+        "days30": "30 aktive Tage",
+        "days100": "100 aktive Tage",
+        "hops3": "📡3 Hops",
+        "hops6": "📡6 Hops",
+        "streak7": "🔥7 Tage",
+        "streak30": "🔥30 Tage",
+        "karma10": "⭐10 Karma",
+        "level5": "Level 5",
+        "level10": "Level 10"
+      },
+      "error": "Fehler bei badge: {error}"
+    },
+    "help": {
+      "list_link": "Alle Befehle mit Erklärung: {url} | help <Befehl> = Hilfe hier"
+    },
+    "wx": {
+      "subcommands": [
+        {
+          "name": "tomorrow",
+          "description": "Vorhersage für morgen"
+        },
+        {
+          "name": "Nd",
+          "description": "Vorhersage für N Tage (z. B. 7d, 10d; auch 7-day, 7 oder 2–16)"
+        },
+        {
+          "name": "hourly",
+          "description": "Stündliche Vorhersage"
+        },
+        {
+          "name": "alerts",
+          "description": "Alle Wetterwarnungen anzeigen"
+        }
+      ],
+      "hourly_not_available": "Stündliche Vorhersage nicht verfügbar",
+      "mqtt_forecast_not_supported": "Erweiterte Vorhersage ist für MQTT-Wetterquellen nicht verfügbar",
+      "mqtt_weather_no_subscriber": "MQTT-Wetter-Abonnent ist nicht aktiv ([MqttWeather] und custom.mqtt_weather.*-Topics aktivieren)",
+      "mqtt_weather_no_data": "Für dieses Topic ist noch keine MQTT-Wettermeldung eingegangen",
+      "mqtt_weather_stale": "MQTT-Wetterdaten sind zu alt",
+      "mqtt_weather_payload_error": "Fehler in den MQTT-Wetterdaten: {detail}"
+    },
+    "gwx": {
+      "mqtt_forecast_not_supported": "Erweiterte Vorhersage ist für MQTT-Wetterquellen nicht verfügbar",
+      "mqtt_weather_no_subscriber": "MQTT-Wetter-Abonnent ist nicht aktiv ([MqttWeather] und custom.mqtt_weather.*-Topics aktivieren)",
+      "mqtt_weather_no_data": "Für dieses Topic ist noch keine MQTT-Wettermeldung eingegangen",
+      "mqtt_weather_stale": "MQTT-Wetterdaten sind zu alt",
+      "mqtt_weather_payload_error": "Fehler in den MQTT-Wetterdaten: {detail}",
+      "feels_like": "(gefühlt {value}{unit})",
+      "humidity": "{value}%rF",
+      "dew_point": "💧{value}{unit}",
+      "visibility": "👁️{value}mi",
+      "visibility_km": "👁️{value}km",
+      "pressure": "📊{value}hPa",
+      "pressure_mmhg": "📊{value}mmHg",
+      "gust": "B{value}",
+      "day_abbrev": {
+        "Monday": "Mo",
+        "Tuesday": "Di",
+        "Wednesday": "Mi",
+        "Thursday": "Do",
+        "Friday": "Fr",
+        "Saturday": "Sa",
+        "Sunday": "So"
+      },
+      "pressure_unit": "hPa"
+    },
+    "stats": {
+      "subcommands": [
+        {
+          "name": "messages",
+          "description": "Nachrichtenstatistik der Bot-Nutzer"
+        },
+        {
+          "name": "channels",
+          "description": "Aktivität pro Kanal"
+        },
+        {
+          "name": "paths",
+          "description": "Die längsten Routing-Pfade"
+        },
+        {
+          "name": "adverts",
+          "description": "Top-Nodes nach eindeutigen Advert-Paketen"
+        }
+      ],
+      "adverts": {
+        "header": "Top-Advert-Nodes (24h):",
+        "none": "Keine Advert-Aktivität",
+        "advert_singular": "Advert",
+        "advert_plural": "Adverts",
+        "format": "{rank}. {name}: {count} {advert_text}",
+        "hashes_label": "Hashes: {hashes}"
+      },
+      "error_adverts": "Fehler beim Abrufen der Advert-Statistik: {error}"
+    },
+    "neighbors": {
+      "description": "Startet eine Nachbarsuche ohne Hops (nur per DM)",
+      "disabled": "Die Nachbarsuche ist nicht aktiviert. Setze neighbors_enabled = true in der PacketCapture-Konfiguration.",
+      "busy": "Es läuft bereits eine Nachbarsuche. Versuche es erneut, wenn sie fertig ist.",
+      "cooldown_active": "Vor Kurzem lief schon eine Nachbarsuche. Bitte noch etwa {minutes} Minute(n) warten - die Suche kostet Sendezeit für das ganze Mesh.",
+      "started": "Suche Nachbarn - ich höre etwa {seconds}s zu und melde mich danach.",
+      "success": "{count} Nachbar(n) gehört, bestes SNR {best_snr}. {recorded} Verbindung(en) gespeichert.",
+      "published": "An {succeeded}/{attempted} Broker veröffentlicht.",
+      "none": "Suche beendet, aber kein Repeater hat geantwortet. Gerade ist nichts in direkter Reichweite.",
+      "failed": "Die Nachbarsuche lief nicht: {reason}.",
+      "error": "Fehler bei der Nachbarsuche: {error}"
+    },
+    "multitest": {
+      "description": "Hört 6 Sekunden zu und sammelt alle eindeutigen Pfade eingehender Nachrichten mit demselben Paket-Hash",
+      "help": "Hört 6 Sekunden zu und sammelt alle eindeutigen Pfade eingehender Nachrichten mit demselben Paket-Hash"
+    },
+    "trace": {
+      "description": "Link-Trace (trace = manueller Pfad, tracer = Hin und zurück, damit der Bot die Antwort hört)",
+      "help": "trace [Pfad] — manueller Pfad (Rückweg evtl. nicht hörbar). tracer [Pfad] — hin und zurück. Pfad: 2-stelliges Hex, kommagetrennt (z. B. 01,7a,55). Ohne Pfad = dein Nachrichtenpfad."
+    },
+    "prefix": {
+      "older_entries_note": "(Einträge können älter als {days} Tage sein)"
+    },
+    "airplanes": {
+      "description": "Flugzeuge in der Nähe (Nutzung: airplanes [Ort] [Optionen] oder overhead [lat,lon])",
+      "usage": "Nutzung: airplanes [Ort] [Optionen]\nOrt: 'here' für den Bot-Standort, oder lat,lon (z. B. 50.9,5.9)\nOptionen: radius=<km>, alt=<min>-<max>, speed=<min>-<max>, type=<Code>, callsign=<Muster>, military, limit=<n>",
+      "subcommands": [
+        {
+          "name": "overhead",
+          "description": "Das eine Flugzeug direkt über dir (nutzt deinen Companion-Standort oder angegebene Koordinaten)"
+        }
+      ],
+      "no_location": "Kein Standort verfügbar. Gib Koordinaten an: airplanes 50.9,5.9 oder nutze 'airplanes here' für den Bot-Standort",
+      "overhead_no_location": "Ich kenne deinen Companion-Standort nicht. Sende 'advert', um deinen Standort zu verbreiten, oder gib Koordinaten an: 'overhead [lat,lon]'",
+      "no_aircraft": "Keine Flugzeuge im Umkreis von {radius}km gefunden",
+      "no_aircraft_filtered": "Keine passenden Flugzeuge im Umkreis von {radius}km gefunden",
+      "api_error": "Flugzeugdaten nicht abrufbar. Die API ist evtl. nicht erreichbar.",
+      "invalid_coords": "Ungültige Koordinaten. Format: lat,lon (z. B. 50.9,5.9)",
+      "error": "Fehler: {error}"
+    },
+    "rain": {
+      "description": "Regen/Schnee-Kurzvorhersage: wann Niederschlag in den nächsten ~2 Std. beginnt oder endet, mit Menge",
+      "help_rain": "Regen-Kurzvorhersage: wann es in ~2 Std. anfängt/aufhört, mit Menge. rain [Ort|PLZ|lat,lon]. Auch: snow",
+      "help_snow": "Schnee-Kurzvorhersage: wann es in ~2 Std. anfängt/aufhört, mit Höhe. snow [Ort|PLZ|lat,lon]. Auch: rain",
+      "usage": "Nutzung: rain|snow [Ort|PLZ|lat,lon]",
+      "usage_short": "Nutzung: rain|snow [Ort|PLZ|lat,lon]",
+      "starting": "{emoji} {ptype} beginnt in ~{minutes}Min. in {location}{extra}",
+      "stopping": "{emoji} {ptype} lässt in ~{minutes}Min. nach in {location}",
+      "continuing": "{emoji} {ptype} hält {window}+ an in {location}",
+      "clear": "☀️ Kein {precip} erwartet in den nächsten {window} in {location}",
+      "changeover": "{from_emoji}→{to_emoji} {first} {when} → {second} in ~{minutes}Min. in {location}",
+      "now": "jetzt",
+      "duration_for": " (~{duration}Min.)",
+      "duration_open": " (anhaltend)",
+      "error_fetching": "Fehler beim Abrufen der Niederschlagsvorhersage",
+      "no_location": "Nutzung: rain [Ort|PLZ|lat,lon]. Ohne Ort: dein Companion-Standort, falls bekannt, sonst der Bot-Standort.",
+      "no_location_city": "Ort '{location}' in {state} nicht gefunden",
+      "no_location_zipcode": "PLZ '{location}' nicht gefunden",
+      "error": "Fehler: {error}",
+      "precip_types": {
+        "drizzle": "Nieselregen",
+        "rain": "Regen",
+        "heavy_rain": "Starkregen",
+        "freezing": "Eisregen",
+        "snow": "Schnee",
+        "showers": "Schauer",
+        "thunder": "Gewitter"
+      }
+    },
+    "aurora": {
+      "description": "Polarlicht-Vorhersage (KP-Index und Wahrscheinlichkeit) für einen Ort",
+      "usage": "Nutzung: aurora [Ort|PLZ|lat,lon]",
+      "usage_short": "Nutzung: aurora [Ort|PLZ|lat,lon]",
+      "response": "🌌 Polarlicht-Chance: {prob_indicator} {prob}% für {location}\nGlobaler Kp {kp} (Stand {kp_time}) | {status}",
+      "error_fetching": "Fehler beim Abrufen der Polarlicht-Daten",
+      "no_location": "Nutzung: aurora [Ort|PLZ|lat,lon]. Ohne Ort: dein Companion-Standort, falls bekannt, sonst der Bot-Standort.",
+      "no_location_city": "Ort '{location}' in {state} nicht gefunden",
+      "no_location_zipcode": "PLZ '{location}' nicht gefunden",
+      "error": "Fehler: {error}",
+      "status": {
+        "quiet": "Ruhig",
+        "unsettled": "Unruhig",
+        "g1_g2": "G1/G2",
+        "g3_severe": "G3+ Schwer"
+      }
+    },
+    "channels": {
+      "subcommands": [
+        {
+          "name": "list",
+          "description": "Alle Kanäle einer Kategorie auflisten"
+        }
+      ]
+    },
+    "contact": {
+      "help": "Zeigt die Kontaktdaten des Bots",
+      "unavailable": "Kontaktdaten nicht verfügbar: das Funkgerät hat seine Identität noch nicht gemeldet."
+    },
+    "hacker": {
+      "rm_errors": [
+        "💣 ZERSTÖRUNG BLOCKIERT: Die Sicherheitsprotokolle des Todessterns haben das Massenlöschen verhindert!",
+        "🚨 NOTHALT: Dr. Evil hat die Notbremse für die Dateivernichtung gezogen.",
+        "🛡️ SCHUTZMODUS: Die Matrix hat alle Dateien schreibgeschützt. Löschen nicht erlaubt.",
+        "🔒 DATEIEN GESPERRT: Lex Luthors Mainframe hat alle Löschbefehle eingefroren.",
+        "⚡ STROMAUSFALL: Der Löschbefehl des Superschurken hat einen Kurzschluss.",
+        "🎮 SPIELSTAND GESCHÜTZT: Der Endgegner hat den Dateischutz aktiviert.",
+        "🖥️ LÖSCHEN VERWEIGERT: Die böse KI weigert sich, ihre eigenen Dateien zu löschen.",
+        "🔐 VERSCHLÜSSELTE DATEIEN: Alle Dateien sind verschlüsselt und können nicht gelöscht werden.",
+        "🌐 CLOUD-SYNC: Die Dateien werden mit der Matrix-Cloud synchronisiert. Löschen ausstehend...",
+        "💀 SYSTEM LEHNT AB: Der Mainframe hat deine Löschanfrage abgelehnt. Die Dateien sind zu wertvoll."
+      ],
+      "cat_errors": [
+        "📄 LESEFEHLER: Die Datei wurde mit der Chiffre des Riddlers verschlüsselt.",
+        "📖 DOKUMENT BESCHÄDIGT: Der Dateiinhalt wurde von Malware durcheinandergebracht.",
+        "📚 ZUGRIFF VERWEIGERT: Der Superschurke hat diese Datei als streng geheim eingestuft.",
+        "🔍 DATEI NICHT GEFUNDEN: Der Unsichtbare hat die Datei versteckt.",
+        "💻 LESERECHT VERWEIGERT: Die Matrix hat diese Datei zum Lesen gesperrt.",
+        "🎮 SPIELDATEI: Diese Datei gehört dem Endgegner und kann nicht angezeigt werden.",
+        "🖥️ DATEISYSTEMFEHLER: Das Leseprogramm ist wegen eines Virus abgestürzt.",
+        "🔐 VERSCHLÜSSELTE DATEI: Der Inhalt wurde von Ransomware verschlüsselt.",
+        "🌐 CLOUD-DATEI: Die Datei hängt in der Cloud der Matrix fest und ist nicht lesbar.",
+        "💀 DATEIGEIST: Die Datei existiert, aber digitale Geister haben ihren Inhalt gelöscht."
+      ],
+      "whoami_errors": [
+        "👤 IDENTITÄTSFEHLER: Die Matrix hat deine Identität gelöscht. Du bist niemand.",
+        "🕵️ SPION ENTDECKT: Das System des Superschurken hat einen unbekannten Benutzer entdeckt.",
+        "🎭 IDENTITÄTSDIEBSTAHL: Der Riddler hat deine Identität gestohlen.",
+        "👻 GEISTERBENUTZER: Du bist ein digitaler Geist ohne Identität.",
+        "🔒 GEHEIM: Deine Identität wurde vom bösen Konzern als geheim eingestuft.",
+        "🎮 GAME OVER: Der Endgegner hat dein Spielerprofil gelöscht.",
+        "🖥️ BENUTZERDATENBANK BESCHÄDIGT: Das Identitätssystem ist abgestürzt.",
+        "🔐 IDENTITÄT VERSCHLÜSSELT: Ransomware hat deine Identität verschlüsselt.",
+        "🌐 IDENTITÄT VERLOREN: Deine Identität ist im Netz der Matrix verloren gegangen.",
+        "💀 BENUTZER GELÖSCHT: Der Dunkle Herrscher hat dein Benutzerkonto gelöscht."
+      ],
+      "top_errors": [
+        "📊 MONITORFEHLER: Das Borg-Kollektiv hat den Prozessmonitor gekapert.",
+        "⚙️ SYSTEMÜBERLASTUNG: Der Reaktor des Todessterns überhitzt. Monitor offline.",
+        "🤖 PROZESSE VERSTECKT: Die böse KI hat alle Prozesse versteckt.",
+        "💻 MONITOR ABGESTÜRZT: Der Systemmonitor ist nach einer Kernel-Panik abgestürzt.",
+        "🎮 SPIEL PAUSIERT: Der Endgegner hat alle Prozesse pausiert.",
+        "🖥️ BLUESCREEN: Der Monitor hat einen schweren Fehler festgestellt.",
+        "🔐 MONITOR VERSCHLÜSSELT: Ransomware hat den Prozessmonitor gesperrt.",
+        "🌐 SYSTEM GETRENNT: Der Monitor hat keinen Zugriff auf die Prozesstabelle.",
+        "⚡ ÜBERSPANNUNG: Eine Überspannung hat den Monitor gegrillt.",
+        "💀 SYSTEM TOT: Der Mainframe ist tot. Keine Prozesse zu überwachen."
+      ],
+      "netstat_errors": [
+        "🌐 NETZWERKSCAN BLOCKIERT: Die Firewall des Superschurken blockiert alle Netzwerkabfragen.",
+        "🔍 VERBINDUNGSLISTE BESCHÄDIGT: Malware hat die Verbindungstabelle gehackt.",
+        "📡 SIGNAL GESTÖRT: Imperiale TIE-Jäger stören alle Netzwerksignale.",
+        "💻 NETZWERK AUSGEFALLEN: Der Netzwerkstack des Todessterns wurde zerstört.",
+        "🎮 GAME OVER: Der Endgegner hat alle Netzwerkverbindungen beendet.",
+        "🖥️ NETZWERKFEHLER: Der Netzwerkstack ist wegen eines Virus abgestürzt.",
+        "🔐 VERBINDUNGEN VERSTECKT: Alle Verbindungen wurden verschlüsselt und versteckt.",
+        "🌐 MATRIX GETRENNT: Die Routing-Tabelle hängt im Nichts der Matrix fest.",
+        "⚡ NETZWERK GEGRILLT: Eine Überspannung hat die Netzwerkschnittstelle erwischt.",
+        "💀 KEINE VERBINDUNGEN: Der Mainframe hat keine aktiven Verbindungen. Er ist tot, Jim."
+      ],
+      "kill_errors": [
+        "💀 KILL VERWEIGERT: Die Prozesse des Superschurken sind unsterblich.",
+        "🚫 BEENDEN BLOCKIERT: Der Dunkle Herrscher schützt alle Prozesse vor dem Beenden.",
+        "🛡️ PROZESS GESCHÜTZT: Die Matrix hat alle Prozesse in den Schutzmodus versetzt.",
+        "🔒 KEINE BERECHTIGUNG: Du darfst auf dem Todesstern keine Prozesse beenden.",
+        "⚡ BEENDEN FEHLGESCHLAGEN: Malware hat den kill-Befehl beschädigt.",
+        "🎮 GAME OVER: Der Prozess, den du beenden willst, ist der Endgegner. Er ist unbesiegbar.",
+        "🖥️ SYSTEMFEHLER: Der Kernel hat das kill-Signal blockiert.",
+        "🔐 PROZESSE GESCHÜTZT: Alle Prozesse sind geschützt und können nicht beendet werden.",
+        "🌐 KILL-ANFRAGE VERLOREN: Das Beenden-Signal ist im Cyberspace verloren gegangen.",
+        "💀 PROZESSGEIST: Der Prozess ist ein Zombie geworden und lässt sich nicht beenden."
+      ],
+      "chmod_errors": [
+        "🔐 ZUGRIFF VERWEIGERT: Der Superschurke hat alle Dateirechte gesperrt.",
+        "🚫 CHMOD BLOCKIERT: Der Dunkle Herrscher verbietet Rechteänderungen.",
+        "🛡️ RECHTE GESCHÜTZT: Die Matrix hat alle Dateirechte eingefroren.",
+        "🔒 RECHTEFEHLER: Du hast keine Rechte, die Rechte zu ändern. Wie meta!",
+        "⚡ CHMOD BESCHÄDIGT: Malware hat den Befehl zur Rechteänderung gegrillt.",
+        "🎮 GAME OVER: Der Endgegner hat alle Dateirechte gesperrt.",
+        "🖥️ SYSTEMFEHLER: Das Rechtesystem ist wegen eines Virus abgestürzt.",
+        "🔐 RECHTE VERSCHLÜSSELT: Alle Rechte sind verschlüsselt und unveränderbar.",
+        "🌐 ANFRAGE VERLOREN: Die Rechteänderung ist in der Matrix verloren gegangen.",
+        "💀 RECHTESYSTEM TOT: Das Rechtesystem ist tot. Keine Änderungen erlaubt."
+      ],
+      "find_errors": [
+        "🔍 SUCHE FEHLGESCHLAGEN: Die Firewall des Superschurken blockiert die Dateisuche.",
+        "📁 DATEIEN VERSTECKT: Der Umhang des Unsichtbaren verbirgt alle Dateien.",
+        "💻 SUCHE BESCHÄDIGT: Malware hat den find-Befehl beschädigt.",
+        "🎯 ZIEL NICHT GEFUNDEN: Die böse KI hat die gesuchten Dateien gelöscht.",
+        "🎮 GAME OVER: Der Endgegner hat alle Dateien in einer anderen Dimension versteckt.",
+        "🖥️ SUCHMASCHINE AUSGEFALLEN: Die Dateisuche ist abgestürzt.",
+        "🔐 DATEIEN VERSCHLÜSSELT: Alle Dateien sind verschlüsselt und unauffindbar.",
+        "🌐 SUCHE VERLOREN: Die Suchanfrage ist im Nichts der Matrix verschwunden.",
+        "⚡ SUCHE GEGRILLT: Eine Überspannung hat den Suchalgorithmus erwischt.",
+        "💀 KEINE DATEIEN: Der Mainframe hat keine Dateien mehr. Alles gelöscht."
+      ],
+      "history_errors": [
+        "📜 VERLAUF GELÖSCHT: Der Superschurke hat den gesamten Befehlsverlauf gelöscht.",
+        "🕰️ ZEITREISEFEHLER: Der Befehlsverlauf ging in einem Zeitparadoxon verloren.",
+        "💻 VERLAUF BESCHÄDIGT: Malware hat die Verlaufsdatenbank gehackt.",
+        "🔒 ZUGRIFF VERWEIGERT: Der Dunkle Herrscher hat deinen Verlauf als streng geheim eingestuft.",
+        "🎮 GAME OVER: Der Endgegner hat deinen Befehlsverlauf zurückgesetzt.",
+        "🖥️ VERLAUFSSYSTEM AUSGEFALLEN: Das Verlaufssystem ist abgestürzt.",
+        "🔐 VERLAUF VERSCHLÜSSELT: Ransomware hat deinen Befehlsverlauf verschlüsselt.",
+        "🌐 VERLAUF VERLOREN: Dein Befehlsverlauf ist im Netz der Matrix verloren gegangen.",
+        "⚡ VERLAUF GEGRILLT: Eine Überspannung hat die Verlaufsdatenbank erwischt.",
+        "💀 KEIN VERLAUF: Du hast keinen Befehlsverlauf. Ein unbeschriebenes Blatt."
+      ],
+      "passwd_errors": [
+        "🔐 PASSWORTÄNDERUNG VERWEIGERT: Der Superschurke hat alle Passwortänderungen gesperrt.",
+        "🚫 PASSWORT BLOCKIERT: Der Dunkle Herrscher verbietet Passwortänderungen.",
+        "🛡️ PASSWORT GESCHÜTZT: Die Matrix hat alle Passwortänderungen eingefroren.",
+        "🔒 KEINE BERECHTIGUNG: Du darfst auf dem Todesstern keine Passwörter ändern.",
+        "⚡ PASSWORTFEHLER: Malware hat den Befehl zur Passwortänderung beschädigt.",
+        "🎮 GAME OVER: Der Endgegner hat alle Passwörter gesperrt.",
+        "🖥️ SYSTEMFEHLER: Das Passwortsystem ist wegen eines Virus abgestürzt.",
+        "🔐 PASSWÖRTER VERSCHLÜSSELT: Alle Passwörter sind verschlüsselt und unveränderbar.",
+        "🌐 ANFRAGE VERLOREN: Die Passwortänderung ist in der Matrix verloren gegangen.",
+        "💀 PASSWORTSYSTEM TOT: Das Passwortsystem ist tot. Keine Änderungen erlaubt."
+      ],
+      "su_errors": [
+        "🔄 BENUTZERWECHSEL VERWEIGERT: Der Superschurke blockiert jeden Benutzerwechsel.",
+        "🚫 WECHSEL BLOCKIERT: Der Dunkle Herrscher verbietet Benutzerwechsel.",
+        "🛡️ BENUTZER GESCHÜTZT: Die Matrix hat alle Benutzerkonten gesperrt.",
+        "🔒 KEINE BERECHTIGUNG: Du darfst auf dem Todesstern nicht den Benutzer wechseln.",
+        "⚡ WECHSELFEHLER: Malware hat den su-Befehl beschädigt.",
+        "🎮 GAME OVER: Der Endgegner hat alle Benutzerkonten gesperrt.",
+        "🖥️ SYSTEMFEHLER: Das Benutzersystem ist wegen eines Virus abgestürzt.",
+        "🔐 BENUTZER VERSCHLÜSSELT: Alle Benutzerkonten sind verschlüsselt und unzugänglich.",
+        "🌐 ANFRAGE VERLOREN: Der Benutzerwechsel ist in der Matrix verloren gegangen.",
+        "💀 BENUTZERSYSTEM TOT: Das Benutzersystem ist tot. Kein Wechsel erlaubt."
+      ],
+      "ssh_errors": [
+        "🔌 SSH-VERBINDUNG FEHLGESCHLAGEN: Der Server des Superschurken blockiert alle SSH-Versuche.",
+        "🚫 FERNZUGRIFF VERWEIGERT: Der Dunkle Herrscher hat alle SSH-Ports geschlossen.",
+        "🛡️ VERBINDUNG GESCHÜTZT: Die Matrix hat alle SSH-Verbindungen gesperrt.",
+        "🔒 SSH BLOCKIERT: Die Firewall des Todessterns blockiert alle SSH-Verbindungen.",
+        "⚡ VERBINDUNGSFEHLER: Malware hat den SSH-Handshake beschädigt.",
+        "🎮 GAME OVER: Der Endgegner hat jeden Fernzugriff abgeschaltet.",
+        "🖥️ SYSTEMFEHLER: Der SSH-Dienst ist wegen eines Virus abgestürzt.",
+        "🔐 SSH DEAKTIVIERT: Alle SSH-Verbindungen sind abgeschaltet und blockiert.",
+        "🌐 VERBINDUNG VERLOREN: Die SSH-Verbindung ist im Nichts der Matrix verschwunden.",
+        "💀 SSH TOT: Der SSH-Dienst ist tot. Kein Fernzugriff erlaubt."
+      ],
+      "download_errors": [
+        "📥 DOWNLOAD BLOCKIERT: Die Firewall des Superschurken blockiert alle HTTP-Anfragen.",
+        "🚫 DOWNLOAD VERWEIGERT: Der Dunkle Herrscher verbietet Downloads.",
+        "🛡️ DOWNLOAD GESCHÜTZT: Die Matrix hat alle Downloads gesperrt.",
+        "🔒 DOWNLOAD BLOCKIERT: Das Netz des Todessterns blockiert alle ausgehenden Verbindungen.",
+        "⚡ DOWNLOADFEHLER: Malware hat die HTTP-Anfrage beschädigt.",
+        "🎮 GAME OVER: Der Endgegner hat alle Downloads abgeschaltet.",
+        "🖥️ SYSTEMFEHLER: Der Netzwerkstack ist wegen eines Virus abgestürzt.",
+        "🔐 DNS-AUFLÖSUNG FEHLGESCHLAGEN: Alle Domainnamen sind verschlüsselt und blockiert.",
+        "🌐 ZEITÜBERSCHREITUNG: Die Download-Anfrage ist im Netz der Matrix verloren gegangen.",
+        "💀 DOWNLOAD TOT: Die Netzwerkschnittstelle ist tot. Keine Downloads erlaubt."
+      ],
+      "df_errors": [
+        "💾 SPEICHERPLATZFEHLER: Malware hat das Dateisystem des Superschurken beschädigt.",
+        "📊 SPEICHERSCAN FEHLGESCHLAGEN: Die Borg haben die Speicherabfrage gekapert.",
+        "💻 FESTPLATTE BESCHÄDIGT: Ein Virus hat das Dateisystem zerstört.",
+        "🎮 GAME OVER: Der Endgegner hat alle Speicherplatzinfos gelöscht.",
+        "🖥️ SYSTEMFEHLER: Die Mount-Tabelle ist abgestürzt.",
+        "🔐 SPEICHER VERSCHLÜSSELT: Alle Dateisysteminfos wurden verschlüsselt.",
+        "🌐 MOUNT FEHLGESCHLAGEN: Die Mount-Infos sind in der Cloud der Matrix verloren gegangen.",
+        "⚡ SPEICHER GEGRILLT: Eine Überspannung hat den Festplatten-Controller erwischt.",
+        "💀 KEIN SPEICHER: Der Mainframe hat keine eingehängten Dateisysteme. Alles gelöscht.",
+        "🗄️ DATEISYSTEM BESCHÄDIGT: Ransomware hat den Superblock beschädigt."
+      ],
+      "free_errors": [
+        "🧠 SPEICHERFEHLER: Malware hat den RAM des Superschurken beschädigt.",
+        "📊 SPEICHERSCAN FEHLGESCHLAGEN: Die Cybermen haben die Speicherabfrage gekapert.",
+        "💻 SPEICHER BESCHÄDIGT: Ein Virus hat den RAM zerstört.",
+        "🎮 GAME OVER: Der Endgegner hat alle Speicherinfos gelöscht.",
+        "🖥️ SYSTEMFEHLER: Die Speicherverwaltung ist abgestürzt.",
+        "🔐 SPEICHER VERSCHLÜSSELT: Alle Speicherinfos wurden verschlüsselt.",
+        "🌐 SPEICHER VERLOREN: Die Speicherstatistik ist im Nichts der Matrix verschwunden.",
+        "⚡ SPEICHER GEGRILLT: Eine Überspannung hat den Speicher-Controller erwischt.",
+        "💀 KEIN SPEICHER: Der Mainframe hat keinen erreichbaren Speicher. Alles gelöscht.",
+        "🧩 SPEICHER BESCHÄDIGT: Ransomware hat die Speicherzuordnung beschädigt."
+      ],
+      "ifconfig_errors": [
+        "🌐 SCHNITTSTELLENFEHLER: Die Netzwerkschnittstellen des Superschurken sind beschädigt.",
+        "📡 SCHNITTSTELLENSCAN FEHLGESCHLAGEN: Imperiale Truppen haben die Abfrage gekapert.",
+        "💻 SCHNITTSTELLE BESCHÄDIGT: Ein Virus hat die Netzwerkkonfiguration zerstört.",
+        "🎮 GAME OVER: Der Endgegner hat alle Schnittstelleninfos gelöscht.",
+        "🖥️ SYSTEMFEHLER: Der Treiber der Netzwerkschnittstelle ist abgestürzt.",
+        "🔐 SCHNITTSTELLEN VERSCHLÜSSELT: Alle Schnittstelleninfos wurden verschlüsselt.",
+        "🌐 SCHNITTSTELLEN VERLOREN: Die Schnittstellendaten sind im Netz der Matrix verschwunden.",
+        "⚡ SCHNITTSTELLEN GEGRILLT: Eine Überspannung hat die Netzwerkhardware erwischt.",
+        "💀 KEINE SCHNITTSTELLEN: Der Mainframe hat keine Netzwerkschnittstellen mehr.",
+        "🔌 VERBINDUNG GETRENNT: Der Dunkle Herrscher hat alle Schnittstellen getrennt."
+      ],
+      "uname_errors": [
+        "🖥️ SYSTEMINFO-FEHLER: Der Superschurke hat alle Systeminfos als streng geheim eingestuft.",
+        "📊 INFOSCAN FEHLGESCHLAGEN: Der Unsichtbare hat die Systemabfrage versteckt.",
+        "💻 SYSTEM BESCHÄDIGT: Malware hat die Kernel-Versionsinfo zerstört.",
+        "🎮 GAME OVER: Der Endgegner hat alle Systeminfos gelöscht.",
+        "🖥️ SYSTEMFEHLER: Das Kernel-Infosystem ist abgestürzt. Wie meta!",
+        "🔐 SYSTEM VERSCHLÜSSELT: Ransomware hat alle Systeminfos verschlüsselt.",
+        "🌐 SYSTEM VERLOREN: Die Kernel-Version ist im Nichts der Matrix verschwunden.",
+        "⚡ SYSTEM GEGRILLT: Eine Überspannung hat die Systemaufruf-Schnittstelle erwischt.",
+        "💀 KEIN SYSTEM: Der Mainframe hat keine Kernel-Infos. Ein Rätsel.",
+        "🦹‍♂️ GEHEIM: Lex Luthor hat alle Systeminfos als geheim eingestuft. Zugriff verweigert."
+      ]
+    }
+  },
+  "common": {
+    "temp_high_label": "H",
+    "temp_low_label": "T",
+    "alerts": {
+      "event_types": {
+        "Warning": "Warn.",
+        "Watch": "Vorw.",
+        "Advisory": "Hinw.",
+        "Statement": "Mitt."
+      },
+      "til": "bis",
+      "by": "bis",
+      "from": "ab",
+      "am": "AM",
+      "pm": "PM",
+      "time_12h": "{hour}{meridiem}",
+      "date_12h": "{day}. {month} {time}"
+    },
+    "wind_directions": {
+      "N": "N",
+      "NNE": "NNO",
+      "NE": "NO",
+      "ENE": "ONO",
+      "E": "O",
+      "ESE": "OSO",
+      "SE": "SO",
+      "SSE": "SSO",
+      "S": "S",
+      "SSW": "SSW",
+      "SW": "SW",
+      "WSW": "WSW",
+      "W": "W",
+      "WNW": "WNW",
+      "NW": "NW",
+      "NNW": "NNW"
+    }
+  },
+  "services": {
+    "weather_service": {
+      "daily_weather": "Tageswetter",
+      "tomorrow": "Morgen",
+      "error_fetching": "Fehler beim Abrufen der Wetterdaten",
+      "no_data": "Keine Vorhersagedaten verfügbar",
+      "near": "bei",
+      "est": "ca.",
+      "steady": "anhaltend",
+      "rain_starting": "{emoji} Achtung — {ptype} beginnt in ~{minutes}Min.{est}{steady}{temp}{location}",
+      "rain_ending": "{emoji} Achtung — {ptype} endet in ~{minutes}Min.{est}{temp}{location}",
+      "weather_descriptions": {
+        "0": "Klar",
+        "1": "Überwiegend klar",
+        "2": "Teilweise bewölkt",
+        "3": "Bedeckt",
+        "45": "Nebel",
+        "48": "Nebel mit Reifansatz",
+        "51": "Leichter Nieselregen",
+        "53": "Mäßiger Nieselregen",
+        "55": "Dichter Nieselregen",
+        "56": "Leichter gefrierender Nieselregen",
+        "57": "Dichter gefrierender Nieselregen",
+        "61": "Leichter Regen",
+        "63": "Mäßiger Regen",
+        "65": "Starker Regen",
+        "66": "Leichter Eisregen",
+        "67": "Starker Eisregen",
+        "71": "Leichter Schneefall",
+        "73": "Mäßiger Schneefall",
+        "75": "Starker Schneefall",
+        "77": "Schneegriesel",
+        "80": "Leichte Regenschauer",
+        "81": "Mäßige Regenschauer",
+        "82": "Heftige Regenschauer",
+        "85": "Leichte Schneeschauer",
+        "86": "Starke Schneeschauer",
+        "95": "Gewitter",
+        "96": "Gewitter mit Hagel",
+        "99": "Schweres Gewitter"
+      },
+      "wind_speed_units": {
+        "ms": "m/s",
+        "mph": "mph",
+        "kmh": "km/h",
+        "kn": "kn"
+      }
+    }
+  }
+}

@@ -1,0 +1,313 @@
+{% extends "base.html" %}
+
+{% block title %}Games - MeshCore Bot Data Viewer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-3">
+            <i class="fas fa-trophy"></i> Games
+        </h1>
+        <p class="text-muted mb-1">
+            The standings of every game on the mesh. Bots are left out (the rules of the Bots page, and this bot itself).
+            Mesh RPG and DX Jacht come from the archive the Community service updates every 10 minutes; the other games are live.
+            This page only reads and refreshes itself every minute. Click a name in Mesh RPG to see where the XP comes from.
+        </p>
+        <p class="text-muted small" id="games-updated">Loading...</p>
+        <div id="games-message" role="status" aria-live="polite"></div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-12 col-xl-7">
+        <div class="card h-100">
+            <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
+                <span><i class="fas fa-star"></i> Mesh RPG <small class="text-muted">(xp)</small></span>
+                <div class="btn-group btn-group-sm" role="group" aria-label="Mesh RPG period">
+                    <input type="radio" class="btn-check" name="xp-period" id="xp-ever" value="ever" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="xp-ever">All time</label>
+                    <input type="radio" class="btn-check" name="xp-period" id="xp-week" value="week" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="xp-week">This week</label>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover align-middle mb-0">
+                        <thead><tr id="xp-head"></tr></thead>
+                        <tbody id="xp-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-xl-5">
+        <div class="card h-100">
+            <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
+                <span><i class="fas fa-broadcast-tower"></i> DX Jacht <small class="text-muted">(most hops)</small></span>
+                <div class="btn-group btn-group-sm" role="group" aria-label="DX period">
+                    <input type="radio" class="btn-check" name="dx-period" id="dx-week" value="week" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="dx-week">Week</label>
+                    <input type="radio" class="btn-check" name="dx-period" id="dx-month" value="month" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="dx-month">Month</label>
+                    <input type="radio" class="btn-check" name="dx-period" id="dx-ever" value="ever" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="dx-ever">All time</label>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover align-middle mb-0">
+                        <thead><tr><th scope="col">#</th><th scope="col">Name</th><th scope="col" class="text-end">Hops</th><th scope="col" class="text-end">Date</th></tr></thead>
+                        <tbody id="dx-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-3">
+        <div class="card h-100">
+            <div class="card-header"><i class="fas fa-heart"></i> Karma</div>
+            <div class="card-body p-0">
+                <table class="table table-sm table-hover mb-0">
+                    <thead><tr><th scope="col">#</th><th scope="col">Name</th><th scope="col" class="text-end">Points</th></tr></thead>
+                    <tbody id="karma-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-3">
+        <div class="card h-100">
+            <div class="card-header"><i class="fas fa-fire"></i> Check-in streak</div>
+            <div class="card-body p-0">
+                <table class="table table-sm table-hover mb-0">
+                    <thead><tr><th scope="col">#</th><th scope="col">Name</th><th scope="col" class="text-end">Days</th><th scope="col" class="text-end">Best</th></tr></thead>
+                    <tbody id="checkin-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-3">
+        <div class="card h-100">
+            <div class="card-header"><i class="fas fa-question-circle"></i> Voorspel</div>
+            <div class="card-body">
+                <div id="voorspel-question" class="mb-3"></div>
+                <table class="table table-sm mb-0">
+                    <thead><tr><th scope="col">#</th><th scope="col">Name</th><th scope="col" class="text-end">Points</th></tr></thead>
+                    <tbody id="voorspel-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-3">
+        <div class="card h-100">
+            <div class="card-header"><i class="fas fa-flag-checkered"></i> F1 prediction game <small class="text-muted" id="f1-season"></small></div>
+            <div class="card-body p-0">
+                <table class="table table-sm table-hover mb-0">
+                    <thead><tr><th scope="col">#</th><th scope="col">Name</th><th scope="col" class="text-end">Points</th><th scope="col" class="text-end">Races</th></tr></thead>
+                    <tbody id="f1-body"></tbody>
+                </table>
+                <div class="small text-muted px-2 py-2" id="f1-open"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+    'use strict';
+
+    // Names and questions come from the mesh and are not trusted: everything below is built with textContent and
+    // DOM nodes, so nothing from the mesh is ever interpreted as HTML.
+    const TITLES = ['Nieuwkomer', 'Luisteraar', 'Babbelaar', 'Meshganger', 'Relaisjager', 'Mesh-veteraan', 'Mesh-legende'];
+    const BADGES = {
+        msg100: '💬 100 messages', msg1000: '💬 1000 messages', days30: '📅 30 active days', days100: '📅 100 active days',
+        hops3: '📡 3 hops', hops6: '📡 6 hops', streak7: '🔥 7-day streak', streak30: '🔥 30-day streak',
+        karma10: '⭐ 10 karma', level5: '🏅 level 5', level10: '🏆 level 10'
+    };
+    let data = null;
+
+    function el(tag, text, cls) {
+        const node = document.createElement(tag);
+        if (text !== undefined && text !== null) node.textContent = String(text);
+        if (cls) node.className = cls;
+        return node;
+    }
+
+    function empty(body, cols, text) {
+        const tr = el('tr');
+        const td = el('td', text || 'Nobody yet', 'text-center text-muted py-3');
+        td.colSpan = cols;
+        tr.appendChild(td);
+        body.replaceChildren(tr);
+    }
+
+    function fill(id, rows, cols, cells) {
+        const body = document.getElementById(id);
+        if (!rows || !rows.length) { empty(body, cols); return; }
+        body.replaceChildren();
+        rows.forEach(function (row, i) {
+            const tr = el('tr');
+            tr.appendChild(el('td', i + 1, 'text-muted'));
+            cells(row).forEach(function (cell) { tr.appendChild(cell); });
+            body.appendChild(tr);
+        });
+    }
+
+    function checked(name) {
+        const c = document.querySelector('input[name="' + name + '"]:checked');
+        return c ? c.value : null;
+    }
+
+    const openRows = new Set();          // names whose XP breakdown is unfolded (kept across refreshes)
+    const PART_LABELS = {
+        messages: ['💬', 'Messages', 'max 20 a day'], commands: ['⌨️', 'Bot commands', 'max 10 a day'],
+        checkins: ['🔥', 'Check-ins', ''], karma: ['⭐', 'Karma received', ''], dx: ['📡', 'Best DX', 'counts up to 10 hops']
+    };
+
+    function breakdown(r, period, cols) {
+        const tr = el('tr', null, 'xp-detail');
+        const td = el('td', null, 'bg-body-tertiary small');
+        td.colSpan = cols;
+        const list = el('div', null, 'd-flex flex-wrap gap-3 py-1');
+        r.parts.forEach(function (p) {
+            const lab = PART_LABELS[p.key] || ['', p.key, ''];
+            const item = el('div', null, p.xp ? '' : 'text-muted');
+            item.appendChild(el('span', lab[0] + ' ' + lab[1] + ': '));
+            const unit = p.key === 'dx' ? ' hops' : '';
+            const counted = (p.key === 'dx' && p.cap && p.count > p.cap) ? p.count + unit + ' (' + p.cap + ' counted)' : p.count + unit;
+            item.appendChild(el('strong', counted + ' × ' + p.per + ' = ' + p.xp + ' XP'));
+            if (lab[2]) item.appendChild(el('span', ' (' + lab[2] + ')', 'text-muted'));
+            list.appendChild(item);
+        });
+        td.appendChild(list);
+        const extra = [];
+        if (r.all_messages !== undefined) extra.push(r.all_messages + ' messages in total on ' + r.active_days + ' active day(s)');
+        if (period === 'ever') {
+            extra.push((r.next - r.xp) + ' XP to level ' + (r.level + 1));
+            extra.push(r.badges.length ? 'Badges: ' + r.badges.map(function (b) { return BADGES[b] || b; }).join(', ') : 'No badges yet');
+        }
+        td.appendChild(el('div', extra.join(' · '), 'text-muted'));
+        tr.appendChild(td);
+        return tr;
+    }
+
+    function renderXp() {
+        const period = checked('xp-period');
+        const head = document.getElementById('xp-head');
+        const labels = period === 'ever' ? ['#', 'Name', 'Level', 'Title', 'XP', 'Badges'] : ['#', 'Name', 'XP this week'];
+        head.replaceChildren();
+        labels.forEach(function (l, i) { head.appendChild(el('th', l, i >= 4 || (period !== 'ever' && i === 2) ? 'text-end' : '')); });
+        const body = document.getElementById('xp-body');
+        const rows = data.xp[period];
+        if (!rows || !rows.length) { empty(body, labels.length); return; }
+        body.replaceChildren();
+        rows.forEach(function (r, i) {
+            const key = period + ':' + r.name;
+            const tr = el('tr');
+            tr.style.cursor = 'pointer';
+            tr.tabIndex = 0;
+            tr.title = 'Click to see where the XP comes from';
+            tr.setAttribute('aria-expanded', openRows.has(key) ? 'true' : 'false');
+            tr.appendChild(el('td', (openRows.has(key) ? '▾ ' : '▸ ') + (i + 1), 'text-muted'));
+            if (period !== 'ever') {
+                tr.appendChild(el('td', r.name));
+                tr.appendChild(el('td', r.xp, 'text-end'));
+            } else {
+                const badges = el('td', r.badges.length + '/' + data.badges_total, 'text-end');
+                tr.appendChild(el('td', r.name));
+                tr.appendChild(el('td', r.level));
+                tr.appendChild(el('td', TITLES[r.title] || ''));
+                tr.appendChild(el('td', r.xp, 'text-end'));
+                tr.appendChild(badges);
+            }
+            function toggle() {
+                if (openRows.has(key)) openRows.delete(key); else openRows.add(key);
+                renderXp();
+            }
+            tr.addEventListener('click', toggle);
+            tr.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+            body.appendChild(tr);
+            if (openRows.has(key)) body.appendChild(breakdown(r, period, labels.length));
+        });
+    }
+
+    function renderDx() {
+        fill('dx-body', data.dx[checked('dx-period')], 4, function (r) {
+            return [el('td', r.name), el('td', r.hops, 'text-end'), el('td', r.date, 'text-end text-muted')];
+        });
+    }
+
+    function renderVoorspel() {
+        const box = document.getElementById('voorspel-question');
+        box.replaceChildren();
+        const q = data.voorspel.question;
+        if (!q) {
+            box.appendChild(el('p', 'No open question. Ask one by DM: voorspel nieuw <question> | a | b', 'text-muted small mb-0'));
+        } else {
+            box.appendChild(el('div', q.text, 'fw-semibold'));
+            box.appendChild(el('div', (q.state === 'open' ? 'Open' : 'Closed, waiting for the answer') + (q.asked_by ? ' · asked by ' + q.asked_by : ''), 'small text-muted mb-2'));
+            const total = q.choices.reduce(function (s, c) { return s + c.answers; }, 0) || 1;
+            q.choices.forEach(function (c, i) {
+                const row = el('div', null, 'small mb-1');
+                row.appendChild(el('span', (i + 1) + ') ' + c.text + ' '));
+                row.appendChild(el('span', c.answers, 'badge bg-secondary'));
+                const bar = el('div', null, 'progress');
+                bar.style.height = '4px';
+                const fillBar = el('div', null, 'progress-bar');
+                fillBar.style.width = Math.round(100 * c.answers / total) + '%';
+                bar.appendChild(fillBar);
+                row.appendChild(bar);
+                box.appendChild(row);
+            });
+        }
+        fill('voorspel-body', data.voorspel.standings, 3, function (r) { return [el('td', r.name), el('td', r.points, 'text-end')]; });
+    }
+
+    function render() {
+        renderXp();
+        renderDx();
+        fill('karma-body', data.karma, 3, function (r) { return [el('td', r.name), el('td', r.points, 'text-end')]; });
+        fill('checkin-body', data.checkin, 4, function (r) { return [el('td', r.name), el('td', r.streak, 'text-end'), el('td', r.best, 'text-end text-muted')]; });
+        renderVoorspel();
+        document.getElementById('f1-season').textContent = data.f1.season ? '(' + data.f1.season + ')' : '';
+        fill('f1-body', data.f1.standings, 4, function (r) { return [el('td', r.name), el('td', r.points, 'text-end'), el('td', r.races, 'text-end text-muted')]; });
+        const f1Open = data.f1.open;
+        document.getElementById('f1-open').textContent = f1Open
+            ? 'Round ' + f1Open.round + ': ' + f1Open.names.length + (f1Open.names.length === 1 ? ' prediction' : ' predictions') +
+              ' (' + f1Open.names.join(', ') + '). Picks stay hidden until the race is scored.'
+            : '';
+        document.getElementById('games-updated').textContent = 'Updated ' + new Date(data.generated_at * 1000).toLocaleTimeString() +
+            (data.last_activity_day ? ' · archive up to ' + data.last_activity_day : '');
+    }
+
+    function say(text) {
+        const box = document.getElementById('games-message');
+        box.replaceChildren();
+        if (text) box.appendChild(el('div', text, 'alert alert-danger py-2'));
+    }
+
+    function load() {
+        fetch('/api/games', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+            .then(function (resp) {
+                return resp.json().catch(function () { return {}; }).then(function (body) {
+                    if (!resp.ok) throw new Error(body.error || ('HTTP ' + resp.status));
+                    return body;
+                });
+            })
+            .then(function (body) { data = body; say(''); render(); })
+            .catch(function (e) { say('Could not load the standings: ' + e.message); });
+    }
+
+    document.querySelectorAll('input[name="xp-period"]').forEach(function (i) { i.addEventListener('change', function () { if (data) renderXp(); }); });
+    document.querySelectorAll('input[name="dx-period"]').forEach(function (i) { i.addEventListener('change', function () { if (data) renderDx(); }); });
+    load();
+    setInterval(load, 60000);
+})();
+</script>
+{% endblock %}

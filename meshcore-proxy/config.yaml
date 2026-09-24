@@ -1,0 +1,37 @@
+name: MeshCore Proxy
+version: "1.0.0"
+slug: meshcore_proxy
+description: Shares one physical MeshCore radio over TCP between several clients (meshcore-ha, MeshCore Bot, ...)
+url: https://github.com/vipje/Meshcore-bot-for-HA
+stage: stable
+arch:
+  - aarch64
+  - amd64
+  - armv7
+  - armhf
+  - i386
+startup: system
+boot: auto
+init: false
+# host_network: so other add-ons and Home Assistant Core can reach the proxy on
+# localhost, however Supervisor's internal Docker network is set up.
+host_network: true
+# uart gives the add-on access to the serial devices of the host, so the radio
+# can be any /dev/ttyACM*, /dev/ttyUSB* or /dev/serial/by-id/* path; pick it
+# with the serial_port option. (A fixed 'devices:' entry would make the add-on
+# refuse to start on every machine where the radio has a different name.)
+uart: true
+options:
+  serial_port: /dev/ttyACM0
+  baudrate: 115200
+  listen_port: 5010
+  turn_quiet_seconds: 0.75
+  turn_max_seconds: 8.0
+  log_level: INFO
+schema:
+  serial_port: "str"
+  baudrate: "int(1200,4000000)"
+  listen_port: "port"
+  turn_quiet_seconds: "float(0.1,10)"
+  turn_max_seconds: "float(1,60)"
+  log_level: "list(DEBUG|INFO|WARNING|ERROR)"

@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Channel radar - MeshCore Bot Data Viewer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-3"><i class="fas fa-satellite-dish"></i> Channel radar</h1>
+        <p class="text-muted mb-1">
+            Which hashtag channels are in use around the bot. Every group message the radio hears starts with a channel byte
+            and a short check code; the radar compares those with the keys of about 200 known channel names, the names on the
+            <em>ChannelRadar</em> card and tens of thousands of generated variants (mesh-zl, maastricht-chat, ...; shown from 2 messages). A channel is only listed when both match, so it is certain. Messages are never
+            decrypted and nothing is sent. A message heard via several repeaters counts once. Refreshes every minute.
+        </p>
+        <p class="text-muted small" id="radar-updated">Loading...</p>
+        <div id="radar-message" role="status" aria-live="polite"></div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-12 col-xl-8">
+        <div class="card h-100">
+            <div class="card-header"><i class="fas fa-hashtag"></i> Recognised channels</div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover align-middle mb-0">
+                        <thead><tr>
+                            <th scope="col">Channel</th>
+                            <th scope="col" class="text-end">Today</th>
+                            <th scope="col" class="text-end">7 days</th>
+                            <th scope="col" class="text-end">30 days</th>
+                            <th scope="col" class="text-end">Last heard</th>
+                            <th scope="col">On your radio</th>
+                        </tr></thead>
+                        <tbody id="radar-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-xl-4">
+        <div class="card h-100">
+            <div class="card-header"><i class="fas fa-question-circle"></i> Unknown channels</div>
+            <div class="card-body">
+                <p class="small text-muted">
+                    Messages on channels whose name is not in the list: private channels with their own key, or a hashtag
+                    name nobody added yet. Shown by channel byte (several channels can share one). Add a name you suspect on
+                    the ChannelRadar card; from then on it is recognised.
+                </p>
+                <table class="table table-sm mb-0">
+                    <thead><tr><th scope="col">Channel byte</th><th scope="col" class="text-end">7 days</th><th scope="col" class="text-end">30 days</th></tr></thead>
+                    <tbody id="unknown-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+    'use strict';
+    // Channel names can come from the card; everything is built with textContent, never as HTML.
+    let radioChannels = [];
+
+    function el(tag, text, cls) {
+        const n = document.createElement(tag);
+        if (text !== undefined && text !== null) n.textContent = String(text);
+        if (cls) n.className = cls;
+        return n;
+    }
+
+    function ago(ts) {
+        if (!ts) return '-';
+        const s = Math.max(0, Math.floor(Date.now() / 1000) - ts);
+        if (s < 90) return 'just now';
+        if (s < 5400) return Math.round(s / 60) + ' min ago';
+        if (s < 129600) return Math.round(s / 3600) + ' h ago';
+        return Math.round(s / 86400) + ' days ago';
+    }
+
+    function api(path) {
+        return fetch(path, { headers: { 'X-Requested-With': 'XMLHttpRequest' } }).then(function (resp) {
+            return resp.json().catch(function () { return {}; }).then(function (body) {
+                if (!resp.ok) throw new Error(body.error || ('HTTP ' + resp.status));
+                return body;
+            });
+        });
+    }
+
+    function onRadio(label) {
+        const l = label.toLowerCase();
+        if (l.indexOf('publiek') === 0) return true;
+        return radioChannels.indexOf(l) !== -1;
+    }
+
+    function render(data) {
+        const body = document.getElementById('radar-body');
+        body.replaceChildren();
+        if (!data.channels.length) {
+            const tr = el('tr'); const td = el('td', 'Nothing recognised yet. The radar counts every minute; give it some time.', 'text-center text-muted py-3');
+            td.colSpan = 6; tr.appendChild(td); body.appendChild(tr);
+        }
+        data.channels.forEach(function (c) {
+            const tr = el('tr');
+            const name = el('td', c.label, 'fw-semibold');
+            if (c.found) {
+                const b = el('span', 'found', 'badge bg-info text-dark ms-2');
+                b.title = 'Not on the built-in list: found among the generated names (only shown from 2 messages).';
+                name.appendChild(b);
+            }
+            tr.appendChild(name);
+            tr.appendChild(el('td', c.today, 'text-end'));
+            tr.appendChild(el('td', c.week, 'text-end'));
+            tr.appendChild(el('td', c.month, 'text-end'));
+            tr.appendChild(el('td', ago(c.last_ts), 'text-end text-muted'));
+            const mine = el('td');
+            mine.appendChild(el('span', onRadio(c.label) ? 'yes' : 'no', 'badge ' + (onRadio(c.label) ? 'bg-success' : 'bg-secondary')));
+            tr.appendChild(mine);
+            body.appendChild(tr);
+        });
+        const ub = document.getElementById('unknown-body');
+        ub.replaceChildren();
+        if (!data.unknown.length) {
+            const tr = el('tr'); const td = el('td', 'None', 'text-center text-muted'); td.colSpan = 3; tr.appendChild(td); ub.appendChild(tr);
+        }
+        data.unknown.slice(0, 20).forEach(function (u) {
+            const tr = el('tr');
+            tr.appendChild(el('td', u.hash, 'font-monospace'));
+            tr.appendChild(el('td', u.week, 'text-end'));
+            tr.appendChild(el('td', u.month, 'text-end'));
+            ub.appendChild(tr);
+        });
+        document.getElementById('radar-updated').textContent = 'Updated ' + new Date(data.generated_at * 1000).toLocaleTimeString() +
+            (data.since ? ' · counting since ' + data.since : '');
+    }
+
+    function load() {
+        api('/api/channels').then(function (d) {
+            const list = (d && (d.channels || d)) || [];
+            radioChannels = (Array.isArray(list) ? list : []).map(function (c) { return String(c.name || c.channel_name || '').toLowerCase(); });
+        }).catch(function () {}).then(function () {
+            return api('/api/radar');
+        }).then(function (data) {
+            document.getElementById('radar-message').replaceChildren();
+            render(data);
+        }).catch(function (e) {
+            const box = document.getElementById('radar-message');
+            box.replaceChildren(el('div', 'Could not load the radar: ' + e.message, 'alert alert-danger py-2'));
+        });
+    }
+
+    load();
+    setInterval(load, 60000);
+})();
+</script>
+{% endblock %}

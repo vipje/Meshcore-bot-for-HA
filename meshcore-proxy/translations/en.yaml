@@ -1,0 +1,19 @@
+configuration:
+  serial_port:
+    name: Serial port
+    description: "Path of the MeshCore radio, for example /dev/ttyACM0. A /dev/serial/by-id/usb-... path is the most stable because it does not change when you plug in other USB devices. The add-on log lists the available ones when the port is not found."
+  baudrate:
+    name: Baud rate
+    description: Serial speed of the radio. MeshCore companion firmware uses 115200.
+  listen_port:
+    name: Listen port
+    description: TCP port clients connect to (meshcore-ha, MeshCore Bot). Default 5010.
+  turn_quiet_seconds:
+    name: Turn ends after silence (seconds)
+    description: "While one client is talking to the radio, the proxy gives that client the answers live and holds them back from the others. The turn ends after this many seconds without radio traffic."
+  turn_max_seconds:
+    name: Longest turn (seconds)
+    description: Hard limit on how long one client may hold the turn, even if the radio keeps sending.
+  log_level:
+    name: Log level
+    description: DEBUG shows every turn that is taken and released.

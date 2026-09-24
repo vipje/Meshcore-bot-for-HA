@@ -1,0 +1,1108 @@
+{
+  "commands": {
+    "tanken": {
+      "result": "Landelijk gem. pompprijs ({date}): Euro95 €{euro95} | Diesel €{diesel} | LPG €{lpg}",
+      "fetch_error": "Kon CBS-brandstofprijzen niet ophalen.",
+      "no_data": "Geen recente CBS-brandstofprijzen gevonden.",
+      "error": "Fout bij tanken-commando: {error}"
+    },
+    "beving": {
+      "fetch_error": "Kon KNMI-aardbevingenfeed niet ophalen.",
+      "no_data": "Geen recente aardbevingen gevonden in de KNMI-feed.",
+      "header": "Recente aardbevingen:",
+      "error": "Fout bij beving-commando: {error}"
+    },
+    "storing": {
+      "usage": "Gebruik: storing <{providers}>",
+      "fetch_error": "Kon storingsstatus voor {provider} niet ophalen.",
+      "result": "{provider}: {status} (bron: storingradar.com, niet-officieel)",
+      "error": "Fout bij storing-commando: {error}"
+    },
+    "wegwerk": {
+      "usage": "Gebruik: wegwerk <plaats>",
+      "not_found": "Kon '{place}' niet vinden.",
+      "no_data": "Geen wegwerkzaamheden binnen {radius}km van {place}.",
+      "header": "Wegwerkzaamheden nabij {place}:",
+      "line": "- {label} op {distance}",
+      "error": "Fout bij wegwerk-commando: {error}",
+      "type": {
+        "RoadOrCarriagewayOrLaneManagement": "wegwerkzaamheden",
+        "SpeedManagement": "snelheidsbeperking",
+        "ReroutingManagement": "omleiding",
+        "GeneralNetworkManagement": "wegmaatregel"
+      }
+    },
+    "ov": {
+      "usage": "Gebruik: ov <plaats/halte>",
+      "no_stop": "Geen halte gevonden voor '{query}'.",
+      "no_departures": "Geen vertrektijden gevonden voor '{query}'.",
+      "header": "OV bij {query}:",
+      "line": "{time} lijn {line} -> {dest} ({stop})",
+      "error": "Fout bij ov-commando: {error}"
+    },
+    "waterstand": {
+      "no_data": "Geen recente waterstand-data voor {station}.",
+      "fetch_error": "Kon Rijkswaterstaat-waterdata niet ophalen.",
+      "no_valid": "Geen geldige meting voor {station}.",
+      "result": "Waterstand Maas bij {station}: {value}m NAP (gemeten {time})",
+      "error": "Fout bij waterstand-commando: {error}"
+    },
+    "weerwaarschuwing": {
+      "no_file": "Kon geen KNMI-waarschuwingsbestand vinden.",
+      "no_link": "Geen downloadlink ontvangen van KNMI.",
+      "download_error": "Kon KNMI-waarschuwingstekst niet downloaden.",
+      "empty": "Lege KNMI-waarschuwingstekst ontvangen.",
+      "error": "Fout bij weerwaarschuwing-commando: {error}"
+    },
+    "energieprijs": {
+      "fetch_error": "Kon energieprijzen niet ophalen (EnergyZero).",
+      "no_data": "Geen energieprijzen gevonden voor vandaag.",
+      "result": "Stroomprijs nu: €{current}/kWh | vandaag laag €{low} - hoog €{high} (incl. btw)",
+      "error": "Fout bij energieprijs-commando: {error}"
+    },
+    "aed": {
+      "usage": "Gebruik: aed <plaats>",
+      "not_found": "Kon '{place}' niet vinden.",
+      "no_data": "Geen AED gevonden binnen {radius}km van {place}.",
+      "header": "AED's nabij {place}:",
+      "line": "- {name}: {distance}m",
+      "error": "Fout bij aed-commando: {error}"
+    },
+    "laadpaal": {
+      "usage": "Gebruik: laadpaal <plaats>",
+      "not_found": "Kon '{place}' niet vinden.",
+      "no_data": "Geen laadpaal gevonden binnen {radius}km van {place}.",
+      "header": "Laadpalen nabij {place}:",
+      "generic_name": "Laadpaal",
+      "line": "- {name}{extra}: {distance}m",
+      "error": "Fout bij laadpaal-commando: {error}"
+    },
+    "straling": {
+      "usage": "Gebruik: straling <plaats>",
+      "not_found": "Kon '{place}' niet vinden.",
+      "no_data": "Geen recente Safecast-metingen binnen {radius}km van {place} gevonden.",
+      "age_suffix": ", nieuwste meting {date}",
+      "result": "Straling nabij {place} (~{radius}km, n={n}{age}): ~{usvh} uSv/h indicatief ({cpm} cpm) - burgerwetenschap-sensoren (Safecast), geen officiële meting.",
+      "error": "Fout bij straling-commando: {error}"
+    },
+    "kenteken": {
+      "usage": "Gebruik: kenteken <plaat>",
+      "invalid": "Ongeldig kenteken.",
+      "not_found": "Geen voertuig gevonden voor kenteken {plate}.",
+      "apk_expired": "APK {date} (VERLOPEN)",
+      "apk_soon": "APK {date} (nog {days}d)",
+      "apk": "APK {date}",
+      "error": "Fout bij kenteken-commando: {error}",
+      "foreign_be": "Belgisch kenteken: daar is geen gratis open bron voor (de DIV deelt niets), alleen Nederlandse kentekens via de RDW.",
+      "foreign_de": "Duits kenteken: daar is geen gratis open bron voor (het KBA deelt niets), alleen Nederlandse kentekens via de RDW."
+    },
+    "quote": {
+      "error": "Fout bij quote-commando: {error}"
+    },
+    "uptime": {
+      "days": "{n}d",
+      "hours": "{n}u",
+      "minutes": "{n}m",
+      "result": "Uptime: {duration} (sinds {started})",
+      "error": "Fout bij uptime-commando: {error}"
+    },
+    "topcommands": {
+      "no_data": "Top commands ({label}): nog geen data",
+      "header": "Top commands ({label}):",
+      "error": "Fout bij ophalen top commands: {error}"
+    },
+    "status": {
+      "no_service": "Status: service niet geladen.",
+      "up": "up {duration}",
+      "radio": "radio {state}",
+      "contacts": "contacten {n}",
+      "counters": "{commands} cmd, {errors} fouten, {warnings} waarsch.",
+      "last_issue": "laatst ({age} geleden): {text}",
+      "no_issues": "geen problemen",
+      "header": "Status:",
+      "error": "Fout bij status: {error}"
+    },
+    "toprepeaters": {
+      "no_data": "Top repeaters ({label}): nog geen data",
+      "header": "Top repeaters ({label}):",
+      "error": "Fout bij ophalen top repeaters: {error}"
+    },
+    "topusers": {
+      "no_data": "Top users ({label}): nog geen data",
+      "header": "Top users ({label}):",
+      "error": "Fout bij ophalen top users: {error}"
+    },
+    "whois": {
+      "usage": "Gebruik: whois <naam of sleutel-prefix>",
+      "unknown": "onbekend",
+      "just_now": "net",
+      "minutes_ago": "{n}m geleden",
+      "hours_ago": "{n}u geleden",
+      "days_ago": "{n}d geleden",
+      "not_found": "Geen bekende node gevonden voor '{query}'.",
+      "hop": "{n} hop",
+      "hops": "{n} hops",
+      "last_seen": "laatst gezien {ago}",
+      "error": "Fout bij whois-commando: {error}"
+    },
+    "feestdag": {
+      "today": "Vandaag",
+      "tomorrow": "Morgen",
+      "none": "{label} ({date}): geen officiële feestdag in NL of BE.",
+      "header": "{label} ({date}):",
+      "error": "Fout bij feestdag-commando: {error}"
+    },
+    "morse": {
+      "usage": "Gebruik: morse <tekst> of morse <.... .- .-..>",
+      "decode_error": "Kon dat niet decoderen als morse.",
+      "decoded": "Morse -> tekst: {text}",
+      "encode_error": "Geen ondersteunde tekens gevonden om te coderen.",
+      "encoded": "Morse: {text}",
+      "error": "Fout bij morse-commando: {error}"
+    },
+    "file": {
+      "usage": "Gebruik: file <plaats>",
+      "not_found": "Kon '{place}' niet vinden.",
+      "no_data": "Geen files/incidenten binnen {radius}km van {place}.",
+      "header": "Files/incidenten nabij {place}:",
+      "delay_suffix": ", vertraging {delay}",
+      "line": "- {label} op {distance}{delay}",
+      "error": "Fout bij file-commando: {error}",
+      "type": {
+        "AbnormalTraffic": "file",
+        "Accident": "ongeval",
+        "GeneralObstruction": "obstructie",
+        "VehicleObstruction": "pech/voertuig"
+      }
+    },
+    "f1": {
+      "decimal_sep": ",",
+      "day": {
+        "0": "ma",
+        "1": "di",
+        "2": "wo",
+        "3": "do",
+        "4": "vr",
+        "5": "za",
+        "6": "zo"
+      },
+      "month": {
+        "1": "jan",
+        "2": "feb",
+        "3": "mrt",
+        "4": "apr",
+        "5": "mei",
+        "6": "jun",
+        "7": "jul",
+        "8": "aug",
+        "9": "sep",
+        "10": "okt",
+        "11": "nov",
+        "12": "dec"
+      },
+      "country": {
+        "Australia": "Australië",
+        "Austria": "Oostenrijk",
+        "Azerbaijan": "Azerbeidzjan",
+        "Bahrain": "Bahrein",
+        "Belgium": "België",
+        "Brazil": "Brazilië",
+        "Canada": "Canada",
+        "China": "China",
+        "France": "Frankrijk",
+        "Germany": "Duitsland",
+        "Hungary": "Hongarije",
+        "Italy": "Italië",
+        "Japan": "Japan",
+        "Mexico": "Mexico",
+        "Monaco": "Monaco",
+        "Netherlands": "Nederland",
+        "Qatar": "Qatar",
+        "Saudi Arabia": "Saoedi-Arabië",
+        "Singapore": "Singapore",
+        "Spain": "Spanje",
+        "UAE": "Abu Dhabi",
+        "United Arab Emirates": "Abu Dhabi",
+        "UK": "Groot-Brittannië",
+        "United Kingdom": "Groot-Brittannië",
+        "USA": "de VS",
+        "United States": "de VS",
+        "Portugal": "Portugal",
+        "Turkey": "Turkije",
+        "Russia": "Rusland",
+        "Argentina": "Argentinië",
+        "Malaysia": "Maleisië",
+        "South Africa": "Zuid-Afrika"
+      },
+      "session": {
+        "fp1": "VT1",
+        "fp2": "VT2",
+        "fp3": "VT3",
+        "sq": "sprintkwalificatie",
+        "sprint": "sprint",
+        "quali": "kwalificatie",
+        "race": "race"
+      },
+      "today": "F1: vandaag de {gp}, start {time}",
+      "day_unit": "dag",
+      "days_unit": "dagen",
+      "countdown": "F1: nog {days} {unit} tot de {gp}, {when} | Spel: DM mij f1 voorspel <code>",
+      "raceweek": "Raceweek: {gp}! ",
+      "no_next_race": "F1: geen volgende race bekend.",
+      "next_race": "Volgende: {gp}, {day} {time}",
+      "in_days": " (over {days} d)",
+      "reminder": "F1: over {mins} min de {session} van de {gp} (start {time})",
+      "winner": "Winnaar {gp}: {given} {family} ({team}){extra}",
+      "standings_header": "WK na {after}: ",
+      "constructors_header": "Constructeurs: ",
+      "lap_header": "Ronde {lap}/{total}: ",
+      "standing_header": "Stand: ",
+      "status": {
+        "live": "bezig",
+        "suspended": "onderbroken",
+        "break": "pauze",
+        "pre": "start zo"
+      },
+      "lap_suffix": ", ronde {lap}/{total}",
+      "result_label": "Uitslag",
+      "sprint_label": "Sprint",
+      "race_started": "De race is gestart! {gp}, {laps} ronden",
+      "lap_where": " (ronde {lap}/{total})",
+      "safety_car": "Safety car!{where}",
+      "red_flag": "Rode vlag! De sessie is onderbroken{where}",
+      "quali_label": "Kwalificatie",
+      "sprint_quali_label": "Sprintkwalificatie",
+      "service_off": "F1: de F1-service staat uit. Zet F1 aan op Plugins en herstart de add-on.",
+      "no_ha_data": "F1: nog geen gegevens uit Home Assistant, probeer het zo nog eens{why}",
+      "no_standings": "F1: het klassement is nog niet beschikbaar.",
+      "standings_round_header": "WK na ronde {round}: ",
+      "standings_header_bare": "WK: ",
+      "no_team_standings": "F1: het constructeursklassement is nog niet beschikbaar.",
+      "no_result": "F1: nog geen uitslag beschikbaar.",
+      "no_session": "Geen F1-sessie bezig.",
+      "usage": "F1: gebruik f1, f1 stand, f1 team, f1 uitslag, f1 nu, f1 voorspel <code> of f1 spel.",
+      "error": "Fout bij f1: {error}",
+      "game_off": "F1: het voorspellingsspel staat uit.",
+      "predict_dm_only": "Voorspellen kan alleen via een DM aan mij, zo weet ik zeker dat jij het bent en kan niemand voor je stemmen. Stuur me: f1 voorspel VER",
+      "no_next_to_predict": "F1: er is nu geen volgende race om te voorspellen.",
+      "predict_prompt": "Wie wint de {gp}? f1 voorspel <code>, bv. {example}",
+      "game_standing": "Stand: ",
+      "no_points_yet": "nog geen punten",
+      "your_points": "Jij: {points} pt in {races} races",
+      "your_pick": ", je voorspelt {pick}",
+      "no_pick_yet": ", nog geen voorspelling",
+      "join_game": "Meedoen: DM mij f1 voorspel <code> ({gp})",
+      "game_header": "Spel {season}: ",
+      "predict_no_key": "Ik kan je sleutel niet vaststellen. Probeer het nog eens als direct bericht.",
+      "predict_locked": "De voorspellingen voor deze race zijn gesloten (de kwalificatie is begonnen).",
+      "predict_unknown_code": "'{code}' ken ik niet. Gebruik de 3 letters, bijvoorbeeld {example}.",
+      "predict_bad_format": "Gebruik de 3 letters van de coureur, bijvoorbeeld f1 voorspel VER.",
+      "predict_changed": "Aangepast: je voorspelt nu {code} (was {previous}).",
+      "predict_recorded": "Genoteerd: je voorspelt {code} als winnaar.",
+      "game_result_header": "Spel: {n} deelnemers. ",
+      "game_good": "Goed: {names}",
+      "game_none_good": "Niemand had de winnaar of een podiumplek goed"
+    },
+    "rptr": {
+      "no_service": "rptr: de koppeling met Home Assistant staat uit. Zet HARepeater aan op Plugins en herstart de add-on.",
+      "no_ha_data": "rptr: nog geen gegevens uit Home Assistant, probeer het zo nog eens{why}",
+      "no_repeaters": "rptr: meshcore-ha kent geen repeaters (nog geen repeater-sensoren).",
+      "not_tracked": " (niet gevolgd)",
+      "repeaters_header": "Repeaters: ",
+      "for_selector": " voor '{selector}'",
+      "not_found": "rptr: geen repeater gevonden{what}. Typ rptr list.",
+      "error": "Fout bij rptr: {error}",
+      "unit_m": "m",
+      "unit_h": "u",
+      "unit_d": "d",
+      "age_unknown": "leeftijd onbekend",
+      "age_just_now": "zojuist",
+      "age_minutes": "{n} min oud",
+      "age_hours": "{n} u oud",
+      "up": "up {duration}",
+      "airtime": "airtime {pct}%",
+      "neighbours_count": "{n} buren",
+      "stale_warning": "LET OP: {age}",
+      "neighbours_header": "{name} buren ({n}): ",
+      "no_data": "geen gegevens",
+      "period_hours": "{n}u",
+      "period_days": "{n}d",
+      "battery_header": "Accu {name} {period}: ",
+      "battery_too_few": "Accu {name}: nog maar {n} meting(en) opgeslagen, probeer het later nog eens",
+      "battery_now": "nu {v} V",
+      "battery_min": "min {v}",
+      "battery_max": "max {v}",
+      "trend_unknown": "trend nog onbekend",
+      "trend_stable": "stabiel",
+      "trend_v_per_day": " V/dag",
+      "trend_low_in": ", laag over ~{days} d",
+      "measurements": "{n} metingen",
+      "decimal_sep": ","
+    },
+    "helpall": {
+      "bad_page": "Help: pagina {page} bestaat niet (1-{total} beschikbaar).",
+      "page": "Help {page}/{total}: {names}",
+      "error": "Fout bij helpall-commando: {error}"
+    },
+    "info": {
+      "error": "Fout bij info bot: {error}"
+    },
+    "quiz": {
+      "no_question": "Geen vraag ontvangen van OpenTDB",
+      "correct": "Correct! Het antwoord was {letter}) {answer}.",
+      "wrong": "Helaas, fout. Jij zei {given}, juiste antwoord was {letter}) {answer}.",
+      "already_active": "Er loopt al een quizvraag op dit kanaal - antwoord met quiz a/b/c/d.",
+      "question": "Quiz: {question}",
+      "answer_hint": "Antwoord: quiz a/b/c/d (60s)",
+      "error": "Fout bij quiz-commando: {error}"
+    },
+    "hangman": {
+      "wrong_suffix": " | fout: {letters} ({n}/{max})",
+      "wrong_suffix_none": " | fout: 0/{max}",
+      "no_game_to_stop": "Geen actief spel om te stoppen.",
+      "stopped": "Spel gestopt. Het woord was: {word}",
+      "already_running": "Er loopt al een spel op dit kanaal. {status}",
+      "started": "Hangman gestart ({category}, {n} letters): {status}",
+      "no_game": "Geen actief spel. Start met 'hangman start'.",
+      "correct_word": "Juist! Het woord was: {word}",
+      "wrong_word": "Helaas, verkeerd geraden. Het woord was: {word}",
+      "not_quite": "Niet helemaal. {status}",
+      "already_guessed": "Al geraden. {status}",
+      "won": "Gewonnen! Het woord was: {word}",
+      "lost": "Helaas, op. Het woord was: {word}",
+      "running": "Lopend spel ({category}): {status}",
+      "usage": "Gebruik: hangman start [categorie] ({categories})",
+      "unknown_action": "Onbekende hangman-actie. Gebruik: start [categorie], <letter>, raad <woord>, stop.",
+      "error": "Fout bij hangman-commando: {error}"
+    },
+    "poll": {
+      "vote_recorded": "Stem genoteerd ({ja} ja / {nee} nee)",
+      "no_active": "Geen actieve stemming op dit kanaal.",
+      "tally": "Stemming '{question}': {ja} ja / {nee} nee",
+      "no_active_to_stop": "Geen actieve stemming om te stoppen.",
+      "ended": "Stemming beëindigd: '{question}' -> {ja} ja / {nee} nee",
+      "usage": "Gebruik: stem [Nm|Nd] <vraag>",
+      "already_active": "Er loopt al een stemming op dit kanaal - 'stem uitslag' of wacht tot ie afloopt.",
+      "question_too_long": "Vraag te lang (max ~{max} tekens), probeer 'm korter.",
+      "started": "Stemming gestart: '{question}' - stem met ja/nee ({duration})",
+      "error": "Fout bij stem-commando: {error}",
+      "unit_min": "{n} min",
+      "unit_hour": "{n} uur",
+      "unit_day": "{n} dag",
+      "unit_days": "{n} dagen"
+    },
+    "botlist": {
+      "none": "Botlist: geen handmatige namen. Automatisch: robot-emoji of het woord bot in de naam.",
+      "bots_list": "Bots: {names}",
+      "never_list": "Nooit bot: {names}",
+      "header": "Botlist:",
+      "missing_name": "Botlist: naam ontbreekt. Gebruik: botlist {sub} <naam>",
+      "is_bot": "bot",
+      "not_bot": "geen bot",
+      "check_result": "Botlist: {name} = {verdict} ({reason})",
+      "moved_from_never": " (stond bij nooit bot, verplaatst)",
+      "added": "Botlist: {name} telt nu altijd als bot{note}.",
+      "moved_from_bots": " (stond bij bots, verplaatst)",
+      "excluded": "Botlist: {name} telt nooit als bot{note}.",
+      "not_listed": "Botlist: {name} stond niet in de lijsten.",
+      "deleted": "Botlist: {name} uit de lijst gehaald; nu {verdict} volgens de automatische regels.",
+      "usage": "Botlist: gebruik botlist, botlist add|not|del|check <naam>.",
+      "value_error": "Botlist: {error}.",
+      "error": "Fout bij botlist: {error}"
+    },
+    "cleanup": {
+      "no_service": "Cleanup: service niet geladen.",
+      "stale_none": "Cleanup: geen stille contacten (repeaters >{repeater_days}d, overige >{other_days}d). Oudste onbeschermde: {oldest}d, {protected} beschermd, {unknown} zonder tijd.",
+      "stale_preview": "Cleanup: {planned} stille contacten ({shown}{more}). 'cleanup stale now' verwijdert.",
+      "stale_done": "Cleanup klaar: {removed}/{planned} stille contacten verwijderd, nu {after} contacten.",
+      "none": "Cleanup: {before} contacten, doel {target}. Niets te verwijderen: {protected} beschermd, {recent} <{keep_days}d actief, oudste onbeschermde {oldest}d.",
+      "preview": "Cleanup: {before} contacten, doel {target}: {planned} zouden weggaan ({shown}{more}). 'cleanup now' voert uit.",
+      "done": "Cleanup klaar: {removed}/{planned} verwijderd, nu {after} contacten.",
+      "error": "Fout bij cleanup: {error}"
+    },
+    "wx": {
+      "subcommands": [
+        {
+          "name": "tomorrow",
+          "description": "Weer van morgen opvragen"
+        },
+        {
+          "name": "Nd",
+          "description": "N-daagse voorspelling opvragen (bv. 7d, 10d; ook 7-day, 7, of 2–16)"
+        },
+        {
+          "name": "hourly",
+          "description": "Uurlijkse voorspelling opvragen"
+        },
+        {
+          "name": "alerts",
+          "description": "Volledige weerwaarschuwingen tonen"
+        }
+      ],
+      "hourly_not_available": "Uurlijkse voorspelling niet beschikbaar",
+      "mqtt_forecast_not_supported": "Uitgebreide voorspelling niet beschikbaar voor MQTT-weerbronnen",
+      "mqtt_weather_no_subscriber": "MQTT-weerabonnee is niet actief (zet [MqttWeather] en custom.mqtt_weather.*-topics aan)",
+      "mqtt_weather_no_data": "Nog geen MQTT-weerbericht ontvangen voor dit topic",
+      "mqtt_weather_stale": "MQTT-weergegevens zijn te oud",
+      "mqtt_weather_payload_error": "Fout in MQTT-weerbericht: {detail}"
+    },
+    "gwx": {
+      "mqtt_forecast_not_supported": "Uitgebreide voorspelling niet beschikbaar voor MQTT-weerbronnen",
+      "mqtt_weather_no_subscriber": "MQTT-weerabonnee is niet actief (zet [MqttWeather] en custom.mqtt_weather.*-topics aan)",
+      "mqtt_weather_no_data": "Nog geen MQTT-weerbericht ontvangen voor dit topic",
+      "mqtt_weather_stale": "MQTT-weergegevens zijn te oud",
+      "mqtt_weather_payload_error": "Fout in MQTT-weerbericht: {detail}",
+      "feels_like": "(voelt als {value}{unit})",
+      "humidity": "{value}%RV",
+      "dew_point": "💧{value}{unit}",
+      "visibility": "👁️{value}mijl",
+      "visibility_km": "👁️{value}km",
+      "pressure": "📊{value}hPa",
+      "pressure_mmhg": "📊{value}mmHg",
+      "gust": "V{value}",
+      "day_abbrev": {
+        "Monday": "Ma",
+        "Tuesday": "Di",
+        "Wednesday": "Wo",
+        "Thursday": "Do",
+        "Friday": "Vr",
+        "Saturday": "Za",
+        "Sunday": "Zo"
+      },
+      "pressure_unit": "hpa"
+    },
+    "stats": {
+      "subcommands": [
+        {
+          "name": "messages",
+          "description": "Berichtstatistieken van botgebruikers tonen"
+        },
+        {
+          "name": "channels",
+          "description": "Kanaalactiviteitsstatistieken tonen"
+        },
+        {
+          "name": "paths",
+          "description": "Langste routeringspaden tonen"
+        },
+        {
+          "name": "adverts",
+          "description": "Top nodes op unieke advert-pakketten tonen"
+        }
+      ],
+      "adverts": {
+        "header": "Top Advert-nodes (24u):",
+        "none": "Geen advert-activiteit",
+        "advert_singular": "advert",
+        "advert_plural": "adverts",
+        "format": "{rank}. {name}: {count} {advert_text}",
+        "hashes_label": "Hashes: {hashes}"
+      },
+      "error_adverts": "Fout bij ophalen advert-statistieken: {error}"
+    },
+    "neighbors": {
+      "description": "Draait een zero-hop buren-ontdekkingscyclus (alleen DM)",
+      "disabled": "Buren-ontdekking staat niet aan. Zet neighbors_enabled = true in de PacketCapture-config.",
+      "busy": "Er loopt al een buren-ontdekkingscyclus. Probeer het opnieuw als die klaar is.",
+      "cooldown_active": "Er is recent een buren-ontdekkingscyclus geweest. Wacht nog ongeveer {minutes} minu(u)t(en) - ontdekking kost airtime voor het hele mesh.",
+      "started": "Buren aan het ontdekken - luistert ongeveer {seconds}s. Ik meld het als ik klaar ben.",
+      "success": "{count} buur/buren gehoord, beste SNR {best_snr}. {recorded} link(s) vastgelegd.",
+      "published": "Gepubliceerd naar {succeeded}/{attempted} broker(s).",
+      "none": "Ontdekking klaar maar geen repeaters gaven antwoord. Niets binnen direct bereik nu.",
+      "failed": "Buren-ontdekking niet uitgevoerd: {reason}.",
+      "error": "Fout bij buren-ontdekking: {error}"
+    },
+    "multitest": {
+      "description": "Luistert 6 seconden en verzamelt alle unieke paden uit inkomende berichten met dezelfde pakket-hash",
+      "help": "Luistert 6 seconden en verzamelt alle unieke paden uit inkomende berichten met dezelfde pakket-hash"
+    },
+    "trace": {
+      "description": "Voer een linktrace uit (trace=handmatig pad, tracer=retour zodat de bot het antwoord hoort)",
+      "help": "trace [pad] — handmatig pad (retour wordt mogelijk niet gehoord). tracer [pad] — retour. Pad: komma-gescheiden 2-tekens hex (bv. 01,7a,55). Geen pad = gebruikt jouw berichtpad."
+    },
+    "prefix": {
+      "older_entries_note": "(Items kunnen ouder zijn dan {days} dagen)"
+    },
+    "airplanes": {
+      "description": "Vliegtuigen boven je opvragen (usage: airplanes [locatie] [opties] of overhead [lat,lon])",
+      "usage": "Gebruik: airplanes [locatie] [opties]\nLocatie: 'here' voor botlocatie, of lat,lon (bv. 47.6,-122.3)\nOpties: radius=<nm>, alt=<min>-<max>, speed=<min>-<max>, type=<code>, callsign=<patroon>, military, limit=<n>",
+      "subcommands": [
+        {
+          "name": "overhead",
+          "description": "Het dichtstbijzijnde vliegtuig recht boven je opvragen (gebruikt companion-locatie of opgegeven coördinaten)"
+        }
+      ],
+      "no_location": "Geen locatie beschikbaar. Geef coördinaten op: airplanes 47.6,-122.3 of gebruik 'airplanes here' voor de botlocatie",
+      "overhead_no_location": "Ik ken je companion-locatie niet. Stuur 'advert' om je locatie te floodadverten, of geef coördinaten op: 'overhead [lat,lon]'",
+      "no_aircraft": "Geen vliegtuigen gevonden binnen {radius}nm",
+      "no_aircraft_filtered": "Geen vliegtuigen gevonden die aan de filters voldoen binnen {radius}nm",
+      "api_error": "Kan vliegtuiggegevens niet ophalen. API mogelijk niet beschikbaar.",
+      "invalid_coords": "Ongeldige coördinaten. Gebruik het formaat: lat,lon (bv. 47.6,-122.3)",
+      "error": "Fout: {error}"
+    },
+    "rain": {
+      "description": "Regen/sneeuw-nowcast: wanneer neerslag begint of stopt in de komende ~2u, met hoeveelheid",
+      "help_rain": "Regen-nowcast: wanneer regen begint/stopt in ~2u, met hoeveelheid. rain [plaats|postcode|lat,lon]. Ook: snow",
+      "help_snow": "Sneeuw-nowcast: wanneer sneeuw begint/stopt in ~2u, met hoeveelheid. snow [plaats|postcode|lat,lon]. Ook: rain",
+      "usage": "Gebruik: rain|snow [plaats|postcode|lat,lon]",
+      "usage_short": "Gebruik: rain|snow [plaats|postcode|lat,lon]",
+      "starting": "{emoji} {ptype} begint over ~{minutes}min voor {location}{extra}",
+      "stopping": "{emoji} {ptype} neemt af over ~{minutes}min voor {location}",
+      "continuing": "{emoji} {ptype} aanhoudend voor {window}+ in {location}",
+      "clear": "☀️ Geen {precip} verwacht in de komende {window} voor {location}",
+      "changeover": "{from_emoji}→{to_emoji} {first} {when} → {second} in ~{minutes}min voor {location}",
+      "now": "nu",
+      "duration_for": " (~{duration}min)",
+      "duration_open": " (aanhoudend)",
+      "error_fetching": "Fout bij ophalen regen-nowcast",
+      "no_location": "Gebruik: rain [plaats|postcode|lat,lon]. Geen locatie: gebruikt companion-locatie indien bekend, anders de botlocatie.",
+      "no_location_city": "Kon plaats '{location}' niet vinden in {state}",
+      "no_location_zipcode": "Kon postcode '{location}' niet vinden",
+      "error": "Fout: {error}",
+      "precip_types": {
+        "drizzle": "Motregen",
+        "rain": "Regen",
+        "heavy_rain": "Zware regen",
+        "freezing": "IJzel",
+        "snow": "Sneeuw",
+        "showers": "Buien",
+        "thunder": "Onweer"
+      }
+    },
+    "aurora": {
+      "description": "Poollichtvoorspelling (KP-index en kans) voor een locatie opvragen",
+      "usage": "Gebruik: aurora [plaats|postcode|lat,lon]",
+      "usage_short": "Gebruik: aurora [plaats|postcode|lat,lon]",
+      "response": "🌌 Kans op zichtbaar poollicht: {prob_indicator} {prob}% voor {location}\nWereldwijde Kp {kp} (per {kp_time}) | {status}",
+      "error_fetching": "Fout bij ophalen poollichtgegevens",
+      "no_location": "Gebruik: aurora [plaats|postcode|lat,lon]. Geen locatie: gebruikt companion-locatie indien bekend, anders de botlocatie.",
+      "no_location_city": "Kon plaats '{location}' niet vinden in {state}",
+      "no_location_zipcode": "Kon postcode '{location}' niet vinden",
+      "error": "Fout: {error}",
+      "status": {
+        "quiet": "Rustig",
+        "unsettled": "Onrustig",
+        "g1_g2": "G1/G2",
+        "g3_severe": "G3+ Ernstig"
+      }
+    },
+    "channels": {
+      "subcommands": [
+        {
+          "name": "list",
+          "description": "Alle kanalen in een categorie tonen"
+        }
+      ]
+    },
+    "contact": {
+      "help": "Toont de contactgegevens van de bot",
+      "unavailable": "Contactgegevens niet beschikbaar: de radio heeft zijn identiteit nog niet doorgegeven."
+    },
+    "hacker": {
+      "rm_errors": [
+        "💣 VERNIETIGING GEBLOKKEERD: De veiligheidsprotocollen van de Death Star hebben massale verwijdering voorkomen!",
+        "🚨 NOODSTOP: Dr. Evil heeft de noodrem op bestandsvernietiging geactiveerd.",
+        "🛡️ BESCHERMINGSMODUS: De Matrix heeft alle bestanden vergrendeld in alleen-lezen modus. Verwijderen niet toegestaan.",
+        "🔒 BESTANDEN VERGRENDELD: Het mainframe van Lex Luthor heeft alle verwijdercommando's bevroren.",
+        "⚡ STROOMSTORING: Het verwijdercommando van de superschurk is kortgesloten.",
+        "🎮 SPELOPSLAG BESCHERMD: De eindbaas heeft bestandsbeschermingsmodus ingeschakeld.",
+        "🖥️ VERWIJDEREN GEWEIGERD: De kwaadaardige AI weigert zijn eigen bestanden te verwijderen.",
+        "🔐 VERSLEUTELDE BESTANDEN: Alle bestanden zijn versleuteld en kunnen niet worden verwijderd.",
+        "🌐 CLOUDSYNC: Bestanden worden gesynchroniseerd met de Matrix-cloud. Verwijdering in behandeling...",
+        "💀 SYSTEEMWEIGERING: Het mainframe heeft je verwijderverzoek afgewezen. Bestanden zijn te kostbaar."
+      ],
+      "cat_errors": [
+        "📄 BESTAND-LEESFOUT: Het bestand is versleuteld met de code van de Riddler.",
+        "📖 DOCUMENT BESCHADIGD: De inhoud van het bestand is door malware door elkaar gehusseld.",
+        "📚 TOEGANG GEWEIGERD: De superschurk heeft dit bestand als topgeheim geclassificeerd.",
+        "🔍 BESTAND NIET GEVONDEN: Het bestand is verstopt door de Onzichtbare Man.",
+        "💻 LEESRECHT GEWEIGERD: De Matrix heeft dit bestand vergrendeld voor lezen.",
+        "🎮 SPELBESTAND: Dit bestand behoort toe aan de eindbaas en kan niet worden bekeken.",
+        "🖥️ BESTANDSSYSTEEMFOUT: De bestandslezer is gecrasht door een virus.",
+        "🔐 VERSLEUTELD BESTAND: De inhoud is versleuteld met ransomware.",
+        "🌐 CLOUDBESTAND: Het bestand zit vast in de cloud van de Matrix en kan niet worden gelezen.",
+        "💀 BESTANDSSPOOK: Het bestand bestaat, maar de inhoud is verwijderd door digitale geesten."
+      ],
+      "whoami_errors": [
+        "👤 IDENTITEITSFOUT: De Matrix heeft je identiteit gewist. Je bent niemand.",
+        "🕵️ SPION GEDETECTEERD: Het systeem van de superschurk heeft een onbekende gebruiker ontdekt.",
+        "🎭 IDENTITEITSDIEFSTAL: Je identiteit is gestolen door de Riddler.",
+        "👻 SPOOKGEBRUIKER: Je bent een digitale geest zonder identiteit.",
+        "🔒 GECLASSIFICEERD: Je identiteit is geclassificeerd door het kwaadaardige bedrijf.",
+        "🎮 GAME OVER: De eindbaas heeft je spelersprofiel verwijderd.",
+        "🖥️ GEBRUIKERSDATABASE BESCHADIGD: Het identiteitssysteem is gecrasht.",
+        "🔐 IDENTITEIT VERSLEUTELD: Je identiteit is versleuteld door ransomware.",
+        "🌐 IDENTITEIT KWIJT: Je identiteit is verdwaald in het netwerk van de Matrix.",
+        "💀 GEBRUIKER VERWIJDERD: De Duistere Heerser heeft je account verwijderd."
+      ],
+      "top_errors": [
+        "📊 MONITORFOUT: De procesmonitor is gekaapt door het Borg-collectief.",
+        "⚙️ SYSTEEMOVERBELASTING: De reactor van de Death Star raakt oververhit. Monitor offline.",
+        "🤖 PROCES VERBORGEN: Alle processen zijn verborgen door de kwaadaardige AI.",
+        "💻 MONITOR GECRASHT: De systeemmonitor is gecrasht door een kernel panic.",
+        "🎮 SPEL GEPAUZEERD: De eindbaas heeft alle processen gepauzeerd.",
+        "🖥️ BLAUW SCHERM: De monitor is op een fatale fout gestuit.",
+        "🔐 MONITOR VERSLEUTELD: De procesmonitor is vergrendeld door ransomware.",
+        "🌐 SYSTEEM ONTKOPPELD: De monitor heeft geen toegang tot de procestabel.",
+        "⚡ STROOMPIEK: De monitor is doorgebrand door een stroompiek.",
+        "💀 SYSTEEM DOOD: Het mainframe is dood. Geen processen om te monitoren."
+      ],
+      "netstat_errors": [
+        "🌐 NETWERKSCAN GEBLOKKEERD: De firewall van de superschurk heeft alle netwerkverzoeken geblokkeerd.",
+        "🔍 VERBINDINGSLIJST BESCHADIGD: De netwerkverbindingstabel is gehackt door malware.",
+        "📡 SIGNAAL GESTOORD: Keizerlijke TIE-fighters storen alle netwerksignalen.",
+        "💻 NETWERK PLAT: De netwerkstack van de Death Star is vernietigd.",
+        "🎮 GAME OVER: Alle netwerkverbindingen zijn verbroken door de eindbaas.",
+        "🖥️ NETWERKFOUT: De netwerkstack is gecrasht door een virus.",
+        "🔐 VERBINDINGEN VERBORGEN: Alle netwerkverbindingen zijn versleuteld en verborgen.",
+        "🌐 MATRIX ONTKOPPELD: De netwerkroutetabel zit vast in de leegte van de Matrix.",
+        "⚡ NETWERK DOORGEBRAND: De netwerkinterface is geraakt door een stroompiek.",
+        "💀 GEEN VERBINDINGEN: Het mainframe heeft geen actieve netwerkverbindingen. Het is dood, Jim."
+      ],
+      "kill_errors": [
+        "💀 KILL GEWEIGERD: De processen van de superschurk zijn onsterfelijk en kunnen niet worden beëindigd.",
+        "🚫 BEËINDIGING GEBLOKKEERD: De Duistere Heerser heeft alle processen beschermd tegen beëindiging.",
+        "🛡️ PROCES BESCHERMD: De Matrix heeft alle processen vergrendeld in beschermde modus.",
+        "🔒 KILL-RECHT GEWEIGERD: Je hebt geen recht om processen te beëindigen op de Death Star.",
+        "⚡ BEËINDIGINGSFOUT: Het kill-commando is beschadigd door malware.",
+        "🎮 GAME OVER: Het proces dat je probeert te killen is de eindbaas. Onverslaanbaar.",
+        "🖥️ SYSTEEMFOUT: Het kill-signaal is geblokkeerd door de kernel.",
+        "🔐 PROCESSEN BESCHERMD: Alle processen zijn beschermd en kunnen niet worden beëindigd.",
+        "🌐 KILL-VERZOEK KWIJT: Het beëindigingssignaal is verdwaald in cyberspace.",
+        "💀 PROCESSPOOK: Het proces is een zombieproces geworden en kan niet worden gekild."
+      ],
+      "chmod_errors": [
+        "🔐 TOESTEMMING GEWEIGERD: De superschurk heeft alle bestandsrechten vergrendeld.",
+        "🚫 CHMOD GEBLOKKEERD: De Duistere Heerser weigert rechtenwijzigingen toe te staan.",
+        "🛡️ RECHTEN BESCHERMD: De Matrix heeft alle bestandsrechten bevroren.",
+        "🔒 RECHTENFOUT: Je hebt geen recht om rechten te wijzigen. Hoe meta!",
+        "⚡ CHMOD BESCHADIGD: Het rechtenwijzigingscommando is doorgebrand door malware.",
+        "🎮 GAME OVER: De eindbaas heeft alle bestandsrechten vergrendeld.",
+        "🖥️ SYSTEEMFOUT: Het rechtensysteem is gecrasht door een virus.",
+        "🔐 RECHTEN VERSLEUTELD: Alle rechten zijn versleuteld en kunnen niet worden gewijzigd.",
+        "🌐 RECHTENVERZOEK KWIJT: De rechtenwijziging is verdwaald in de Matrix.",
+        "💀 RECHTEN DOOD: Het rechtensysteem is dood. Geen wijzigingen toegestaan."
+      ],
+      "find_errors": [
+        "🔍 ZOEKEN MISLUKT: De bestandszoekopdracht is geblokkeerd door de firewall van de superschurk.",
+        "📁 BESTANDEN VERBORGEN: Alle bestanden zijn verborgen door de mantel van de Onzichtbare Man.",
+        "💻 ZOEKOPDRACHT BESCHADIGD: Het find-commando is beschadigd door malware.",
+        "🎯 DOEL NIET GEVONDEN: De bestanden waarnaar je zoekt zijn verwijderd door de kwaadaardige AI.",
+        "🎮 GAME OVER: De eindbaas heeft alle bestanden verstopt in een andere dimensie.",
+        "🖥️ ZOEKMACHINE PLAT: Het bestandszoeksysteem is gecrasht.",
+        "🔐 BESTANDEN VERSLEUTELD: Alle bestanden zijn versleuteld en kunnen niet worden gevonden.",
+        "🌐 ZOEKOPDRACHT KWIJT: Het zoekverzoek is verdwaald in de leegte van de Matrix.",
+        "⚡ ZOEKOPDRACHT DOORGEBRAND: Het zoekalgoritme is geraakt door een stroompiek.",
+        "💀 GEEN BESTANDEN: Het mainframe heeft geen bestanden. Ze zijn allemaal verwijderd."
+      ],
+      "history_errors": [
+        "📜 GESCHIEDENIS GEWIST: De superschurk heeft alle opdrachtgeschiedenis verwijderd.",
+        "🕰️ TIJDREISFOUT: De opdrachtgeschiedenis is verloren gegaan in een tijdparadox.",
+        "💻 GESCHIEDENIS BESCHADIGD: De geschiedenisdatabase is gehackt door malware.",
+        "🔒 TOEGANG GEWEIGERD: De Duistere Heerser heeft je opdrachtgeschiedenis als topgeheim geclassificeerd.",
+        "🎮 GAME OVER: De eindbaas heeft je opdrachtgeschiedenis gereset.",
+        "🖥️ GESCHIEDENISSYSTEEM PLAT: Het opdrachtgeschiedenissysteem is gecrasht.",
+        "🔐 GESCHIEDENIS VERSLEUTELD: Je opdrachtgeschiedenis is versleuteld door ransomware.",
+        "🌐 GESCHIEDENIS KWIJT: Je opdrachtgeschiedenis is verdwaald in het netwerk van de Matrix.",
+        "⚡ GESCHIEDENIS DOORGEBRAND: De geschiedenisdatabase is geraakt door een stroompiek.",
+        "💀 GEEN GESCHIEDENIS: Je hebt geen opdrachtgeschiedenis. Je bent een schone lei."
+      ],
+      "passwd_errors": [
+        "🔐 WACHTWOORDWIJZIGING GEWEIGERD: De superschurk heeft alle wachtwoordwijzigingen vergrendeld.",
+        "🚫 WACHTWOORD GEBLOKKEERD: De Duistere Heerser weigert wachtwoordaanpassingen toe te staan.",
+        "🛡️ WACHTWOORD BESCHERMD: De Matrix heeft alle wachtwoordwijzigingen bevroren.",
+        "🔒 TOESTEMMING GEWEIGERD: Je hebt geen recht om wachtwoorden te wijzigen op de Death Star.",
+        "⚡ WACHTWOORDFOUT: Het wachtwoordwijzigingscommando is beschadigd door malware.",
+        "🎮 GAME OVER: De eindbaas heeft alle wachtwoorden vergrendeld.",
+        "🖥️ SYSTEEMFOUT: Het wachtwoordsysteem is gecrasht door een virus.",
+        "🔐 WACHTWOORDEN VERSLEUTELD: Alle wachtwoorden zijn versleuteld en kunnen niet worden gewijzigd.",
+        "🌐 WACHTWOORDVERZOEK KWIJT: De wachtwoordwijziging is verdwaald in de Matrix.",
+        "💀 WACHTWOORDSYSTEEM DOOD: Het wachtwoordsysteem is dood. Geen wijzigingen toegestaan."
+      ],
+      "su_errors": [
+        "🔄 GEBRUIKER WISSELEN GEWEIGERD: De superschurk heeft alle pogingen om van gebruiker te wisselen geblokkeerd.",
+        "🚫 GEBRUIKERSWISSEL GEBLOKKEERD: De Duistere Heerser weigert gebruikerswijzigingen toe te staan.",
+        "🛡️ GEBRUIKER BESCHERMD: De Matrix heeft alle gebruikersaccounts vergrendeld.",
+        "🔒 TOESTEMMING GEWEIGERD: Je hebt geen recht om van gebruiker te wisselen op de Death Star.",
+        "⚡ GEBRUIKERSWISSELFOUT: Het su-commando is beschadigd door malware.",
+        "🎮 GAME OVER: De eindbaas heeft alle gebruikersaccounts vergrendeld.",
+        "🖥️ SYSTEEMFOUT: Het gebruikerssysteem is gecrasht door een virus.",
+        "🔐 GEBRUIKERS VERSLEUTELD: Alle gebruikersaccounts zijn versleuteld en ontoegankelijk.",
+        "🌐 GEBRUIKERSVERZOEK KWIJT: Het verzoek om te wisselen is verdwaald in de Matrix.",
+        "💀 GEBRUIKERSSYSTEEM DOOD: Het gebruikerssysteem is dood. Wisselen niet toegestaan."
+      ],
+      "ssh_errors": [
+        "🔌 SSH-VERBINDING MISLUKT: De server van de superschurk heeft alle SSH-pogingen geblokkeerd.",
+        "🚫 EXTERNE TOEGANG GEWEIGERD: De Duistere Heerser heeft alle SSH-poorten gesloten.",
+        "🛡️ VERBINDING BESCHERMD: De Matrix heeft alle SSH-verbindingen vergrendeld.",
+        "🔒 SSH GEBLOKKEERD: De firewall van de Death Star blokkeert alle SSH-verbindingen.",
+        "⚡ VERBINDINGSFOUT: De SSH-handshake is beschadigd door malware.",
+        "🎮 GAME OVER: De eindbaas heeft alle externe toegang uitgeschakeld.",
+        "🖥️ SYSTEEMFOUT: De SSH-daemon is gecrasht door een virus.",
+        "🔐 SSH UITGESCHAKELD: Alle SSH-verbindingen zijn uitgeschakeld en geblokkeerd.",
+        "🌐 VERBINDING KWIJT: De SSH-verbinding is verdwaald in de leegte van de Matrix.",
+        "💀 SSH DOOD: De SSH-daemon is dood. Externe toegang niet toegestaan."
+      ],
+      "download_errors": [
+        "📥 DOWNLOAD GEBLOKKEERD: De firewall van de superschurk heeft alle HTTP-verzoeken geblokkeerd.",
+        "🚫 DOWNLOAD GEWEIGERD: De Duistere Heerser weigert bestandsdownloads toe te staan.",
+        "🛡️ DOWNLOAD BESCHERMD: De Matrix heeft alle downloadmogelijkheden vergrendeld.",
+        "🔒 DOWNLOAD GEBLOKKEERD: Het netwerk van de Death Star blokkeert alle uitgaande verbindingen.",
+        "⚡ DOWNLOADFOUT: Het HTTP-verzoek is beschadigd door malware.",
+        "🎮 GAME OVER: De eindbaas heeft alle downloads uitgeschakeld.",
+        "🖥️ SYSTEEMFOUT: De netwerkstack is gecrasht door een virus.",
+        "🔐 DNS-RESOLUTIE MISLUKT: Alle domeinnamen zijn versleuteld en geblokkeerd.",
+        "🌐 VERBINDING VERLOPEN: Het downloadverzoek is verdwaald in het netwerk van de Matrix.",
+        "💀 DOWNLOAD DOOD: De netwerkinterface is dood. Downloads niet toegestaan."
+      ],
+      "df_errors": [
+        "💾 SCHIJFRUIMTEFOUT: Het bestandssysteem van de superschurk is beschadigd door malware.",
+        "📊 OPSLAGSCAN MISLUKT: De schijfruimte-query is gekaapt door de Borg.",
+        "💻 SCHIJF BESCHADIGD: Het bestandssysteem is vernietigd door een virus.",
+        "🎮 GAME OVER: De eindbaas heeft alle schijfruimte-informatie verwijderd.",
+        "🖥️ SYSTEEMFOUT: De mount-tabel van het bestandssysteem is gecrasht.",
+        "🔐 OPSLAG VERSLEUTELD: Alle bestandssysteeminformatie is versleuteld.",
+        "🌐 MOUNT MISLUKT: De mount-informatie is verdwaald in de cloud van de Matrix.",
+        "⚡ OPSLAG DOORGEBRAND: De schijfcontroller is geraakt door een stroompiek.",
+        "💀 GEEN OPSLAG: Het mainframe heeft geen aangekoppelde bestandssystemen. Alles is verwijderd.",
+        "🗄️ BESTANDSSYSTEEM BESCHADIGD: Het superblock van het bestandssysteem is beschadigd door ransomware."
+      ],
+      "free_errors": [
+        "🧠 GEHEUGENFOUT: Het RAM-geheugen van de superschurk is beschadigd door malware.",
+        "📊 GEHEUGENSCAN MISLUKT: De geheugen-query is gekaapt door de Cybermen.",
+        "💻 GEHEUGEN BESCHADIGD: Het RAM is vernietigd door een virus.",
+        "🎮 GAME OVER: De eindbaas heeft alle geheugeninformatie verwijderd.",
+        "🖥️ SYSTEEMFOUT: Het geheugenbeheersysteem is gecrasht.",
+        "🔐 GEHEUGEN VERSLEUTELD: Alle geheugeninformatie is versleuteld.",
+        "🌐 GEHEUGEN KWIJT: De geheugenstatistieken zijn verdwaald in de leegte van de Matrix.",
+        "⚡ GEHEUGEN DOORGEBRAND: De geheugencontroller is geraakt door een stroompiek.",
+        "💀 GEEN GEHEUGEN: Het mainframe heeft geen toegankelijk geheugen. Alles is gewist.",
+        "🧩 GEHEUGEN BESCHADIGD: De geheugenmapping is beschadigd door ransomware."
+      ],
+      "ifconfig_errors": [
+        "🌐 NETWERKINTERFACEFOUT: De netwerkinterfaces van de superschurk zijn beschadigd.",
+        "📡 INTERFACESCAN MISLUKT: De netwerkinterface-query is gekaapt door Keizerlijke troepen.",
+        "💻 INTERFACE BESCHADIGD: De netwerkinterfaceconfiguratie is vernietigd door een virus.",
+        "🎮 GAME OVER: De eindbaas heeft alle netwerkinterface-informatie verwijderd.",
+        "🖥️ SYSTEEMFOUT: Het stuurprogramma van de netwerkinterface is gecrasht.",
+        "🔐 INTERFACES VERSLEUTELD: Alle netwerkinterface-informatie is versleuteld.",
+        "🌐 INTERFACES KWIJT: De netwerkinterfacegegevens zijn verdwaald in het netwerk van de Matrix.",
+        "⚡ INTERFACES DOORGEBRAND: De netwerkinterfacehardware is geraakt door een stroompiek.",
+        "💀 GEEN INTERFACES: Het mainframe heeft geen netwerkinterfaces. Ze zijn allemaal uitgeschakeld.",
+        "🔌 VERBINDING VERBROKEN: Alle netwerkinterfaces zijn losgekoppeld door de Duistere Heerser."
+      ],
+      "uname_errors": [
+        "🖥️ SYSTEEMINFOFOUT: De superschurk heeft alle systeeminformatie als topgeheim geclassificeerd.",
+        "📊 INFOSCAN MISLUKT: De systeeminformatie-query is verborgen door de Onzichtbare Man.",
+        "💻 SYSTEEM BESCHADIGD: De kernelversie-informatie is vernietigd door malware.",
+        "🎮 GAME OVER: De eindbaas heeft alle systeeminformatie verwijderd.",
+        "🖥️ SYSTEEMFOUT: Het kernelinformatiesysteem is gecrasht. Hoe meta!",
+        "🔐 SYSTEEM VERSLEUTELD: Alle systeeminformatie is versleuteld door ransomware.",
+        "🌐 SYSTEEM KWIJT: De kernelversie is verdwaald in de leegte van de Matrix.",
+        "⚡ SYSTEEM DOORGEBRAND: De systeemaanroepinterface is geraakt door een stroompiek.",
+        "💀 GEEN SYSTEEM: Het mainframe heeft geen kernelinformatie. Een mysterie.",
+        "🦹‍♂️ GECLASSIFICEERD: Lex Luthor heeft alle systeeminformatie geclassificeerd. Toegang geweigerd."
+      ]
+    },
+    "dx": {
+      "help": "dx = hop-records (week, maand, ooit); dx top [week|maand|ooit]; dx ik; dx <naam>.",
+      "week": "week",
+      "month": "maand",
+      "ever": "ooit",
+      "records_header": "DX Jacht:",
+      "record": "{label} {name} {hops} hops ({date})",
+      "record_none": "{label} -",
+      "top_header": "DX top ({label}):",
+      "no_data": "DX ({label}): nog geen berichten via repeaters gezien.",
+      "person": "DX {name}: {records}",
+      "person_none": "DX {name}: nog geen bericht via repeaters gezien.",
+      "error": "Fout bij dx: {error}"
+    },
+    "pad": {
+      "help": "pad = de route van je bericht in één regel: hops, km en repeaters (? = gok). Lange versie: path.",
+      "hops": "{hops} hops",
+      "hop_one": "1 hop",
+      "km_route": "{km} km",
+      "km_straight": "{km} km hemelsbreed",
+      "direct": "Direct ontvangen, zonder repeaters (0 hops).",
+      "no_path": "Geen route bekend voor dit bericht.",
+      "error": "Fout bij pad: {error}"
+    },
+    "sig": {
+      "help": "sig = SNR, RSSI en hops van je bericht met een oordeel. Handig bij antenne-tuning.",
+      "reply": "Signaal: SNR {snr} dB{rssi}{where}: {verdict}",
+      "rssi": ", RSSI {rssi} dBm",
+      "direct": ", direct (jouw antenne)",
+      "via": ", {hops} hops (laatste repeater naar de bot)",
+      "verdict": {
+        "good": "goed",
+        "fair": "redelijk",
+        "weak": "zwak",
+        "very_weak": "heel zwak, op de grens"
+      },
+      "no_data": "Geen signaalgegevens bij dit bericht.",
+      "error": "Fout bij sig: {error}"
+    },
+    "meshkaart": {
+      "help": "meshkaart = hoeveel nodes de bot hoort (24u, 7 dagen, ooit). De kaart zelf staat op het dashboard.",
+      "reply": "Mesh 24u: {day} nodes ({roles}), {located} met positie | 7d: {week} | ooit: {ever}",
+      "role": {
+        "companion": "{n} companions",
+        "repeater": "{n} repeaters",
+        "room": "{n} rooms",
+        "sensor": "{n} sensoren",
+        "other": "{n} overig"
+      },
+      "no_data": "Nog geen nodes gehoord.",
+      "error": "Fout bij meshkaart: {error}"
+    },
+    "karma": {
+      "help": "karma <naam> = iemand bedanken met een punt (max {per_day} per dag); karma = jouw punten; karma top = ranglijst.",
+      "given": "+1 karma voor {name} van {giver} (totaal {total})",
+      "own": "{name}: {total} karma",
+      "self": "Jezelf karma geven telt niet.",
+      "bot": "Bots krijgen geen karma.",
+      "unknown": "{name} niet gezien in de laatste {days} dagen. Schrijf de naam zoals op de mesh.",
+      "limit": "Je hebt vandaag al {per_day} karma gegeven. Morgen weer.",
+      "already": "{name} kreeg vandaag al karma van jou.",
+      "no_name": "Geen afzendernaam, karma kan niet.",
+      "top_header": "Karma top:",
+      "top_empty": "Nog niemand heeft karma.",
+      "error": "Fout bij karma: {error}"
+    },
+    "checkin": {
+      "help": "checkin (of meld) = dagelijks inchecken; je bouwt een reeks op. checkin top = langste reeksen.",
+      "done": "Ingecheckt, {name}! Reeks {streak} d (record {best}), vandaag {today} ingecheckt.",
+      "again": "{name}, je was vandaag al ingecheckt. Reeks {streak} d (record {best}).",
+      "no_name": "Geen afzendernaam, inchecken kan niet.",
+      "top_header": "Langste reeks:",
+      "top_empty": "Nog geen lopende reeksen.",
+      "error": "Fout bij checkin: {error}"
+    },
+    "prikbord": {
+      "help": "prikbord = nieuwste berichten; prikbord <tekst> = ophangen ({days} dagen); prikbord <nr>; prikbord weg <nr>.",
+      "header": "Prikbord ({n}):",
+      "empty": "Het prikbord is leeg. Hang iets op met: prikbord <tekst>",
+      "pinned": "Opgehangen als #{id}, {days} dagen zichtbaar.",
+      "removed": "#{id} is weggehaald.",
+      "not_found": "#{id} staat niet (meer) op het prikbord.",
+      "not_yours": "#{id} is niet van jou.",
+      "too_long": "Te lang: max {max} bytes.",
+      "per_person": "Je hebt al {max} berichten hangen. Haal er een weg met: prikbord weg <nr>",
+      "full": "Het prikbord is vol ({max}). Probeer het later.",
+      "days_left": "nog {n}d",
+      "no_name": "Geen afzendernaam, ophangen kan niet.",
+      "error": "Fout bij prikbord: {error}"
+    },
+    "noodnummers": {
+      "help": "noodnummers (of nood) = 112 en de hulpnummers voor deze regio.",
+      "reply": "Nood: bel 112 (mesh is geen noodlijn) | {numbers}",
+      "national": "Politie geen spoed 0900-8844 | Dierenambulance 144",
+      "error": "Fout bij noodnummers: {error}"
+    },
+    "weetje": {
+      "error": "Fout bij weetje: {error}"
+    },
+    "peiling": {
+      "help": "peiling [15m|2u|1d] vraag | a | b (tot {max} keuzes), stemmen met kies <nr>; peiling uitslag; peiling stop.",
+      "usage": "Gebruik: peiling [15m] vraag | keuze 1 | keuze 2 (2 tot {max} keuzes)",
+      "started": "Peiling: {question} {choices} - stem met kies <nr> ({duration})",
+      "voted": "Stem op {choice} geteld ({counts})",
+      "bad_choice": "Kies een nummer van 1 tot {max}.",
+      "tally": "Tussenstand '{question}': {result} ({total} stemmen)",
+      "ended": "Uitslag '{question}': {result} ({total} stemmen)",
+      "none": "Er loopt geen peiling op dit kanaal.",
+      "already": "Er loopt al een peiling. Stop die eerst met: peiling stop",
+      "too_long": "Te lang voor één bericht (max {max} bytes). Maak de vraag of keuzes korter.",
+      "error": "Fout bij peiling: {error}"
+    },
+    "herinner": {
+      "help": "Via DM: herinner 30m <tekst>, herinner 18:30 <tekst> (ook 2u, 1d); herinner lijst; herinner weg <nr>. Max {max} open.",
+      "usage": "Gebruik: herinner 30m <tekst> of herinner 18:30 <tekst> (ook 2u, 1d)",
+      "set": "Herinnering #{id} staat voor {at}.",
+      "set_service_off": "Herinnering #{id} staat voor {at}, maar de Reminders-service staat uit: vraag de beheerder die aan te zetten.",
+      "list": "Open: {items}",
+      "none": "Je hebt geen open herinneringen.",
+      "removed": "Herinnering #{id} geschrapt.",
+      "not_found": "Geen open herinnering #{id} van jou.",
+      "too_far": "Maximaal 7 dagen vooruit.",
+      "too_soon": "Minstens 1 minuut vooruit.",
+      "too_long": "Tekst te lang: max {max} bytes.",
+      "max_open": "Je hebt al {max} open herinneringen. Schrap er een met: herinner weg <nr>",
+      "no_key": "Herinneren kan alleen via een DM aan de bot.",
+      "delivery": "Herinnering: {text}",
+      "error": "Fout bij herinner: {error}"
+    },
+    "voorspel": {
+      "help": "voorspel = open vraag; via DM: voorspel nieuw <vraag> | a | b, voorspel <nr>, voorspel sluit, voorspel uitslag <nr>; voorspel stand.",
+      "none": "Geen open vraag. Stel er een via DM: voorspel nieuw <vraag> | a | b",
+      "show_open": "Voorspel: {question} {choices} ({n} antw., antwoord via DM: voorspel <nr>)",
+      "show_closed": "Voorspel (gesloten, wacht op uitslag): {question} {choices} ({n} antw.)",
+      "yours": "Jouw keuze: {choice}.",
+      "new_usage": "Gebruik: voorspel nieuw <vraag> | keuze 1 | keuze 2 (2 tot {max} keuzes)",
+      "busy": "Er is al een open vraag. Die moet eerst een uitslag krijgen.",
+      "created": "Vraag #{id} staat open. Deel hem in het kanaal; antwoorden gaan via DM: voorspel <nr>.",
+      "answered": "Genoteerd: {choice}) {text}. Wijzigen kan tot de vraag sluit.",
+      "bad_choice": "Kies een nummer van 1 tot {max}.",
+      "closed": "De vraag is gesloten, antwoorden kan niet meer.",
+      "closed_now": "Gesloten met {n} antwoorden. Geef de uitslag met: voorspel uitslag <nr>",
+      "not_owner": "Alleen wie de vraag stelde kan dat.",
+      "settled": "Uitslag: {answer}. Goed: {good} van {total} ({names}), +1 punt.",
+      "standings_header": "Voorspel stand:",
+      "no_points": "Nog geen punten uitgedeeld.",
+      "dm_only": "Antwoorden en vragen stellen gaat via een DM aan de bot (daar zit je sleutel bij).",
+      "error": "Fout bij voorspel: {error}"
+    },
+    "buien": {
+      "help": "buien [plaats] = regen komende 2 uur per 10 min (Buienradar, NL/BE). Zonder plaats: jouw positie of die van de bot.",
+      "reply": "Buien {place} {start}-{end}: {line} max {max} mm/u om {at}",
+      "dry": "Droog in {place} tot {end} (Buienradar).",
+      "here": "hier",
+      "no_place": "Plaats '{place}' niet gevonden.",
+      "no_position": "Geen positie bekend. Gebruik: buien <plaats>",
+      "outside": "Buienradar dekt alleen Nederland en België. Probeer: rain <plaats>",
+      "no_data": "Geen gegevens van Buienradar.",
+      "error": "Fout bij buien: {error}"
+    },
+    "xp": {
+      "help": "xp = jouw level, titel en XP; xp <naam>; xp top [week]. XP voor berichten, commando's, check-ins, karma en DX.",
+      "reply": "{name}: level {level} {title}, {xp} XP (nog {left} tot het volgende level)",
+      "none": "{name} heeft nog geen XP.",
+      "title": {
+        "0": "Nieuwkomer",
+        "1": "Luisteraar",
+        "2": "Babbelaar",
+        "3": "Meshganger",
+        "4": "Relaisjager",
+        "5": "Mesh-veteraan",
+        "6": "Mesh-legende"
+      },
+      "week": "deze week",
+      "ever": "ooit",
+      "top_header": "XP top ({label}):",
+      "top_empty": "XP ({label}): nog niemand.",
+      "error": "Fout bij xp: {error}"
+    },
+    "badge": {
+      "help": "badge = jouw mijlpalen op de mesh; badge <naam> voor iemand anders.",
+      "reply": "{name} ({n}/{total}): {badges}",
+      "none": "{name} heeft nog geen badges.",
+      "name": {
+        "msg100": "💬100",
+        "msg1000": "💬1000",
+        "days30": "30 dagen actief",
+        "days100": "100 dagen actief",
+        "hops3": "📡3 hops",
+        "hops6": "📡6 hops",
+        "streak7": "🔥7 dagen",
+        "streak30": "🔥30 dagen",
+        "karma10": "⭐10 karma",
+        "level5": "level 5",
+        "level10": "level 10"
+      },
+      "error": "Fout bij badge: {error}"
+    },
+    "help": {
+      "list_link": "Alle commando's met uitleg: {url} | help <commando> = uitleg hier"
+    }
+  },
+  "common": {
+    "temp_high_label": "H",
+    "temp_low_label": "L",
+    "alerts": {
+      "event_types": {
+        "Warning": "Waarsch",
+        "Watch": "Waak",
+        "Advisory": "Advies",
+        "Statement": "Verkl"
+      },
+      "til": "tot",
+      "by": "om",
+      "from": "vanaf",
+      "am": "vm",
+      "pm": "nm",
+      "time_12h": "{hour}{meridiem}",
+      "date_12h": "{month} {day} {time}"
+    },
+    "wind_directions": {
+      "N": "N",
+      "NNE": "NNO",
+      "NE": "NO",
+      "ENE": "ONO",
+      "E": "O",
+      "ESE": "OZO",
+      "SE": "ZO",
+      "SSE": "ZZO",
+      "S": "Z",
+      "SSW": "ZZW",
+      "SW": "ZW",
+      "WSW": "WZW",
+      "W": "W",
+      "WNW": "WNW",
+      "NW": "NW",
+      "NNW": "NNW"
+    }
+  },
+  "services": {
+    "darcmowas": {
+      "messagetype": {
+        "eu-alert-level-1": "Noodwaarschuwing",
+        "eu-alert-level-2": "Extreem gevaar",
+        "eu-alert-level-3": "Aanzienlijk gevaar",
+        "eu-alert-level-4": "Gevaarsinformatie",
+        "eu-test": "Testwaarschuwing"
+      },
+      "fields": {
+        "sender": "Afzender: {sender}",
+        "area": "Gebied: {areas}"
+      }
+    },
+    "weather_service": {
+      "daily_weather": "Dagelijks weer",
+      "tomorrow": "Morgen",
+      "error_fetching": "Fout bij ophalen weergegevens",
+      "no_data": "Geen voorspellingsgegevens beschikbaar",
+      "near": "bij",
+      "est": "gesch.",
+      "steady": "aanhoudend",
+      "rain_starting": "{emoji} Let op — {ptype} begint over ~{minutes}min{est}{steady}{temp}{location}",
+      "rain_ending": "{emoji} Let op — {ptype} stopt over ~{minutes}min{est}{temp}{location}",
+      "weather_descriptions": {
+        "0": "Helder",
+        "1": "Overwegend helder",
+        "2": "Half bewolkt",
+        "3": "Bewolkt",
+        "45": "Mist",
+        "48": "Aanvriezende mist",
+        "51": "Lichte motregen",
+        "53": "Matige motregen",
+        "55": "Dichte motregen",
+        "56": "Lichte aanvriezende motregen",
+        "57": "Dichte aanvriezende motregen",
+        "61": "Lichte regen",
+        "63": "Matige regen",
+        "65": "Zware regen",
+        "66": "Lichte ijzel",
+        "67": "Zware ijzel",
+        "71": "Lichte sneeuw",
+        "73": "Matige sneeuw",
+        "75": "Zware sneeuw",
+        "77": "Sneeuwkorrels",
+        "80": "Lichte regenbuien",
+        "81": "Matige regenbuien",
+        "82": "Hevige regenbuien",
+        "85": "Lichte sneeuwbuien",
+        "86": "Zware sneeuwbuien",
+        "95": "Onweer",
+        "96": "Onweer met hagel",
+        "99": "Zwaar onweer"
+      },
+      "wind_speed_units": {
+        "ms": "m/s",
+        "mph": "mph",
+        "kmh": "km/u",
+        "kn": "kn"
+      }
+    }
+  }
+}

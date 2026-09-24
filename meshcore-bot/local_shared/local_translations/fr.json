@@ -1,0 +1,1108 @@
+{
+  "commands": {
+    "tanken": {
+      "result": "Prix moyen national à la pompe ({date}) : Euro95 €{euro95} | Diesel €{diesel} | LPG €{lpg}",
+      "fetch_error": "Impossible de récupérer les prix des carburants (CBS).",
+      "no_data": "Aucun prix des carburants CBS récent trouvé.",
+      "error": "Erreur dans la commande tanken : {error}"
+    },
+    "beving": {
+      "fetch_error": "Impossible de récupérer le flux sismique KNMI.",
+      "no_data": "Aucun séisme récent trouvé dans le flux KNMI.",
+      "header": "Séismes récents :",
+      "error": "Erreur dans la commande beving : {error}"
+    },
+    "storing": {
+      "usage": "Utilisation : storing <{providers}>",
+      "fetch_error": "Impossible de récupérer le statut des pannes pour {provider}.",
+      "result": "{provider} : {status} (source : storingradar.com, non officiel)",
+      "error": "Erreur dans la commande storing : {error}"
+    },
+    "wegwerk": {
+      "usage": "Utilisation : wegwerk <lieu>",
+      "not_found": "Impossible de trouver « {place} ».",
+      "no_data": "Aucuns travaux routiers dans un rayon de {radius}km de {place}.",
+      "header": "Travaux routiers près de {place} :",
+      "line": "- {label} à {distance}",
+      "error": "Erreur dans la commande wegwerk : {error}",
+      "type": {
+        "RoadOrCarriagewayOrLaneManagement": "travaux routiers",
+        "SpeedManagement": "limitation de vitesse",
+        "ReroutingManagement": "déviation",
+        "GeneralNetworkManagement": "mesure de circulation"
+      }
+    },
+    "ov": {
+      "usage": "Utilisation : ov <lieu/arrêt>",
+      "no_stop": "Aucun arrêt trouvé pour « {query} ».",
+      "no_departures": "Aucun départ trouvé pour « {query} ».",
+      "header": "Transports en commun à {query} :",
+      "line": "{time} ligne {line} -> {dest} ({stop})",
+      "error": "Erreur dans la commande ov : {error}"
+    },
+    "waterstand": {
+      "no_data": "Aucune donnée récente de niveau d'eau pour {station}.",
+      "fetch_error": "Impossible de récupérer les données d'eau du Rijkswaterstaat.",
+      "no_valid": "Aucune mesure valide pour {station}.",
+      "result": "Niveau d'eau de la Meuse à {station} : {value}m NAP (mesuré à {time})",
+      "error": "Erreur dans la commande waterstand : {error}"
+    },
+    "weerwaarschuwing": {
+      "no_file": "Impossible de trouver un fichier d'alerte KNMI.",
+      "no_link": "Aucun lien de téléchargement reçu du KNMI.",
+      "download_error": "Impossible de télécharger le texte d'alerte KNMI.",
+      "empty": "Texte d'alerte KNMI vide reçu.",
+      "error": "Erreur dans la commande weerwaarschuwing : {error}"
+    },
+    "energieprijs": {
+      "fetch_error": "Impossible de récupérer les prix de l'électricité (EnergyZero).",
+      "no_data": "Aucun prix de l'électricité trouvé pour aujourd'hui.",
+      "result": "Prix de l'électricité actuel : €{current}/kWh | aujourd'hui bas €{low} - haut €{high} (TVA incl.)",
+      "error": "Erreur dans la commande energieprijs : {error}"
+    },
+    "aed": {
+      "usage": "Utilisation : aed <lieu>",
+      "not_found": "Impossible de trouver « {place} ».",
+      "no_data": "Aucun DAE trouvé dans un rayon de {radius}km de {place}.",
+      "header": "DAE près de {place} :",
+      "line": "- {name} : {distance}m",
+      "error": "Erreur dans la commande aed : {error}"
+    },
+    "laadpaal": {
+      "usage": "Utilisation : laadpaal <lieu>",
+      "not_found": "Impossible de trouver « {place} ».",
+      "no_data": "Aucune borne de recharge trouvée dans un rayon de {radius}km de {place}.",
+      "header": "Bornes de recharge près de {place} :",
+      "generic_name": "Borne de recharge",
+      "line": "- {name}{extra} : {distance}m",
+      "error": "Erreur dans la commande laadpaal : {error}"
+    },
+    "straling": {
+      "usage": "Utilisation : straling <lieu>",
+      "not_found": "Impossible de trouver « {place} ».",
+      "no_data": "Aucune mesure Safecast récente trouvée dans un rayon de {radius}km de {place}.",
+      "age_suffix": ", dernière mesure {date}",
+      "result": "Radiation près de {place} (~{radius}km, n={n}{age}) : ~{usvh} uSv/h indicatif ({cpm} cpm) - capteurs de science citoyenne (Safecast), pas une mesure officielle.",
+      "error": "Erreur dans la commande straling : {error}"
+    },
+    "kenteken": {
+      "usage": "Utilisation : kenteken <plaque>",
+      "invalid": "Plaque d'immatriculation invalide.",
+      "not_found": "Aucun véhicule trouvé pour la plaque {plate}.",
+      "apk_expired": "APK {date} (EXPIRÉ)",
+      "apk_soon": "APK {date} (encore {days}j)",
+      "apk": "APK {date}",
+      "error": "Erreur dans la commande kenteken : {error}",
+      "foreign_be": "Plaque belge : pas de source ouverte gratuite (la DIV ne partage rien), seulement les plaques néerlandaises (RDW).",
+      "foreign_de": "Plaque allemande : pas de source ouverte gratuite (le KBA ne partage rien), seulement les plaques néerlandaises (RDW)."
+    },
+    "quote": {
+      "error": "Erreur dans la commande quote : {error}"
+    },
+    "uptime": {
+      "days": "{n}j",
+      "hours": "{n}h",
+      "minutes": "{n}m",
+      "result": "Disponibilité : {duration} (depuis {started})",
+      "error": "Erreur dans la commande uptime : {error}"
+    },
+    "topcommands": {
+      "no_data": "Top commandes ({label}) : pas encore de données",
+      "header": "Top commandes ({label}) :",
+      "error": "Erreur lors de la récupération des top commandes : {error}"
+    },
+    "status": {
+      "no_service": "Statut : service non chargé.",
+      "up": "actif depuis {duration}",
+      "radio": "radio {state}",
+      "contacts": "contacts {n}",
+      "counters": "{commands} cmd, {errors} erreurs, {warnings} avertissements",
+      "last_issue": "dernier (il y a {age}) : {text}",
+      "no_issues": "aucun problème",
+      "header": "Statut :",
+      "error": "Erreur dans status : {error}"
+    },
+    "toprepeaters": {
+      "no_data": "Top répéteurs ({label}) : pas encore de données",
+      "header": "Top répéteurs ({label}) :",
+      "error": "Erreur lors de la récupération des top répéteurs : {error}"
+    },
+    "topusers": {
+      "no_data": "Top utilisateurs ({label}) : pas encore de données",
+      "header": "Top utilisateurs ({label}) :",
+      "error": "Erreur lors de la récupération des top utilisateurs : {error}"
+    },
+    "whois": {
+      "usage": "Utilisation : whois <nom ou préfixe de clé>",
+      "unknown": "inconnu",
+      "just_now": "à l'instant",
+      "minutes_ago": "il y a {n}m",
+      "hours_ago": "il y a {n}h",
+      "days_ago": "il y a {n}j",
+      "not_found": "Aucun nœud connu trouvé pour « {query} ».",
+      "hop": "{n} saut",
+      "hops": "{n} sauts",
+      "last_seen": "vu pour la dernière fois {ago}",
+      "error": "Erreur dans la commande whois : {error}"
+    },
+    "feestdag": {
+      "today": "Aujourd'hui",
+      "tomorrow": "Demain",
+      "none": "{label} ({date}) : aucun jour férié officiel aux Pays-Bas ou en Belgique.",
+      "header": "{label} ({date}) :",
+      "error": "Erreur dans la commande feestdag : {error}"
+    },
+    "morse": {
+      "usage": "Utilisation : morse <texte> ou morse <.... .- .-..>",
+      "decode_error": "Impossible de décoder cela en morse.",
+      "decoded": "Morse -> texte : {text}",
+      "encode_error": "Aucun caractère pris en charge trouvé à encoder.",
+      "encoded": "Morse : {text}",
+      "error": "Erreur dans la commande morse : {error}"
+    },
+    "file": {
+      "usage": "Utilisation : file <lieu>",
+      "not_found": "Impossible de trouver « {place} ».",
+      "no_data": "Aucun bouchon/incident dans un rayon de {radius}km de {place}.",
+      "header": "Bouchons/incidents près de {place} :",
+      "delay_suffix": ", retard {delay}",
+      "line": "- {label} à {distance}{delay}",
+      "error": "Erreur dans la commande file : {error}",
+      "type": {
+        "AbnormalTraffic": "bouchon",
+        "Accident": "accident",
+        "GeneralObstruction": "obstruction",
+        "VehicleObstruction": "panne/véhicule"
+      }
+    },
+    "f1": {
+      "decimal_sep": ",",
+      "day": {
+        "0": "lun",
+        "1": "mar",
+        "2": "mer",
+        "3": "jeu",
+        "4": "ven",
+        "5": "sam",
+        "6": "dim"
+      },
+      "month": {
+        "1": "jan",
+        "2": "fév",
+        "3": "mar",
+        "4": "avr",
+        "5": "mai",
+        "6": "juin",
+        "7": "juil",
+        "8": "août",
+        "9": "sep",
+        "10": "oct",
+        "11": "nov",
+        "12": "déc"
+      },
+      "country": {
+        "Australia": "Australie",
+        "Austria": "Autriche",
+        "Azerbaijan": "Azerbaïdjan",
+        "Bahrain": "Bahreïn",
+        "Belgium": "Belgique",
+        "Brazil": "Brésil",
+        "Canada": "Canada",
+        "China": "Chine",
+        "France": "France",
+        "Germany": "Allemagne",
+        "Hungary": "Hongrie",
+        "Italy": "Italie",
+        "Japan": "Japon",
+        "Mexico": "Mexique",
+        "Monaco": "Monaco",
+        "Netherlands": "Pays-Bas",
+        "Qatar": "Qatar",
+        "Saudi Arabia": "Arabie saoudite",
+        "Singapore": "Singapour",
+        "Spain": "Espagne",
+        "UAE": "Abu Dhabi",
+        "United Arab Emirates": "Abu Dhabi",
+        "UK": "Royaume-Uni",
+        "United Kingdom": "Royaume-Uni",
+        "USA": "les États-Unis",
+        "United States": "les États-Unis",
+        "Portugal": "Portugal",
+        "Turkey": "Turquie",
+        "Russia": "Russie",
+        "Argentina": "Argentine",
+        "Malaysia": "Malaisie",
+        "South Africa": "Afrique du Sud"
+      },
+      "session": {
+        "fp1": "EL1",
+        "fp2": "EL2",
+        "fp3": "EL3",
+        "sq": "Qualifications Sprint",
+        "sprint": "Sprint",
+        "quali": "Qualifications",
+        "race": "Course"
+      },
+      "today": "F1 : c'est aujourd'hui le {gp}, départ {time}",
+      "day_unit": "jour",
+      "days_unit": "jours",
+      "countdown": "F1 : encore {days} {unit} avant le {gp}, {when} | Jeu : DM-moi f1 voorspel <code>",
+      "raceweek": "Semaine de course : {gp} ! ",
+      "no_next_race": "F1 : aucune prochaine course connue.",
+      "next_race": "Prochaine : {gp}, {day} {time}",
+      "in_days": " (dans {days} j)",
+      "reminder": "F1 : encore {mins} min avant {session} du {gp} (départ {time})",
+      "winner": "Vainqueur {gp} : {given} {family} ({team}){extra}",
+      "standings_header": "Championnat après {after} : ",
+      "constructors_header": "Constructeurs : ",
+      "lap_header": "Tour {lap}/{total} : ",
+      "standing_header": "Classement : ",
+      "status": {
+        "live": "en direct",
+        "suspended": "suspendu",
+        "break": "pause",
+        "pre": "démarre bientôt"
+      },
+      "lap_suffix": ", tour {lap}/{total}",
+      "result_label": "Résultat",
+      "sprint_label": "Sprint",
+      "race_started": "La course a commencé ! {gp}, {laps} tours",
+      "lap_where": " (tour {lap}/{total})",
+      "safety_car": "Safety car !{where}",
+      "red_flag": "Drapeau rouge ! La session est suspendue{where}",
+      "quali_label": "Qualifications",
+      "sprint_quali_label": "Qualifications Sprint",
+      "service_off": "F1 : le service F1 est désactivé. Activez F1 dans Plugins et redémarrez l'add-on.",
+      "no_ha_data": "F1 : pas encore de données de Home Assistant, réessayez bientôt{why}",
+      "no_standings": "F1 : le classement du championnat n'est pas encore disponible.",
+      "standings_round_header": "Championnat après le tour {round} : ",
+      "standings_header_bare": "Championnat : ",
+      "no_team_standings": "F1 : le championnat constructeurs n'est pas encore disponible.",
+      "no_result": "F1 : aucun résultat disponible pour le moment.",
+      "no_session": "Aucune session F1 en cours.",
+      "usage": "F1 : utilisez f1, f1 stand, f1 team, f1 uitslag, f1 nu, f1 voorspel <code> ou f1 spel.",
+      "error": "Erreur dans f1 : {error}",
+      "game_off": "F1 : le jeu de pronostics est désactivé.",
+      "predict_dm_only": "Les pronostics ne fonctionnent que par DM, ainsi je suis sûr que c'est bien vous et personne ne peut voter à votre place. Envoyez-moi : f1 voorspel VER",
+      "no_next_to_predict": "F1 : il n'y a pas de prochaine course à pronostiquer pour le moment.",
+      "predict_prompt": "Qui gagne le {gp} ? f1 voorspel <code>, par ex. {example}",
+      "game_standing": "Classement : ",
+      "no_points_yet": "pas encore de points",
+      "your_points": "Vous : {points} pt en {races} courses",
+      "your_pick": ", vous pronostiquez {pick}",
+      "no_pick_yet": ", pas encore de pronostic",
+      "join_game": "Participer : DM-moi f1 voorspel <code> ({gp})",
+      "game_header": "Jeu {season} : ",
+      "predict_no_key": "Je ne peux pas déterminer votre clé. Réessayez en message direct.",
+      "predict_locked": "Les pronostics pour cette course sont clos (les qualifications ont commencé).",
+      "predict_unknown_code": "Je ne connais pas « {code} ». Utilisez les 3 lettres, par exemple {example}.",
+      "predict_bad_format": "Utilisez les 3 lettres du pilote, par exemple f1 voorspel VER.",
+      "predict_changed": "Modifié : vous pronostiquez maintenant {code} (c'était {previous}).",
+      "predict_recorded": "Enregistré : vous pronostiquez {code} comme vainqueur.",
+      "game_result_header": "Jeu : {n} participants. ",
+      "game_good": "Bons pronostics : {names}",
+      "game_none_good": "Personne n'a trouvé le vainqueur ou une place sur le podium"
+    },
+    "rptr": {
+      "no_service": "rptr : la liaison Home Assistant est désactivée. Activez HARepeater dans Plugins et redémarrez l'add-on.",
+      "no_ha_data": "rptr : pas encore de données de Home Assistant, réessayez bientôt{why}",
+      "no_repeaters": "rptr : meshcore-ha ne connaît aucun répéteur (pas encore de capteurs de répéteur).",
+      "not_tracked": " (non suivi)",
+      "repeaters_header": "Répéteurs : ",
+      "for_selector": " pour « {selector} »",
+      "not_found": "rptr : aucun répéteur trouvé{what}. Tapez rptr list.",
+      "error": "Erreur dans rptr : {error}",
+      "unit_m": "m",
+      "unit_h": "h",
+      "unit_d": "j",
+      "age_unknown": "âge inconnu",
+      "age_just_now": "à l'instant",
+      "age_minutes": "{n} min",
+      "age_hours": "{n} h",
+      "up": "actif {duration}",
+      "airtime": "airtime {pct}%",
+      "neighbours_count": "{n} voisins",
+      "stale_warning": "ATTENTION : {age}",
+      "neighbours_header": "{name} voisins ({n}) : ",
+      "no_data": "aucune donnée",
+      "period_hours": "{n}h",
+      "period_days": "{n}j",
+      "battery_header": "Batterie {name} {period} : ",
+      "battery_too_few": "Batterie {name} : seulement {n} mesure(s) enregistrée(s), réessayez plus tard",
+      "battery_now": "actuel {v} V",
+      "battery_min": "min {v}",
+      "battery_max": "max {v}",
+      "trend_unknown": "tendance encore inconnue",
+      "trend_stable": "stable",
+      "trend_v_per_day": " V/jour",
+      "trend_low_in": ", bas dans ~{days} j",
+      "measurements": "{n} mesures",
+      "decimal_sep": ","
+    },
+    "helpall": {
+      "bad_page": "Help : la page {page} n'existe pas (1-{total} disponibles).",
+      "page": "Help {page}/{total} : {names}",
+      "error": "Erreur dans la commande helpall : {error}"
+    },
+    "info": {
+      "error": "Erreur dans info bot : {error}"
+    },
+    "quiz": {
+      "no_question": "Aucune question reçue d'OpenTDB",
+      "correct": "Correct ! La réponse était {letter}) {answer}.",
+      "wrong": "Dommage, faux. Vous avez dit {given}, la bonne réponse était {letter}) {answer}.",
+      "already_active": "Une question de quiz est déjà en cours sur ce canal - répondez avec quiz a/b/c/d.",
+      "question": "Quiz : {question}",
+      "answer_hint": "Réponse : quiz a/b/c/d (60s)",
+      "error": "Erreur dans la commande quiz : {error}"
+    },
+    "hangman": {
+      "wrong_suffix": " | faux : {letters} ({n}/{max})",
+      "wrong_suffix_none": " | faux : 0/{max}",
+      "no_game_to_stop": "Aucune partie active à arrêter.",
+      "stopped": "Partie arrêtée. Le mot était : {word}",
+      "already_running": "Une partie est déjà en cours sur ce canal. {status}",
+      "started": "Hangman lancé ({category}, {n} lettres) : {status}",
+      "no_game": "Aucune partie active. Démarrez avec 'hangman start'.",
+      "correct_word": "Correct ! Le mot était : {word}",
+      "wrong_word": "Dommage, mauvaise réponse. Le mot était : {word}",
+      "not_quite": "Pas tout à fait. {status}",
+      "already_guessed": "Déjà essayé. {status}",
+      "won": "Gagné ! Le mot était : {word}",
+      "lost": "Plus d'essais. Le mot était : {word}",
+      "running": "Partie en cours ({category}) : {status}",
+      "usage": "Utilisation : hangman start [catégorie] ({categories})",
+      "unknown_action": "Action hangman inconnue. Utilisation : start [catégorie], <lettre>, raad <mot>, stop.",
+      "error": "Erreur dans la commande hangman : {error}"
+    },
+    "poll": {
+      "vote_recorded": "Vote enregistré ({ja} oui / {nee} non)",
+      "no_active": "Aucun sondage actif sur ce canal.",
+      "tally": "Sondage « {question} » : {ja} oui / {nee} non",
+      "no_active_to_stop": "Aucun sondage actif à arrêter.",
+      "ended": "Sondage terminé : « {question} » -> {ja} oui / {nee} non",
+      "usage": "Utilisation : stem [Nm|Nd] <question>",
+      "already_active": "Un sondage est déjà en cours sur ce canal - « stem uitslag » ou attendez la fin.",
+      "question_too_long": "Question trop longue (max ~{max} caractères), essayez plus court.",
+      "started": "Sondage lancé : « {question} » - votez avec ja/nee ({duration})",
+      "error": "Erreur dans la commande poll : {error}",
+      "unit_min": "{n} min",
+      "unit_hour": "{n} h",
+      "unit_day": "{n} jour",
+      "unit_days": "{n} jours"
+    },
+    "botlist": {
+      "none": "Botlist : aucun nom manuel. Automatique : emoji robot ou le mot bot dans le nom.",
+      "bots_list": "Bots : {names}",
+      "never_list": "Jamais bot : {names}",
+      "header": "Botlist :",
+      "missing_name": "Botlist : nom manquant. Utilisation : botlist {sub} <nom>",
+      "is_bot": "bot",
+      "not_bot": "pas un bot",
+      "check_result": "Botlist : {name} = {verdict} ({reason})",
+      "moved_from_never": " (était dans jamais bot, déplacé)",
+      "added": "Botlist : {name} compte désormais toujours comme bot{note}.",
+      "moved_from_bots": " (était dans bots, déplacé)",
+      "excluded": "Botlist : {name} ne compte jamais comme bot{note}.",
+      "not_listed": "Botlist : {name} n'était pas dans les listes.",
+      "deleted": "Botlist : {name} retiré de la liste ; maintenant {verdict} selon les règles automatiques.",
+      "usage": "Botlist : utilisez botlist, botlist add|not|del|check <nom>.",
+      "value_error": "Botlist : {error}.",
+      "error": "Erreur dans botlist : {error}"
+    },
+    "cleanup": {
+      "no_service": "Cleanup : service non chargé.",
+      "stale_none": "Cleanup : aucun contact silencieux (répéteurs >{repeater_days}j, autres >{other_days}j). Plus ancien non protégé : {oldest}j, {protected} protégés, {unknown} sans horodatage.",
+      "stale_preview": "Cleanup : {planned} contacts silencieux ({shown}{more}). « cleanup stale now » les supprime.",
+      "stale_done": "Cleanup terminé : {removed}/{planned} contacts silencieux supprimés, {after} contacts maintenant.",
+      "none": "Cleanup : {before} contacts, cible {target}. Rien à supprimer : {protected} protégés, {recent} actifs <{keep_days}j, plus ancien non protégé {oldest}j.",
+      "preview": "Cleanup : {before} contacts, cible {target} : {planned} seraient supprimés ({shown}{more}). « cleanup now » l'exécute.",
+      "done": "Cleanup terminé : {removed}/{planned} supprimés, {after} contacts maintenant.",
+      "error": "Erreur dans cleanup : {error}"
+    },
+    "dx": {
+      "help": "dx = records de sauts (semaine, mois, toujours) ; dx top [week|mois|toujours] ; dx moi ; dx <nom>.",
+      "week": "semaine",
+      "month": "mois",
+      "ever": "toujours",
+      "records_header": "Chasse DX :",
+      "record": "{label} {name} {hops} sauts ({date})",
+      "record_none": "{label} -",
+      "top_header": "Top DX ({label}) :",
+      "no_data": "DX ({label}) : aucun message via répéteur vu pour l'instant.",
+      "person": "DX {name} : {records}",
+      "person_none": "DX {name} : aucun message via répéteur vu.",
+      "error": "Erreur dx : {error}"
+    },
+    "pad": {
+      "help": "pad = l'itinéraire de ton message en une ligne : sauts, km et répéteurs (? = estimé). Version longue : path.",
+      "hops": "{hops} sauts",
+      "hop_one": "1 saut",
+      "km_route": "{km} km",
+      "km_straight": "{km} km à vol d'oiseau",
+      "direct": "Reçu en direct, sans répéteur (0 saut).",
+      "no_path": "Aucun itinéraire connu pour ce message.",
+      "error": "Erreur pad : {error}"
+    },
+    "sig": {
+      "help": "sig = SNR, RSSI et sauts de ton message avec un avis. Pratique pour régler l'antenne.",
+      "reply": "Signal : SNR {snr} dB{rssi}{where} : {verdict}",
+      "rssi": ", RSSI {rssi} dBm",
+      "direct": ", direct (ton antenne)",
+      "via": ", {hops} sauts (dernier répéteur vers le bot)",
+      "verdict": {
+        "good": "bon",
+        "fair": "correct",
+        "weak": "faible",
+        "very_weak": "très faible, à la limite"
+      },
+      "no_data": "Pas de données de signal pour ce message.",
+      "error": "Erreur sig : {error}"
+    },
+    "meshkaart": {
+      "help": "meshkaart = nombre de nœuds entendus par le bot (24h, 7 jours, toujours). La carte est sur le tableau de bord.",
+      "reply": "Mesh 24h : {day} nœuds ({roles}), {located} avec position | 7j : {week} | total : {ever}",
+      "role": {
+        "companion": "{n} compagnons",
+        "repeater": "{n} répéteurs",
+        "room": "{n} salons",
+        "sensor": "{n} capteurs",
+        "other": "{n} autres"
+      },
+      "no_data": "Aucun nœud entendu pour l'instant.",
+      "error": "Erreur meshkaart : {error}"
+    },
+    "karma": {
+      "help": "karma <nom> = remercier quelqu'un d'un point (max {per_day} par jour) ; karma = tes points ; karma top = classement.",
+      "given": "+1 karma pour {name} de {giver} (total {total})",
+      "own": "{name} : {total} karma",
+      "self": "Se donner du karma ne compte pas.",
+      "bot": "Les bots n'ont pas de karma.",
+      "unknown": "{name} pas vu ces {days} derniers jours. Écris le nom comme sur le mesh.",
+      "limit": "Tu as déjà donné {per_day} karma aujourd'hui. Demain à nouveau.",
+      "already": "{name} a déjà reçu ton karma aujourd'hui.",
+      "no_name": "Pas de nom d'expéditeur, karma impossible.",
+      "top_header": "Top karma :",
+      "top_empty": "Personne n'a encore de karma.",
+      "error": "Erreur karma : {error}"
+    },
+    "checkin": {
+      "help": "checkin (ou meld) = pointer chaque jour pour faire une série. checkin top = plus longues séries.",
+      "done": "Pointé, {name} ! Série {streak} j (record {best}), {today} pointés aujourd'hui.",
+      "again": "{name}, tu as déjà pointé aujourd'hui. Série {streak} j (record {best}).",
+      "no_name": "Pas de nom d'expéditeur, pointage impossible.",
+      "top_header": "Plus longue série :",
+      "top_empty": "Aucune série en cours.",
+      "error": "Erreur checkin : {error}"
+    },
+    "prikbord": {
+      "help": "prikbord = dernières notes ; prikbord <texte> = épingler ({days} jours) ; prikbord <n°> ; prikbord weg <n°>.",
+      "header": "Tableau ({n}) :",
+      "empty": "Le tableau est vide. Épingle avec : prikbord <texte>",
+      "pinned": "Épinglé sous #{id}, visible {days} jours.",
+      "removed": "#{id} retiré.",
+      "not_found": "#{id} n'est pas (ou plus) sur le tableau.",
+      "not_yours": "#{id} n'est pas à toi.",
+      "too_long": "Trop long : max {max} octets.",
+      "per_person": "Tu as déjà {max} notes. Retire-en une avec : prikbord weg <n°>",
+      "full": "Le tableau est plein ({max}). Réessaie plus tard.",
+      "days_left": "encore {n}j",
+      "no_name": "Pas de nom d'expéditeur, impossible d'épingler.",
+      "error": "Erreur prikbord : {error}"
+    },
+    "noodnummers": {
+      "help": "noodnummers (ou nood) = 112 et les numéros d'aide de la région.",
+      "reply": "Urgence : appelle le 112 (le mesh n'est pas une ligne d'urgence) | {numbers}",
+      "national": "Police non urgente 0900-8844 (NL) | Ambulance animale 144 (NL)",
+      "error": "Erreur noodnummers : {error}"
+    },
+    "weetje": {
+      "error": "Erreur weetje : {error}"
+    },
+    "peiling": {
+      "help": "peiling [15m|2h|1d] question | a | b (jusqu'à {max} choix), voter avec kies <n°> ; peiling uitslag ; peiling stop.",
+      "usage": "Usage : peiling [15m] question | choix 1 | choix 2 (2 à {max})",
+      "started": "Sondage : {question} {choices} - vote avec kies <n°> ({duration})",
+      "voted": "Vote pour {choice} compté ({counts})",
+      "bad_choice": "Choisis un numéro de 1 à {max}.",
+      "tally": "Résultat partiel '{question}' : {result} ({total} votes)",
+      "ended": "Résultat '{question}' : {result} ({total} votes)",
+      "none": "Aucun sondage en cours sur ce canal.",
+      "already": "Un sondage est déjà en cours. Termine-le avec : peiling stop",
+      "too_long": "Trop long pour un message (max {max} octets). Raccourcis la question ou les choix.",
+      "error": "Erreur peiling : {error}"
+    },
+    "herinner": {
+      "help": "Par MP : herinner 30m <texte>, herinner 18:30 <texte> (aussi 2h, 1d) ; herinner lijst ; herinner weg <n°>. Max {max}.",
+      "usage": "Usage : herinner 30m <texte> ou herinner 18:30 <texte> (aussi 2h, 1d)",
+      "set": "Rappel #{id} prévu pour {at}.",
+      "set_service_off": "Rappel #{id} prévu pour {at}, mais le service Reminders est arrêté : demande à l'admin de l'activer.",
+      "list": "Ouverts : {items}",
+      "none": "Tu n'as aucun rappel en cours.",
+      "removed": "Rappel #{id} annulé.",
+      "not_found": "Pas de rappel #{id} ouvert à toi.",
+      "too_far": "7 jours à l'avance au maximum.",
+      "too_soon": "Au moins 1 minute à l'avance.",
+      "too_long": "Texte trop long : max {max} octets.",
+      "max_open": "Tu as déjà {max} rappels. Annule-en un avec : herinner weg <n°>",
+      "no_key": "Les rappels ne marchent que par MP au bot.",
+      "delivery": "Rappel : {text}",
+      "error": "Erreur herinner : {error}"
+    },
+    "voorspel": {
+      "help": "voorspel = question ouverte ; par MP : voorspel nieuw <question> | a | b, voorspel <n°>, voorspel sluit, voorspel uitslag <n°> ; voorspel stand.",
+      "none": "Aucune question ouverte. Pose-en une par MP : voorspel nieuw <question> | a | b",
+      "show_open": "Pronostic : {question} {choices} ({n} rép., par MP : voorspel <n°>)",
+      "show_closed": "Pronostic (fermé, en attente) : {question} {choices} ({n} rép.)",
+      "yours": "Ton choix : {choice}.",
+      "new_usage": "Usage : voorspel nieuw <question> | choix 1 | choix 2 (2 à {max})",
+      "busy": "Une question est déjà ouverte. Il lui faut d'abord un résultat.",
+      "created": "Question #{id} ouverte. Partage-la sur le canal ; réponses par MP : voorspel <n°>.",
+      "answered": "Noté : {choice}) {text}. Modifiable jusqu'à la clôture.",
+      "bad_choice": "Choisis un numéro de 1 à {max}.",
+      "closed": "La question est fermée, plus de réponses.",
+      "closed_now": "Fermé avec {n} réponses. Donne le résultat avec : voorspel uitslag <n°>",
+      "not_owner": "Seul l'auteur de la question peut faire cela.",
+      "settled": "Résultat : {answer}. Bon : {good} sur {total} ({names}), +1 point.",
+      "standings_header": "Classement pronostics :",
+      "no_points": "Aucun point attribué pour l'instant.",
+      "dm_only": "Répondre et poser une question se fait par MP au bot (avec ta clé).",
+      "error": "Erreur voorspel : {error}"
+    },
+    "buien": {
+      "help": "buien [lieu] = pluie des 2 prochaines heures par 10 min (Buienradar, NL/BE). Sans lieu : ta position ou celle du bot.",
+      "reply": "Pluie {place} {start}-{end} : {line} max {max} mm/h à {at}",
+      "dry": "Sec à {place} jusqu'à {end} (Buienradar).",
+      "here": "ici",
+      "no_place": "Lieu '{place}' introuvable.",
+      "no_position": "Aucune position connue. Utilise : buien <lieu>",
+      "outside": "Buienradar ne couvre que les Pays-Bas et la Belgique. Essaie : rain <lieu>",
+      "no_data": "Pas de données de Buienradar.",
+      "error": "Erreur buien : {error}"
+    },
+    "xp": {
+      "help": "xp = ton niveau, titre et XP ; xp <nom> ; xp top [week]. XP pour messages, commandes, pointages, karma et DX.",
+      "reply": "{name} : niveau {level} {title}, {xp} XP (encore {left} pour le niveau suivant)",
+      "none": "{name} n'a pas encore d'XP.",
+      "title": {
+        "0": "Nouveau",
+        "1": "Auditeur",
+        "2": "Bavard",
+        "3": "Habitué du mesh",
+        "4": "Chasseur de relais",
+        "5": "Vétéran du mesh",
+        "6": "Légende du mesh"
+      },
+      "week": "cette semaine",
+      "ever": "toujours",
+      "top_header": "Top XP ({label}) :",
+      "top_empty": "XP ({label}) : personne encore.",
+      "error": "Erreur xp : {error}"
+    },
+    "badge": {
+      "help": "badge = tes étapes sur le mesh ; badge <nom> pour quelqu'un d'autre.",
+      "reply": "{name} ({n}/{total}) : {badges}",
+      "none": "{name} n'a pas encore de badge.",
+      "name": {
+        "msg100": "💬100",
+        "msg1000": "💬1000",
+        "days30": "30 jours actifs",
+        "days100": "100 jours actifs",
+        "hops3": "📡3 sauts",
+        "hops6": "📡6 sauts",
+        "streak7": "🔥7 jours",
+        "streak30": "🔥30 jours",
+        "karma10": "⭐10 karma",
+        "level5": "niveau 5",
+        "level10": "niveau 10"
+      },
+      "error": "Erreur badge : {error}"
+    },
+    "help": {
+      "list_link": "Toutes les commandes expliquées : {url} | help <commande> = aide ici"
+    },
+    "wx": {
+      "subcommands": [
+        {
+          "name": "tomorrow",
+          "description": "Prévisions pour demain"
+        },
+        {
+          "name": "Nd",
+          "description": "Prévisions sur N jours (ex. 7d, 10d ; aussi 7-day, 7 ou 2–16)"
+        },
+        {
+          "name": "hourly",
+          "description": "Prévisions heure par heure"
+        },
+        {
+          "name": "alerts",
+          "description": "Toutes les alertes météo"
+        }
+      ],
+      "hourly_not_available": "Prévisions horaires indisponibles",
+      "mqtt_forecast_not_supported": "Les prévisions étendues ne sont pas disponibles pour les sources météo MQTT",
+      "mqtt_weather_no_subscriber": "L'abonné météo MQTT n'est pas actif (activer [MqttWeather] et les topics custom.mqtt_weather.*)",
+      "mqtt_weather_no_data": "Aucun message météo MQTT reçu pour ce topic pour l'instant",
+      "mqtt_weather_stale": "Les données météo MQTT sont trop anciennes",
+      "mqtt_weather_payload_error": "Erreur dans les données météo MQTT : {detail}"
+    },
+    "gwx": {
+      "mqtt_forecast_not_supported": "Les prévisions étendues ne sont pas disponibles pour les sources météo MQTT",
+      "mqtt_weather_no_subscriber": "L'abonné météo MQTT n'est pas actif (activer [MqttWeather] et les topics custom.mqtt_weather.*)",
+      "mqtt_weather_no_data": "Aucun message météo MQTT reçu pour ce topic pour l'instant",
+      "mqtt_weather_stale": "Les données météo MQTT sont trop anciennes",
+      "mqtt_weather_payload_error": "Erreur dans les données météo MQTT : {detail}",
+      "feels_like": "(ressenti {value}{unit})",
+      "humidity": "{value}%HR",
+      "dew_point": "💧{value}{unit}",
+      "visibility": "👁️{value}mi",
+      "visibility_km": "👁️{value}km",
+      "pressure": "📊{value}hPa",
+      "pressure_mmhg": "📊{value}mmHg",
+      "gust": "R{value}",
+      "day_abbrev": {
+        "Monday": "L",
+        "Tuesday": "Ma",
+        "Wednesday": "Me",
+        "Thursday": "J",
+        "Friday": "V",
+        "Saturday": "S",
+        "Sunday": "D"
+      },
+      "pressure_unit": "hPa"
+    },
+    "stats": {
+      "subcommands": [
+        {
+          "name": "messages",
+          "description": "Statistiques des messages des utilisateurs du bot"
+        },
+        {
+          "name": "channels",
+          "description": "Activité par canal"
+        },
+        {
+          "name": "paths",
+          "description": "Les plus longs chemins de routage"
+        },
+        {
+          "name": "adverts",
+          "description": "Nœuds les plus actifs par paquets advert uniques"
+        }
+      ],
+      "adverts": {
+        "header": "Top nœuds advert (24h) :",
+        "none": "Aucune activité advert",
+        "advert_singular": "advert",
+        "advert_plural": "adverts",
+        "format": "{rank}. {name} : {count} {advert_text}",
+        "hashes_label": "Hashes : {hashes}"
+      },
+      "error_adverts": "Erreur lors des statistiques advert : {error}"
+    },
+    "neighbors": {
+      "description": "Lance une recherche de voisins sans saut (MP uniquement)",
+      "disabled": "La recherche de voisins n'est pas activée. Mets neighbors_enabled = true dans la configuration PacketCapture.",
+      "busy": "Une recherche de voisins est déjà en cours. Réessaie quand elle est terminée.",
+      "cooldown_active": "Une recherche de voisins a eu lieu récemment. Attends encore environ {minutes} minute(s) - la recherche coûte du temps d'antenne à tout le mesh.",
+      "started": "Recherche de voisins - j'écoute environ {seconds}s et je reviens vers toi.",
+      "success": "{count} voisin(s) entendu(s), meilleur SNR {best_snr}. {recorded} lien(s) enregistré(s).",
+      "published": "Publié vers {succeeded}/{attempted} broker(s).",
+      "none": "Recherche terminée, mais aucun répéteur n'a répondu. Rien n'est à portée directe pour l'instant.",
+      "failed": "La recherche de voisins n'a pas eu lieu : {reason}.",
+      "error": "Erreur lors de la recherche de voisins : {error}"
+    },
+    "multitest": {
+      "description": "Écoute 6 secondes et collecte tous les chemins uniques des messages entrants avec le même hash de paquet",
+      "help": "Écoute 6 secondes et collecte tous les chemins uniques des messages entrants avec le même hash de paquet"
+    },
+    "trace": {
+      "description": "Trace de liaison (trace = chemin manuel, tracer = aller-retour pour que le bot entende la réponse)",
+      "help": "trace [chemin] — chemin manuel (le retour peut ne pas être entendu). tracer [chemin] — aller-retour. Chemin : hex à 2 caractères séparés par des virgules (ex. 01,7a,55). Sans chemin = le chemin de ton message."
+    },
+    "prefix": {
+      "older_entries_note": "(Les entrées peuvent dater de plus de {days} jours)"
+    },
+    "airplanes": {
+      "description": "Avions à proximité (usage : airplanes [lieu] [options] ou overhead [lat,lon])",
+      "usage": "Usage : airplanes [lieu] [options]\nLieu : 'here' pour la position du bot, ou lat,lon (ex. 50.9,5.9)\nOptions : radius=<km>, alt=<min>-<max>, speed=<min>-<max>, type=<code>, callsign=<motif>, military, limit=<n>",
+      "subcommands": [
+        {
+          "name": "overhead",
+          "description": "L'avion le plus proche juste au-dessus de toi (utilise la position de ton companion ou les coordonnées données)"
+        }
+      ],
+      "no_location": "Aucune position disponible. Indique des coordonnées : airplanes 50.9,5.9 ou utilise 'airplanes here' pour la position du bot",
+      "overhead_no_location": "Je ne connais pas la position de ton companion. Envoie 'advert' pour diffuser ta position, ou indique des coordonnées : 'overhead [lat,lon]'",
+      "no_aircraft": "Aucun avion dans un rayon de {radius}km",
+      "no_aircraft_filtered": "Aucun avion correspondant aux filtres dans un rayon de {radius}km",
+      "api_error": "Impossible de récupérer les données des avions. L'API est peut-être indisponible.",
+      "invalid_coords": "Coordonnées invalides. Format : lat,lon (ex. 50.9,5.9)",
+      "error": "Erreur : {error}"
+    },
+    "rain": {
+      "description": "Prévision immédiate pluie/neige : quand les précipitations commencent ou s'arrêtent dans les ~2 h, avec la quantité",
+      "help_rain": "Pluie à court terme : quand elle commence/s'arrête dans ~2 h, avec la quantité. rain [ville|code postal|lat,lon]. Aussi : snow",
+      "help_snow": "Neige à court terme : quand elle commence/s'arrête dans ~2 h, avec l'épaisseur. snow [ville|code postal|lat,lon]. Aussi : rain",
+      "usage": "Usage : rain|snow [ville|code postal|lat,lon]",
+      "usage_short": "Usage : rain|snow [ville|code postal|lat,lon]",
+      "starting": "{emoji} {ptype} dans ~{minutes}min à {location}{extra}",
+      "stopping": "{emoji} {ptype} faiblit dans ~{minutes}min à {location}",
+      "continuing": "{emoji} {ptype} continu pendant {window}+ à {location}",
+      "clear": "☀️ Pas de {precip} prévue dans les {window} à {location}",
+      "changeover": "{from_emoji}→{to_emoji} {first} {when} → {second} dans ~{minutes}min à {location}",
+      "now": "maintenant",
+      "duration_for": " (~{duration}min)",
+      "duration_open": " (continu)",
+      "error_fetching": "Erreur lors de la récupération des prévisions de pluie",
+      "no_location": "Usage : rain [ville|code postal|lat,lon]. Sans lieu : la position de ton companion si elle est connue, sinon celle du bot.",
+      "no_location_city": "Ville '{location}' introuvable dans {state}",
+      "no_location_zipcode": "Code postal '{location}' introuvable",
+      "error": "Erreur : {error}",
+      "precip_types": {
+        "drizzle": "Bruine",
+        "rain": "Pluie",
+        "heavy_rain": "Forte pluie",
+        "freezing": "Pluie verglaçante",
+        "snow": "Neige",
+        "showers": "Averses",
+        "thunder": "Orages"
+      }
+    },
+    "aurora": {
+      "description": "Prévision d'aurores (indice KP et probabilité) pour un lieu",
+      "usage": "Usage : aurora [ville|code postal|lat,lon]",
+      "usage_short": "Usage : aurora [ville|code postal|lat,lon]",
+      "response": "🌌 Chance d'aurore visible : {prob_indicator} {prob}% pour {location}\nKp global {kp} (à {kp_time}) | {status}",
+      "error_fetching": "Erreur lors de la récupération des données d'aurore",
+      "no_location": "Usage : aurora [ville|code postal|lat,lon]. Sans lieu : la position de ton companion si elle est connue, sinon celle du bot.",
+      "no_location_city": "Ville '{location}' introuvable dans {state}",
+      "no_location_zipcode": "Code postal '{location}' introuvable",
+      "error": "Erreur : {error}",
+      "status": {
+        "quiet": "Calme",
+        "unsettled": "Agité",
+        "g1_g2": "G1/G2",
+        "g3_severe": "G3+ Sévère"
+      }
+    },
+    "channels": {
+      "subcommands": [
+        {
+          "name": "list",
+          "description": "Lister tous les canaux d'une catégorie"
+        }
+      ]
+    },
+    "contact": {
+      "help": "Affiche les coordonnées du bot",
+      "unavailable": "Coordonnées indisponibles : la radio n'a pas encore communiqué son identité."
+    },
+    "hacker": {
+      "rm_errors": [
+        "💣 DESTRUCTION BLOQUÉE : Les protocoles de sécurité de l'Étoile de la Mort ont empêché la suppression massive !",
+        "🚨 ARRÊT D'URGENCE : Dr. Evil a tiré le frein d'urgence sur la destruction des fichiers.",
+        "🛡️ MODE PROTECTION : La Matrice a mis tous les fichiers en lecture seule. Suppression interdite.",
+        "🔒 FICHIERS VERROUILLÉS : Le mainframe de Lex Luthor a gelé toutes les commandes de suppression.",
+        "⚡ PANNE DE COURANT : La commande de suppression du super-méchant a fait court-circuit.",
+        "🎮 SAUVEGARDE PROTÉGÉE : Le boss final a activé la protection des fichiers.",
+        "🖥️ SUPPRESSION REFUSÉE : L'IA maléfique refuse de supprimer ses propres fichiers.",
+        "🔐 FICHIERS CHIFFRÉS : Tous les fichiers sont chiffrés et ne peuvent pas être supprimés.",
+        "🌐 SYNCHRO CLOUD : Les fichiers se synchronisent avec le cloud de la Matrice. Suppression en attente...",
+        "💀 REJET DU SYSTÈME : Le mainframe a rejeté ta demande. Les fichiers sont trop précieux."
+      ],
+      "cat_errors": [
+        "📄 ERREUR DE LECTURE : Le fichier a été chiffré par le code du Sphinx.",
+        "📖 DOCUMENT CORROMPU : Un malware a mélangé le contenu du fichier.",
+        "📚 ACCÈS REFUSÉ : Le super-méchant a classé ce fichier top secret.",
+        "🔍 FICHIER INTROUVABLE : L'Homme invisible a caché le fichier.",
+        "💻 LECTURE INTERDITE : La Matrice a verrouillé ce fichier en lecture.",
+        "🎮 FICHIER DE JEU : Ce fichier appartient au boss final et ne peut pas être affiché.",
+        "🖥️ ERREUR DU SYSTÈME DE FICHIERS : Le lecteur a planté à cause d'un virus.",
+        "🔐 FICHIER CHIFFRÉ : Un rançongiciel a chiffré le contenu.",
+        "🌐 FICHIER CLOUD : Le fichier est coincé dans le cloud de la Matrice.",
+        "💀 FICHIER FANTÔME : Le fichier existe, mais des fantômes numériques ont effacé son contenu."
+      ],
+      "whoami_errors": [
+        "👤 ERREUR D'IDENTITÉ : La Matrice a effacé ton identité. Tu n'es personne.",
+        "🕵️ ESPION DÉTECTÉ : Le système du super-méchant a détecté un utilisateur inconnu.",
+        "🎭 VOL D'IDENTITÉ : Le Sphinx t'a volé ton identité.",
+        "👻 UTILISATEUR FANTÔME : Tu es un fantôme numérique sans identité.",
+        "🔒 CLASSIFIÉ : La société maléfique a classé ton identité secrète.",
+        "🎮 GAME OVER : Le boss final a supprimé ton profil de joueur.",
+        "🖥️ BASE UTILISATEURS CORROMPUE : Le système d'identité a planté.",
+        "🔐 IDENTITÉ CHIFFRÉE : Un rançongiciel a chiffré ton identité.",
+        "🌐 IDENTITÉ PERDUE : Ton identité s'est perdue dans le réseau de la Matrice.",
+        "💀 UTILISATEUR SUPPRIMÉ : Le Seigneur des Ténèbres a supprimé ton compte."
+      ],
+      "top_errors": [
+        "📊 ERREUR DU MONITEUR : Le Collectif Borg a piraté le moniteur de processus.",
+        "⚙️ SURCHARGE : Le réacteur de l'Étoile de la Mort surchauffe. Moniteur hors ligne.",
+        "🤖 PROCESSUS CACHÉS : L'IA maléfique a caché tous les processus.",
+        "💻 MONITEUR PLANTÉ : Le moniteur système a planté après un kernel panic.",
+        "🎮 JEU EN PAUSE : Le boss final a mis tous les processus en pause.",
+        "🖥️ ÉCRAN BLEU : Le moniteur a rencontré une erreur fatale.",
+        "🔐 MONITEUR CHIFFRÉ : Un rançongiciel a verrouillé le moniteur de processus.",
+        "🌐 SYSTÈME DÉCONNECTÉ : Le moniteur n'a pas accès à la table des processus.",
+        "⚡ SURTENSION : Une surtension a grillé le moniteur.",
+        "💀 SYSTÈME MORT : Le mainframe est mort. Aucun processus à surveiller."
+      ],
+      "netstat_errors": [
+        "🌐 SCAN RÉSEAU BLOQUÉ : Le pare-feu du super-méchant bloque toutes les requêtes réseau.",
+        "🔍 LISTE DE CONNEXIONS CORROMPUE : Un malware a piraté la table des connexions.",
+        "📡 SIGNAL BROUILLÉ : Des chasseurs TIE impériaux brouillent tous les signaux.",
+        "💻 RÉSEAU EN PANNE : La pile réseau de l'Étoile de la Mort a été détruite.",
+        "🎮 GAME OVER : Le boss final a coupé toutes les connexions réseau.",
+        "🖥️ ERREUR RÉSEAU : La pile réseau a planté à cause d'un virus.",
+        "🔐 CONNEXIONS CACHÉES : Toutes les connexions ont été chiffrées et cachées.",
+        "🌐 MATRICE DÉCONNECTÉE : La table de routage est coincée dans le vide de la Matrice.",
+        "⚡ RÉSEAU GRILLÉ : Une surtension a frappé l'interface réseau.",
+        "💀 AUCUNE CONNEXION : Le mainframe n'a plus aucune connexion active. Il est mort, Jim."
+      ],
+      "kill_errors": [
+        "💀 KILL REFUSÉ : Les processus du super-méchant sont immortels.",
+        "🚫 ARRÊT BLOQUÉ : Le Seigneur des Ténèbres protège tous les processus.",
+        "🛡️ PROCESSUS PROTÉGÉ : La Matrice a mis tous les processus en mode protégé.",
+        "🔒 PERMISSION REFUSÉE : Tu n'as pas le droit de tuer des processus sur l'Étoile de la Mort.",
+        "⚡ ERREUR D'ARRÊT : Un malware a corrompu la commande kill.",
+        "🎮 GAME OVER : Le processus que tu veux tuer est le boss final. Il est invincible.",
+        "🖥️ ERREUR SYSTÈME : Le noyau a bloqué le signal kill.",
+        "🔐 PROCESSUS PROTÉGÉS : Tous les processus sont protégés et ne peuvent pas être arrêtés.",
+        "🌐 REQUÊTE PERDUE : Le signal d'arrêt s'est perdu dans le cyberespace.",
+        "💀 PROCESSUS FANTÔME : Le processus est devenu zombie et ne peut pas être tué."
+      ],
+      "chmod_errors": [
+        "🔐 PERMISSION REFUSÉE : Le super-méchant a verrouillé toutes les permissions.",
+        "🚫 CHMOD BLOQUÉ : Le Seigneur des Ténèbres interdit de changer les permissions.",
+        "🛡️ PERMISSIONS PROTÉGÉES : La Matrice a gelé toutes les permissions.",
+        "🔒 ERREUR DE PERMISSION : Tu n'as pas la permission de changer les permissions. Très méta !",
+        "⚡ CHMOD CORROMPU : Un malware a grillé la commande de permissions.",
+        "🎮 GAME OVER : Le boss final a verrouillé toutes les permissions.",
+        "🖥️ ERREUR SYSTÈME : Le système de permissions a planté à cause d'un virus.",
+        "🔐 PERMISSIONS CHIFFRÉES : Toutes les permissions sont chiffrées et immuables.",
+        "🌐 REQUÊTE PERDUE : Le changement de permissions s'est perdu dans la Matrice.",
+        "💀 PERMISSIONS MORTES : Le système de permissions est mort. Aucun changement possible."
+      ],
+      "find_errors": [
+        "🔍 RECHERCHE ÉCHOUÉE : Le pare-feu du super-méchant bloque la recherche.",
+        "📁 FICHIERS CACHÉS : La cape de l'Homme invisible cache tous les fichiers.",
+        "💻 RECHERCHE CORROMPUE : Un malware a corrompu la commande find.",
+        "🎯 CIBLE INTROUVABLE : L'IA maléfique a supprimé les fichiers que tu cherches.",
+        "🎮 GAME OVER : Le boss final a caché tous les fichiers dans une autre dimension.",
+        "🖥️ MOTEUR DE RECHERCHE EN PANNE : La recherche de fichiers a planté.",
+        "🔐 FICHIERS CHIFFRÉS : Tous les fichiers sont chiffrés et introuvables.",
+        "🌐 RECHERCHE PERDUE : La requête s'est perdue dans le vide de la Matrice.",
+        "⚡ RECHERCHE GRILLÉE : Une surtension a frappé l'algorithme de recherche.",
+        "💀 AUCUN FICHIER : Le mainframe n'a plus de fichiers. Tout a été supprimé."
+      ],
+      "history_errors": [
+        "📜 HISTORIQUE EFFACÉ : Le super-méchant a supprimé tout l'historique des commandes.",
+        "🕰️ ERREUR TEMPORELLE : L'historique s'est perdu dans un paradoxe temporel.",
+        "💻 HISTORIQUE CORROMPU : Un malware a piraté la base de l'historique.",
+        "🔒 ACCÈS REFUSÉ : Le Seigneur des Ténèbres a classé ton historique top secret.",
+        "🎮 GAME OVER : Le boss final a réinitialisé ton historique.",
+        "🖥️ SYSTÈME D'HISTORIQUE EN PANNE : L'historique des commandes a planté.",
+        "🔐 HISTORIQUE CHIFFRÉ : Un rançongiciel a chiffré ton historique.",
+        "🌐 HISTORIQUE PERDU : Ton historique s'est perdu dans le réseau de la Matrice.",
+        "⚡ HISTORIQUE GRILLÉ : Une surtension a frappé la base de l'historique.",
+        "💀 AUCUN HISTORIQUE : Tu n'as aucun historique. Une page blanche."
+      ],
+      "passwd_errors": [
+        "🔐 CHANGEMENT REFUSÉ : Le super-méchant a verrouillé tous les mots de passe.",
+        "🚫 MOT DE PASSE BLOQUÉ : Le Seigneur des Ténèbres interdit toute modification.",
+        "🛡️ MOT DE PASSE PROTÉGÉ : La Matrice a gelé tous les changements de mot de passe.",
+        "🔒 PERMISSION REFUSÉE : Tu n'as pas le droit de changer les mots de passe sur l'Étoile de la Mort.",
+        "⚡ ERREUR DE MOT DE PASSE : Un malware a corrompu la commande.",
+        "🎮 GAME OVER : Le boss final a verrouillé tous les mots de passe.",
+        "🖥️ ERREUR SYSTÈME : Le système de mots de passe a planté à cause d'un virus.",
+        "🔐 MOTS DE PASSE CHIFFRÉS : Tous les mots de passe sont chiffrés et immuables.",
+        "🌐 REQUÊTE PERDUE : Le changement de mot de passe s'est perdu dans la Matrice.",
+        "💀 SYSTÈME MORT : Le système de mots de passe est mort. Aucun changement possible."
+      ],
+      "su_errors": [
+        "🔄 CHANGEMENT D'UTILISATEUR REFUSÉ : Le super-méchant bloque toute tentative.",
+        "🚫 CHANGEMENT BLOQUÉ : Le Seigneur des Ténèbres interdit de changer d'utilisateur.",
+        "🛡️ UTILISATEUR PROTÉGÉ : La Matrice a verrouillé tous les comptes.",
+        "🔒 PERMISSION REFUSÉE : Tu n'as pas le droit de changer d'utilisateur sur l'Étoile de la Mort.",
+        "⚡ ERREUR : Un malware a corrompu la commande su.",
+        "🎮 GAME OVER : Le boss final a verrouillé tous les comptes.",
+        "🖥️ ERREUR SYSTÈME : Le système d'utilisateurs a planté à cause d'un virus.",
+        "🔐 COMPTES CHIFFRÉS : Tous les comptes sont chiffrés et inaccessibles.",
+        "🌐 REQUÊTE PERDUE : Le changement d'utilisateur s'est perdu dans la Matrice.",
+        "💀 SYSTÈME MORT : Le système d'utilisateurs est mort. Aucun changement possible."
+      ],
+      "ssh_errors": [
+        "🔌 CONNEXION SSH ÉCHOUÉE : Le serveur du super-méchant bloque toutes les tentatives SSH.",
+        "🚫 ACCÈS DISTANT REFUSÉ : Le Seigneur des Ténèbres a fermé tous les ports SSH.",
+        "🛡️ CONNEXION PROTÉGÉE : La Matrice a verrouillé toutes les connexions SSH.",
+        "🔒 SSH BLOQUÉ : Le pare-feu de l'Étoile de la Mort bloque toutes les connexions SSH.",
+        "⚡ ERREUR DE CONNEXION : Un malware a corrompu la poignée de main SSH.",
+        "🎮 GAME OVER : Le boss final a coupé tout accès distant.",
+        "🖥️ ERREUR SYSTÈME : Le service SSH a planté à cause d'un virus.",
+        "🔐 SSH DÉSACTIVÉ : Toutes les connexions SSH sont coupées et bloquées.",
+        "🌐 CONNEXION PERDUE : La connexion SSH s'est perdue dans le vide de la Matrice.",
+        "💀 SSH MORT : Le service SSH est mort. Aucun accès distant."
+      ],
+      "download_errors": [
+        "📥 TÉLÉCHARGEMENT BLOQUÉ : Le pare-feu du super-méchant bloque toutes les requêtes HTTP.",
+        "🚫 TÉLÉCHARGEMENT REFUSÉ : Le Seigneur des Ténèbres interdit les téléchargements.",
+        "🛡️ TÉLÉCHARGEMENT PROTÉGÉ : La Matrice a verrouillé tous les téléchargements.",
+        "🔒 TÉLÉCHARGEMENT BLOQUÉ : Le réseau de l'Étoile de la Mort bloque toutes les connexions sortantes.",
+        "⚡ ERREUR DE TÉLÉCHARGEMENT : Un malware a corrompu la requête HTTP.",
+        "🎮 GAME OVER : Le boss final a coupé tous les téléchargements.",
+        "🖥️ ERREUR SYSTÈME : La pile réseau a planté à cause d'un virus.",
+        "🔐 RÉSOLUTION DNS ÉCHOUÉE : Tous les noms de domaine sont chiffrés et bloqués.",
+        "🌐 DÉLAI DÉPASSÉ : La requête s'est perdue dans le réseau de la Matrice.",
+        "💀 TÉLÉCHARGEMENT MORT : L'interface réseau est morte. Aucun téléchargement."
+      ],
+      "df_errors": [
+        "💾 ERREUR D'ESPACE DISQUE : Un malware a corrompu le système de fichiers du super-méchant.",
+        "📊 SCAN DU STOCKAGE ÉCHOUÉ : Les Borg ont piraté la requête d'espace disque.",
+        "💻 DISQUE CORROMPU : Un virus a détruit le système de fichiers.",
+        "🎮 GAME OVER : Le boss final a supprimé toutes les infos d'espace disque.",
+        "🖥️ ERREUR SYSTÈME : La table de montage a planté.",
+        "🔐 STOCKAGE CHIFFRÉ : Toutes les infos du système de fichiers ont été chiffrées.",
+        "🌐 MONTAGE ÉCHOUÉ : Les infos de montage se sont perdues dans le cloud de la Matrice.",
+        "⚡ STOCKAGE GRILLÉ : Une surtension a frappé le contrôleur de disque.",
+        "💀 AUCUN STOCKAGE : Le mainframe n'a plus de système de fichiers monté. Tout a été supprimé.",
+        "🗄️ SYSTÈME DE FICHIERS CORROMPU : Un rançongiciel a corrompu le superbloc."
+      ],
+      "free_errors": [
+        "🧠 ERREUR MÉMOIRE : Un malware a corrompu la RAM du super-méchant.",
+        "📊 SCAN MÉMOIRE ÉCHOUÉ : Les Cybermen ont piraté la requête mémoire.",
+        "💻 MÉMOIRE CORROMPUE : Un virus a détruit la RAM.",
+        "🎮 GAME OVER : Le boss final a supprimé toutes les infos mémoire.",
+        "🖥️ ERREUR SYSTÈME : La gestion de la mémoire a planté.",
+        "🔐 MÉMOIRE CHIFFRÉE : Toutes les infos mémoire ont été chiffrées.",
+        "🌐 MÉMOIRE PERDUE : Les statistiques mémoire se sont perdues dans le vide de la Matrice.",
+        "⚡ MÉMOIRE GRILLÉE : Une surtension a frappé le contrôleur mémoire.",
+        "💀 AUCUNE MÉMOIRE : Le mainframe n'a plus de mémoire accessible. Tout a été effacé.",
+        "🧩 MÉMOIRE CORROMPUE : Un rançongiciel a corrompu la table mémoire."
+      ],
+      "ifconfig_errors": [
+        "🌐 ERREUR D'INTERFACE : Les interfaces réseau du super-méchant sont corrompues.",
+        "📡 SCAN DES INTERFACES ÉCHOUÉ : Les forces impériales ont piraté la requête.",
+        "💻 INTERFACE CORROMPUE : Un virus a détruit la configuration réseau.",
+        "🎮 GAME OVER : Le boss final a supprimé toutes les infos d'interface.",
+        "🖥️ ERREUR SYSTÈME : Le pilote de l'interface réseau a planté.",
+        "🔐 INTERFACES CHIFFRÉES : Toutes les infos d'interface ont été chiffrées.",
+        "🌐 INTERFACES PERDUES : Les données d'interface se sont perdues dans le réseau de la Matrice.",
+        "⚡ INTERFACES GRILLÉES : Une surtension a frappé le matériel réseau.",
+        "💀 AUCUNE INTERFACE : Le mainframe n'a plus d'interface réseau.",
+        "🔌 CONNEXION ROMPUE : Le Seigneur des Ténèbres a déconnecté toutes les interfaces."
+      ],
+      "uname_errors": [
+        "🖥️ ERREUR D'INFO SYSTÈME : Le super-méchant a classé toutes les infos système top secret.",
+        "📊 SCAN D'INFO ÉCHOUÉ : L'Homme invisible a caché la requête système.",
+        "💻 SYSTÈME CORROMPU : Un malware a détruit les infos de version du noyau.",
+        "🎮 GAME OVER : Le boss final a supprimé toutes les infos système.",
+        "🖥️ ERREUR SYSTÈME : Le système d'infos du noyau a planté. Très méta !",
+        "🔐 SYSTÈME CHIFFRÉ : Un rançongiciel a chiffré toutes les infos système.",
+        "🌐 SYSTÈME PERDU : La version du noyau s'est perdue dans le vide de la Matrice.",
+        "⚡ SYSTÈME GRILLÉ : Une surtension a frappé l'interface des appels système.",
+        "💀 AUCUN SYSTÈME : Le mainframe n'a aucune info noyau. Un mystère.",
+        "🦹‍♂️ CLASSIFIÉ : Lex Luthor a classé toutes les infos système. Accès refusé."
+      ]
+    }
+  },
+  "common": {
+    "temp_high_label": "Max",
+    "temp_low_label": "Min",
+    "alerts": {
+      "event_types": {
+        "Warning": "Alerte",
+        "Watch": "Veille",
+        "Advisory": "Avis",
+        "Statement": "Comm."
+      },
+      "til": "jusq.",
+      "by": "vers",
+      "from": "dès",
+      "am": "AM",
+      "pm": "PM",
+      "time_12h": "{hour}{meridiem}",
+      "date_12h": "{day} {month} {time}"
+    },
+    "wind_directions": {
+      "N": "N",
+      "NNE": "NNE",
+      "NE": "NE",
+      "ENE": "ENE",
+      "E": "E",
+      "ESE": "ESE",
+      "SE": "SE",
+      "SSE": "SSE",
+      "S": "S",
+      "SSW": "SSO",
+      "SW": "SO",
+      "WSW": "OSO",
+      "W": "O",
+      "WNW": "ONO",
+      "NW": "NO",
+      "NNW": "NNO"
+    }
+  },
+  "services": {
+    "darcmowas": {
+      "messagetype": {
+        "eu-alert-level-1": "Alerte d'urgence",
+        "eu-alert-level-2": "Danger extrême",
+        "eu-alert-level-3": "Danger important",
+        "eu-alert-level-4": "Information de danger",
+        "eu-test": "Alerte de test"
+      },
+      "fields": {
+        "sender": "Émetteur : {sender}",
+        "area": "Zone : {areas}"
+      }
+    },
+    "weather_service": {
+      "daily_weather": "Météo du jour",
+      "tomorrow": "Demain",
+      "error_fetching": "Erreur lors de la récupération de la météo",
+      "no_data": "Aucune prévision disponible",
+      "near": "près de",
+      "est": "env.",
+      "steady": "continu",
+      "rain_starting": "{emoji} Attention — {ptype} dans ~{minutes}min{est}{steady}{temp}{location}",
+      "rain_ending": "{emoji} Attention — fin de {ptype} dans ~{minutes}min{est}{temp}{location}",
+      "weather_descriptions": {
+        "0": "Dégagé",
+        "1": "Plutôt dégagé",
+        "2": "Partiellement nuageux",
+        "3": "Couvert",
+        "45": "Brouillard",
+        "48": "Brouillard givrant",
+        "51": "Bruine légère",
+        "53": "Bruine modérée",
+        "55": "Bruine dense",
+        "56": "Bruine verglaçante légère",
+        "57": "Bruine verglaçante dense",
+        "61": "Pluie faible",
+        "63": "Pluie modérée",
+        "65": "Forte pluie",
+        "66": "Pluie verglaçante faible",
+        "67": "Forte pluie verglaçante",
+        "71": "Neige faible",
+        "73": "Neige modérée",
+        "75": "Forte neige",
+        "77": "Neige en grains",
+        "80": "Averses faibles",
+        "81": "Averses modérées",
+        "82": "Averses violentes",
+        "85": "Averses de neige faibles",
+        "86": "Fortes averses de neige",
+        "95": "Orage",
+        "96": "Orage avec grêle",
+        "99": "Orage violent"
+      },
+      "wind_speed_units": {
+        "ms": "m/s",
+        "mph": "mph",
+        "kmh": "km/h",
+        "kn": "nd"
+      }
+    }
+  }
+}

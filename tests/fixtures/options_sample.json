@@ -1,0 +1,132 @@
+{
+  "connection": {
+    "type": "tcp",
+    "tcp_host": "localhost",
+    "tcp_port": 5010,
+    "serial_port": "",
+    "ble_device_name": ""
+  },
+  "bot": {
+    "name": "Mesh|HA|\ud83e\udd16",
+    "channels": [
+      "Team Bot",
+      "#test",
+      "#bot",
+      "#p2000-zl"
+    ],
+    "respond_to_dms": true,
+    "admin_pubkeys": [
+      "1111111111111111111111111111111111111111111111111111111111111111",
+      "2222222222222222222222222222222222222222222222222222222222222222"
+    ],
+    "tx_delay_seconds": 3.0,
+    "log_level": "INFO",
+    "timezone": ""
+  },
+  "room_server": {
+    "enabled": true,
+    "public_key": "3333333333333333333333333333333333333333333333333333333333333333",
+    "password": "test-password"
+  },
+  "weather": {
+    "default_country": "NL",
+    "provider": "openmeteo",
+    "temperature_unit": "celsius",
+    "wind_speed_unit": "kmh",
+    "precipitation_unit": "mm"
+  },
+  "webhook": {
+    "enabled": true,
+    "port": 8765,
+    "secret_token": "test-secret-token",
+    "max_message_length": 140
+  },
+  "webviewer": {
+    "enabled": true,
+    "port": 8081,
+    "lan_access": true,
+    "password": "test-password"
+  },
+  "home_assistant": {
+    "webhook_url": "http://127.0.0.1:8123/api/webhook/meshcore_bot_relay",
+    "node_prefix": ""
+  },
+  "public_channel": {
+    "enabled": true,
+    "channel": "Publiek",
+    "command_channels": [
+      "#test"
+    ],
+    "hint_enabled": true,
+    "hint_message": "We helpen je heel graag verder in {channels}",
+    "hint_ignore_words": [
+      "hello",
+      "hi",
+      "hey"
+    ],
+    "hint_cooldown_seconds": 120,
+    "yield_to_other_bots": true,
+    "yield_seconds": 15,
+    "greeter_enabled": true,
+    "greeting": "Hallo @[{sender}], welkom op de mesh! \ud83d\udc4b Wil je de bot testen? Dat kan in #test.",
+    "greeter_rollout_days": 7,
+    "announcement_enabled": false,
+    "announcement_day": "sat",
+    "announcement_time": "12:00",
+    "announcement_intro": "Ik ben een bot! Commando's? Probeer #bot of #test.",
+    "announcement_channels": []
+  },
+  "contacts": {
+    "mode": "device",
+    "protect_starred": true,
+    "keep_radio_favourites": true,
+    "backup_enabled": true,
+    "backup_time": "02:00",
+    "backup_keep": 7,
+    "cleanup_enabled": true,
+    "cleanup_at": 300,
+    "cleanup_to": 250,
+    "cleanup_keep_days": 7,
+    "stale_enabled": true,
+    "stale_repeater_days": 14,
+    "stale_other_days": 30
+  },
+  "notifications": {
+    "enabled": true,
+    "destination": "room",
+    "target": "",
+    "min_level": "ERROR",
+    "events": [
+      "startup",
+      "radio",
+      "room_login",
+      "send_failed",
+      "contacts_full",
+      "ha_bridge",
+      "command_error",
+      "admin_command",
+      "error"
+    ],
+    "cooldown_minutes": 30,
+    "digest_seconds": 60,
+    "daily_summary": true,
+    "summary_time": "08:00",
+    "ha_notify": true,
+    "ha_notify_service": ""
+  },
+  "commands": {
+    "enable": [],
+    "disable": [],
+    "feeds_enabled": true,
+    "feed_max_item_age_minutes": 30
+  },
+  "advanced": {
+    "keywords": [
+      "ping = \"Pong!\"",
+      "test = \"ack @[{sender}]{phrase_part} | {connection_info} | Received at: {timestamp}\""
+    ],
+    "extra_config": [
+      "Worldcup_Command.enabled = false"
+    ]
+  }
+}
