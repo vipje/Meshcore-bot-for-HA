@@ -36,8 +36,12 @@ het Nederlands, Engels, Duits of Frans.
 
 ## Installeren in het kort
 
+Klik op de knop om deze repository aan je Home Assistant toe te voegen, of volg stap 1:
+
+[![Add the repository to Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fvipje%2FMeshcore-bot-for-Home-Assistant)
+
 1. In Home Assistant: **Instellingen → Add-ons → Add-on Store → ⋮ → Repositories**, voeg toe:
-   `https://github.com/vipje/Meshcore-bot-for-HA`.
+   `https://github.com/vipje/Meshcore-bot-for-Home-Assistant`.
 2. Installeer **MeshCore Proxy**, kies bij *Seriële poort* je radio en start hem.
 3. Installeer **MeshCore Bot**, vul minstens de botnaam, de kanalen en je eigen *Admin-publieke sleutel* in en start hem.
 4. Open het dashboard via de HA-zijbalk en zet op de pagina *Plugins* aan wat je wilt gebruiken.

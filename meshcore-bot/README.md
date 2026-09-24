@@ -19,4 +19,4 @@ with MeshCore companion firmware. The easiest set-up uses the **MeshCore Proxy**
 and the meshcore-ha integration can share the radio.
 
 Read the **Documentation** tab for all options. The full command list is in the
-[COMMANDS.md](https://github.com/vipje/Meshcore-bot-for-HA/blob/main/COMMANDS.md).
+[COMMANDS.md](https://github.com/vipje/Meshcore-bot-for-Home-Assistant/blob/main/COMMANDS.md).
